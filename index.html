@@ -1,331 +1,423 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cimiento Digital – Datos y automatización para construcción</title>
-<meta name="description" content="Automatizamos procesos y convertimos SQL y Excel en reportes automáticos para inmobiliarias y constructoras.">
+<title>Soluciones TI · Dashboards y automatización para pymes</title>
+<meta name="description" content="Convertimos los Excel y bases de datos de su empresa en reportes automáticos y procesos sin trabajo manual. Dashboards, Power Automate e integración de datos para pymes en Colombia.">
+<meta name="theme-color" content="#0B1F33">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CO">
+<meta property="og:title" content="Soluciones TI · Sus datos trabajando, sus informes solos">
+<meta property="og:description" content="Dashboards, automatización con Power Automate e integración de datos para pymes.">
+<meta property="og:image" content="og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<style>
-:root{
-  --bg:#FBFBFD; --ink:#1D1D1F; --muted:#6E6E73; --soft:#8A8A90; --chip:#EEF0F4;
-  --accent:#2563EB; --navy:#0B1F33; --navy2:#132B45; --navy3:#2A4A6D; --teal:#5EEAD4;
-  --shadow:0 1px 2px rgba(16,24,40,.04),0 12px 32px -18px rgba(16,24,40,.18);
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:#1D4ED8}
-.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-.center{text-align:center}
-
-/* Header */
-header{position:sticky;top:0;z-index:10;background:rgba(251,251,253,.78);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-top:12px;padding-bottom:12px}
-.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;font-weight:800;font-size:18px;letter-spacing:-.02em}
-.logo{width:32px;height:32px;border-radius:9px;background:var(--navy);display:flex;align-items:flex-end;justify-content:center;gap:3px;padding:7px}
-.logo i{width:4px;border-radius:2px;background:#fff;display:block}
-nav{display:flex;flex-wrap:wrap;gap:2px;align-items:center;font-size:14px;font-weight:500}
-.nav-link{color:#3A3A3F;text-decoration:none;padding:8px 14px;border-radius:999px;transition:background .2s}
-.nav-link:hover{background:rgba(0,0,0,.05);color:var(--ink)}
-
-/* Buttons */
-.btn{display:inline-block;text-decoration:none;border:0;border-radius:999px;font-weight:600;font-family:inherit;cursor:pointer;transition:transform .2s,box-shadow .25s,background .2s}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px -10px rgba(37,99,235,.55);color:#fff}
-.btn-soft{background:var(--chip);color:var(--ink)}
-.btn-soft:hover{background:#E4E6EB;color:var(--ink)}
-.btn-sm{padding:10px 18px;margin-left:8px}
-.btn-lg{padding:15px 28px;font-size:16px}
-
-/* Type */
-.eyebrow{margin:0 0 12px;color:var(--accent);font-weight:600;font-size:17px}
-h1{margin:0;font-weight:800;font-size:clamp(42px,7vw,84px);line-height:1.02;letter-spacing:-.045em;max-width:1000px}
-h2{margin:0 auto;font-weight:800;font-size:clamp(34px,5vw,60px);letter-spacing:-.04em;line-height:1.05;max-width:800px}
-.dim{color:var(--soft)}
-.lead{margin:0;font-size:clamp(18px,2vw,22px);line-height:1.55;color:var(--muted);max-width:680px}
-section{padding-bottom:140px}
-
-/* Hero */
-.hero{padding-top:104px;padding-bottom:40px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:24px}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:var(--chip);color:#3A3A3F;font-size:14px;font-weight:600}
-.dot{width:8px;height:8px;border-radius:999px;background:#14B8A6}
-.ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:8px}
-
-/* Dashboard mock */
-.dash{max-width:1100px;margin:0 auto;background:var(--navy);color:#fff;border-radius:32px;padding:clamp(18px,3vw,32px);display:flex;flex-direction:column;gap:20px;box-shadow:0 50px 100px -40px rgba(11,31,51,.55)}
-.dash-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;font-size:14px;color:#9FB0C4}
-.live{padding:5px 12px;border-radius:999px;background:rgba(94,234,212,.12);color:var(--teal)}
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px}
-.kpi{background:var(--navy2);border-radius:18px;padding:18px}
-.kpi small{font-size:13px;color:#9FB0C4}
-.kpi b{display:block;font-size:30px;margin-top:6px}
-.bars{background:var(--navy2);border-radius:18px;padding:22px;display:flex;align-items:flex-end;gap:12px;height:220px}
-.bars i{flex:1;background:var(--navy3);border-radius:8px 8px 3px 3px;display:block}
-.cap{font-size:13px;color:#9FB0C4}
-
-/* Statement */
-.statement{max-width:1000px;margin:0 auto;padding:40px 24px 140px;text-align:center}
-.statement p:first-child{margin:0;font-weight:700;font-size:clamp(28px,4vw,48px);line-height:1.2;letter-spacing:-.03em}
-.statement p+p{margin:28px auto 0;font-size:20px;line-height:1.6;color:var(--muted);max-width:640px}
-
-/* Cards */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
-.grid-fill{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
-.card{background:#fff;border-radius:28px;box-shadow:var(--shadow);transition:transform .3s cubic-bezier(.2,.7,.2,1),box-shadow .3s}
-.card:hover{transform:translateY(-6px);box-shadow:0 2px 4px rgba(16,24,40,.04),0 28px 56px -24px rgba(16,24,40,.28)}
-.service{padding:36px;display:flex;flex-direction:column;gap:14px}
-.service h3{margin:6px 0 0;font-size:24px;letter-spacing:-.02em}
-.service p{margin:0;color:var(--muted);line-height:1.6}
-.service .stack{font-size:14px;font-weight:500;margin-top:6px}
-.icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center}
-.section-head{text-align:center;margin-bottom:56px}
-
-/* Portfolio */
-.filters{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:4px;padding:5px;background:var(--chip);border-radius:999px;margin-top:28px}
-.filters button{min-height:44px;padding:10px 20px;font-size:15px;font-weight:600;font-family:inherit;cursor:pointer;border:0;border-radius:999px;background:transparent;color:var(--muted);transition:background .25s,color .25s,box-shadow .25s}
-.filters button.active{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(16,24,40,.12)}
-.project{overflow:hidden;display:flex;flex-direction:column}
-.project[hidden]{display:none}
-.thumb{margin:12px 12px 0;background:var(--navy);height:180px;border-radius:20px;padding:20px;display:flex;align-items:center;justify-content:center;gap:10px;color:#D6DEE8;font-size:12px;font-weight:600}
-.thumb.bars-thumb{align-items:flex-end;gap:8px;padding:22px}
-.thumb.bars-thumb i{flex:1;background:var(--navy3);border-radius:6px 6px 2px 2px;display:block}
-.body{padding:24px 28px 28px;display:flex;flex-direction:column;gap:10px;flex:1}
-.body h3{margin:0;font-size:21px;letter-spacing:-.02em}
-.body p{margin:0;color:var(--muted);line-height:1.55}
-.body .desc{flex:1}
-.body .stack{font-size:13px}
-.tag{font-size:13px;font-weight:600}
-.more{font-weight:600;padding:10px 0;text-decoration:none}
-.more:hover{text-decoration:underline}
-.track{height:12px;background:#1E3954;border-radius:999px;width:100%}
-.track i{display:block;height:12px;border-radius:999px;background:var(--navy3)}
-.chipbox{background:var(--navy2);border-radius:999px;padding:10px 14px}
-.line{width:22px;height:2px;background:var(--teal);border-radius:2px}
-.row{background:var(--navy2);border-radius:12px;padding:10px 14px;font-size:13px;font-weight:500;display:flex;justify-content:space-between;width:100%}
-
-/* Steps & team */
-.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px 32px;text-align:center}
-.steps .n{font-size:56px;font-weight:800;letter-spacing:-.04em;color:var(--accent)}
-.steps h3{margin:8px 0;font-size:20px}
-.steps p{margin:0 auto;color:var(--muted);line-height:1.6;max-width:240px}
-.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;text-align:center}
-.team div{display:flex;flex-direction:column;align-items:center;gap:6px}
-.avatar{width:160px;height:160px;border-radius:999px;background:var(--chip);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px}
-.team h3{margin:16px 0 0;font-size:19px}
-.team p{margin:0;color:var(--muted)}
-
-/* Contact */
-.contact{background:var(--navy);color:#fff;border-radius:36px;padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;box-shadow:0 50px 100px -40px rgba(11,31,51,.55)}
-.contact h2{margin:0;font-size:clamp(32px,4vw,48px);text-align:left}
-form{background:#fff;color:var(--ink);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:16px}
-label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:6px}
-input,textarea{border:1px solid #D2D2D7;border-radius:12px;padding:13px 14px;font-size:16px;font-family:inherit;background:var(--bg);font-weight:400}
-input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px}
-footer .wrap>div{border-top:1px solid rgba(0,0,0,.08);padding:28px 0 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:13px;color:var(--muted)}
-
-/* Scroll reveal (todos los navegadores) */
-.reveal{opacity:0;transform:translateY(48px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.rise{opacity:.4;transform:perspective(1400px) rotateX(14deg) scale(.9);transition:opacity 1.2s cubic-bezier(.2,.7,.2,1),transform 1.2s cubic-bezier(.2,.7,.2,1)}
-.reveal.in,.rise.in{opacity:1;transform:none}
-.d2{transition-delay:.12s}.d3{transition-delay:.24s}
-@media (prefers-reduced-motion: reduce){.reveal,.rise{opacity:1;transform:none;transition:none}}
-</style>
+<link rel="stylesheet" href="styles.css">
+<script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
+<a href="#contenido" class="skip">Saltar al contenido</a>
 
 <header>
   <div class="wrap nav">
-    <a href="#inicio" class="brand"><span class="logo"><i style="height:7px"></i><i style="height:12px"></i><i style="height:18px;background:var(--teal)"></i></span>Cimiento Digital</a>
+    <a href="#inicio" class="brand" aria-label="Soluciones TI, inicio"><span class="logo" aria-hidden="true"><i style="height:7px"></i><i style="height:12px"></i><i style="height:18px;background:var(--teal)"></i></span>Soluciones TI</a>
     <nav aria-label="Principal">
       <a href="#servicios" class="nav-link">Servicios</a>
       <a href="#portafolio" class="nav-link">Portafolio</a>
-      <a href="#metodo" class="nav-link">Cómo trabajamos</a>
+      <a href="#planes" class="nav-link">Planes</a>
       <a href="#equipo" class="nav-link">Equipo</a>
       <a href="#contacto" class="btn btn-primary btn-sm">Agendar diagnóstico</a>
     </nav>
   </div>
 </header>
 
-<main>
+<main id="contenido">
+
+<!-- PORTADA -->
 <section id="inicio" class="wrap hero">
-  <span class="pill reveal"><span class="dot"></span>Para inmobiliarias y constructoras</span>
+  <span class="pill reveal"><span class="dot"></span>Datos y automatización para pymes</span>
   <h1 class="reveal">Sus datos trabajando.<br><span class="dim">Sus informes, solos.</span></h1>
-  <p class="lead reveal d2">Conectamos SQL y Excel en un solo modelo de datos, automatizamos procesos y entregamos dashboards de ventas, obra y cartera.</p>
+  <p class="lead reveal d2">Convertimos los Excel y bases de datos de su empresa en dashboards que se actualizan solos y procesos que ya no dependen de trabajo manual.</p>
   <div class="ctas reveal d2">
-    <a href="#portafolio" class="btn btn-primary btn-lg">Ver proyectos demo</a>
-    <a href="#contacto" class="btn btn-soft btn-lg">Hablemos ›</a>
+    <a href="#contacto" class="btn btn-primary btn-lg">Agendar diagnóstico</a>
+    <a href="#portafolio" class="btn btn-soft btn-lg">Ver demos ›</a>
   </div>
 </section>
 
-<section class="wrap" style="padding-top:40px;padding-bottom:120px">
+<section class="wrap" style="padding-top:40px;padding-bottom:110px" aria-label="Ejemplo de dashboard">
   <div class="dash rise">
-    <div class="dash-top"><span style="font-weight:600;color:#fff">Proyecto Torre Norte</span><span class="live">● Actualizado automáticamente</span></div>
+    <div class="dash-top"><span style="font-weight:600;color:#fff">Tablero de gestión · Empresa demo</span><span class="live">● Actualizado automáticamente</span></div>
     <div class="kpis">
-      <div class="kpi"><small>Unidades vendidas</small><b>[00]</b></div>
-      <div class="kpi"><small>Avance de obra</small><b>[00%]</b></div>
+      <div class="kpi"><small>Ventas del mes</small><b>[$0]</b></div>
       <div class="kpi"><small>Cartera vencida</small><b>[$0]</b></div>
-      <div class="kpi"><small>Ppto. ejecutado</small><b>[00%]</b></div>
+      <div class="kpi"><small>Casos abiertos</small><b>[00]</b></div>
+      <div class="kpi"><small>Cumplimiento meta</small><b>[00%]</b></div>
     </div>
     <div class="bars" aria-hidden="true"><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:55%"></i><i style="height:50%"></i><i style="height:66%"></i><i style="height:72%"></i><i style="height:84%;background:var(--accent)"></i><i style="height:96%;background:var(--teal)"></i></div>
     <div class="cap">Ventas mensuales vs. meta · datos ficticios de ejemplo</div>
   </div>
 </section>
 
+<!-- PROBLEMA -->
 <div class="statement">
-  <p class="reveal">Horas copiando entre archivos. Cifras que no cuadran. <span class="dim">Decisiones que llegan cuando ya cuestan dinero.</span></p>
-  <p class="reveal d2">Ventas en SQL, presupuestos en Excel, pagos en otro sistema. Lo unimos todo para que su equipo tenga una sola cifra, siempre al día.</p>
+  <p class="reveal">Horas armando informes a mano. Cifras que no cuadran. <span class="dim">Decisiones que llegan cuando ya cuestan dinero.</span></p>
+  <p class="reveal d2">Ventas en un sistema, cartera en Excel, aprobaciones por correo. Lo conectamos todo para que su equipo tenga una sola cifra, siempre al día, sin contratar un área de analítica.</p>
 </div>
 
+<!-- SERVICIOS -->
 <section id="servicios" class="wrap">
   <div class="section-head">
     <p class="eyebrow reveal">Servicios</p>
-    <h2 class="reveal">De lo rápido a lo estructural.</h2>
+    <h2 class="reveal">Lo que hacemos por su empresa.</h2>
   </div>
   <div class="grid">
     <div class="card service reveal">
       <span class="icon" style="background:#E8EEFD;color:#1D4ED8"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg></span>
-      <h3>Reportes y dashboards</h3>
-      <p>Ventas por proyecto, inventario de unidades, presupuesto vs. ejecutado y cartera, actualizados sin intervención manual.</p>
-      <p class="stack">Power BI · Looker Studio · SQL</p>
+      <h3>Dashboards e informes</h3>
+      <p>Indicadores claros para tomar decisiones, sin copiar y pegar.</p>
+      <ul><li>Ventas, cartera y servicio al cliente</li><li>Actualización automática</li><li>Acceso por roles y desde el celular</li></ul>
+      <p class="stack">Power BI · Looker Studio · Excel</p>
     </div>
     <div class="card service reveal d2">
       <span class="icon" style="background:#DDF7F2;color:#0F766E"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></span>
       <h3>Automatización de procesos</h3>
-      <p>Informes que se generan y envían solos, consolidación de archivos y alertas de pagos vencidos o desviaciones.</p>
-      <p class="stack">Python · n8n · Power Automate</p>
+      <p>Tareas repetitivas que se hacen solas mientras su equipo se enfoca en lo importante.</p>
+      <ul><li>Aprobaciones y flujos de correo</li><li>SharePoint, Excel y Teams</li><li>Alertas y recordatorios automáticos</li></ul>
+      <p class="stack">Power Automate · SharePoint · Python</p>
     </div>
     <div class="card service reveal d3">
       <span class="icon" style="background:#EEF0F4;color:#0B1F33"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
-      <h3>Arquitectura de datos</h3>
-      <p>Migramos Excel a SQL, limpiamos y construimos un modelo único de datos que sirve de base para todo lo demás.</p>
-      <p class="stack">SQL Server · Azure · PostgreSQL</p>
+      <h3>Datos e integraciones</h3>
+      <p>Una sola fuente confiable a partir de archivos y sistemas dispersos.</p>
+      <ul><li>Consolidación y limpieza de datos</li><li>Conexión CRM, ERP y bases SQL</li><li>Modelo de datos documentado</li></ul>
+      <p class="stack">SQL Server · Azure · Python</p>
     </div>
   </div>
 </section>
 
+<!-- SECTORES -->
+<section id="sectores" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow reveal">Sectores</p>
+    <h2 class="reveal">Pensado para cómo opera su negocio.</h2>
+  </div>
+  <div class="sectors">
+    <div class="sector reveal"><span class="badge">Sector destacado</span><h3>Constructoras e inmobiliarias</h3><p>Seguimiento comercial, cartera de compradores, avance de proyectos y conexión CRM–ERP.</p></div>
+    <div class="sector reveal d2"><h3>Distribución y comercio</h3><p>Indicadores de ventas, inventario y consolidación de archivos de sucursales.</p></div>
+    <div class="sector reveal d2"><h3>Salud y educación</h3><p>Consolidación de información y aprobación de procesos, con cuidado en el manejo de datos.</p></div>
+    <div class="sector reveal d3"><h3>Transporte y servicios</h3><p>Seguimiento operativo, informes periódicos y automatización administrativa.</p></div>
+  </div>
+</section>
+
+<!-- MAPA INTERACTIVO -->
+<section id="mapa" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow reveal">Mapa de soluciones</p>
+    <h2 class="reveal">¿En qué área de su empresa<br><span class="dim">se pierde más tiempo?</span></h2>
+    <p class="lead reveal d2">Toque un área y vea qué automatizamos y qué informes le entregamos.</p>
+  </div>
+  <div class="map-card rise">
+    <div class="map" id="map">
+      <svg class="map-lines" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true" id="map-lines"></svg>
+      <div class="hub" aria-hidden="true">
+        <span class="hub-logo"><i style="height:10px"></i><i style="height:17px"></i><i style="height:26px;background:var(--teal)"></i></span>
+        <b>Datos<br>conectados</b>
+      </div>
+      <div id="map-nodes" role="group" aria-label="Áreas de la empresa"></div>
+    </div>
+    <aside class="map-panel" id="map-panel" aria-live="polite">
+      <span class="panel-icon" id="p-icon"></span>
+      <p class="panel-kicker" id="p-kicker">Área</p>
+      <h3 id="p-title">Gerencia general</h3>
+      <p class="panel-pain" id="p-pain"></p>
+      <p class="panel-label">Lo que automatizamos</p>
+      <ul id="p-auto"></ul>
+      <p class="panel-label">Lo que reportamos</p>
+      <div class="panel-chips" id="p-chips"></div>
+      <a href="#contacto" class="btn btn-primary btn-lg" id="p-cta">Hablemos de esta área</a>
+    </aside>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
 <section id="portafolio" class="wrap">
-  <div class="section-head" style="margin-bottom:40px">
+  <div class="section-head">
     <p class="eyebrow reveal">Portafolio</p>
     <h2 class="reveal">Véalo funcionando.</h2>
-    <p class="lead reveal d2" style="margin:16px auto 0;font-size:19px">Soluciones construidas con datos ficticios de una constructora de ejemplo. Así se verían con los suyos.</p>
-    <div class="filters reveal d2" role="group" aria-label="Filtrar proyectos">
-      <button type="button" class="active" data-filter="todos" aria-pressed="true">Todos</button>
-      <button type="button" data-filter="reportes" aria-pressed="false">Reportes</button>
-      <button type="button" data-filter="automatizacion" aria-pressed="false">Automatización</button>
-      <button type="button" data-filter="datos" aria-pressed="false">Datos</button>
-    </div>
+    <p class="lead reveal d2">Demos construidas con datos ficticios de una empresa de ejemplo. Así se verían con los suyos.</p>
   </div>
-
-  <div class="grid-fill">
-    <article class="card project reveal" data-cat="reportes">
-      <div class="thumb bars-thumb" aria-hidden="true"><i style="height:40%"></i><i style="height:65%"></i><i style="height:50%"></i><i style="height:85%;background:var(--accent)"></i><i style="height:72%;background:var(--teal)"></i></div>
-      <div class="body"><span class="tag" style="color:#1D4ED8">Reportes</span><h3>Dashboard comercial</h3><p class="desc">Unidades vendidas y disponibles por proyecto, separaciones y velocidad de ventas.</p><p class="stack">Power BI · SQL Server</p><a href="#contacto" class="more">Ver demo ›</a></div>
+  <div class="projects">
+    <article class="card project reveal">
+      <div class="thumb bars-thumb" aria-hidden="true"><i style="height:40%"></i><i style="height:62%"></i><i style="height:50%"></i><i style="height:74%"></i><i style="height:86%;background:var(--accent)"></i><i style="height:95%;background:var(--teal)"></i></div>
+      <div class="body"><span class="tag" style="color:#1D4ED8">Dashboard</span><h3>Ventas</h3><p class="desc">Ventas por vendedor, producto y región, cumplimiento de meta y tendencia mensual.</p><p class="tech">Power BI · Excel</p><span class="soon">Demo en construcción</span></div>
     </article>
-    <article class="card project reveal d2" data-cat="reportes">
-      <div class="thumb" style="flex-direction:column;gap:14px;padding:26px" aria-hidden="true">
-        <div class="track"><i style="width:78%"></i></div><div class="track"><i style="width:92%;background:var(--accent)"></i></div><div class="track"><i style="width:55%;background:var(--teal)"></i></div><div class="track"><i style="width:66%"></i></div>
+    <article class="card project reveal d2">
+      <div class="thumb" aria-hidden="true">
+        <div class="mini">
+          <div>Al día<b>[00%]</b><div class="meter" style="background:var(--teal);width:80%"></div></div>
+          <div>1–30 días<b>[00%]</b><div class="meter" style="background:var(--navy3);width:45%"></div></div>
+          <div>31–60 días<b>[00%]</b><div class="meter" style="background:var(--accent);width:28%"></div></div>
+          <div>+60 días<b>[00%]</b><div class="meter" style="background:#F59E0B;width:16%"></div></div>
+        </div>
       </div>
-      <div class="body"><span class="tag" style="color:#1D4ED8">Reportes</span><h3>Control de obra</h3><p class="desc">Presupuesto vs. ejecutado por capítulo, avance físico y desviaciones resaltadas.</p><p class="stack">Power BI · Excel · SQL</p><a href="#contacto" class="more">Ver demo ›</a></div>
+      <div class="body"><span class="tag" style="color:#1D4ED8">Dashboard</span><h3>Cartera y recaudo</h3><p class="desc">Cartera por edades, clientes en mora, recaudo proyectado y alertas de vencimiento.</p><p class="tech">Power BI · Power Automate</p><span class="soon">Demo en construcción</span></div>
     </article>
-    <article class="card project reveal d3" data-cat="reportes">
-      <div class="thumb" style="display:grid;grid-template-columns:1fr 1fr;align-items:stretch;color:#9FB0C4;font-weight:500" aria-hidden="true">
-        <div style="background:var(--navy2);border-radius:12px;padding:12px">Al día<div style="height:8px;margin-top:12px;background:var(--teal);width:80%;border-radius:999px"></div></div>
-        <div style="background:var(--navy2);border-radius:12px;padding:12px">30 días<div style="height:8px;margin-top:12px;background:var(--navy3);width:45%;border-radius:999px"></div></div>
-        <div style="background:var(--navy2);border-radius:12px;padding:12px">60 días<div style="height:8px;margin-top:12px;background:var(--accent);width:30%;border-radius:999px"></div></div>
-        <div style="background:var(--navy2);border-radius:12px;padding:12px">90+ días<div style="height:8px;margin-top:12px;background:var(--accent);width:18%;border-radius:999px"></div></div>
-      </div>
-      <div class="body"><span class="tag" style="color:#1D4ED8">Reportes</span><h3>Cartera y recaudo</h3><p class="desc">Cuotas por vencer y vencidas por edades, con flujo de caja proyectado por proyecto.</p><p class="stack">Looker Studio · SQL</p><a href="#contacto" class="more">Ver demo ›</a></div>
-    </article>
-    <article class="card project reveal" data-cat="automatizacion">
-      <div class="thumb" aria-hidden="true"><span class="chipbox">10 Excel</span><span class="line"></span><span class="chipbox">Script</span><span class="line"></span><span class="chipbox" style="background:var(--accent);color:#fff">PDF</span></div>
-      <div class="body"><span class="tag" style="color:#0F766E">Automatización</span><h3>Informe semanal automático</h3><p class="desc">Los archivos de cada obra se consolidan solos y el informe llega por correo cada lunes.</p><p class="stack">Python · n8n</p><a href="#contacto" class="more">Ver demo ›</a></div>
-    </article>
-    <article class="card project reveal d2" data-cat="automatizacion">
+    <article class="card project reveal d3">
       <div class="thumb" style="flex-direction:column;gap:8px" aria-hidden="true">
-        <div class="row"><span>Cuota apto 402</span><span style="color:var(--teal)">vence en 3 días</span></div>
-        <div class="row"><span>Cuota apto 1108</span><span style="color:#FCA5A5">vencida</span></div>
-        <div class="row"><span>Capítulo estructura</span><span style="color:#FCD34D">sobre presupuesto</span></div>
+        <div class="row"><span>Caso #1042 · Garantía</span><span style="color:var(--teal)">Resuelto</span></div>
+        <div class="row"><span>Caso #1043 · Facturación</span><span style="color:#FCD34D">En curso</span></div>
+        <div class="row"><span>Caso #1044 · Entrega</span><span style="color:#FCA5A5">Vence hoy</span></div>
       </div>
-      <div class="body"><span class="tag" style="color:#0F766E">Automatización</span><h3>Alertas inteligentes</h3><p class="desc">Avisos por correo o WhatsApp cuando una cuota vence o un capítulo supera su presupuesto.</p><p class="stack">Power Automate · SQL</p><a href="#contacto" class="more">Ver demo ›</a></div>
-    </article>
-    <article class="card project reveal d3" data-cat="datos">
-      <div class="thumb" style="gap:14px" aria-hidden="true">
-        <div style="display:flex;flex-direction:column;gap:6px"><span style="background:var(--navy2);border-radius:8px;padding:6px 12px">ventas.xlsx</span><span style="background:var(--navy2);border-radius:8px;padding:6px 12px">obra.xlsx</span><span style="background:var(--navy2);border-radius:8px;padding:6px 12px">pagos.xlsx</span></div>
-        <span class="line" style="width:30px"></span>
-        <span style="background:var(--accent);color:#fff;border-radius:14px;padding:22px 16px">Modelo SQL</span>
-      </div>
-      <div class="body"><span class="tag" style="color:#3A3A3F">Datos</span><h3>De Excel a un modelo único</h3><p class="desc">Migración y limpieza de archivos dispersos a una base SQL con modelo estrella listo para reportar.</p><p class="stack">Python · SQL Server · Azure</p><a href="#contacto" class="more">Ver demo ›</a></div>
+      <div class="body"><span class="tag" style="color:#0F766E">Dashboard + automatización</span><h3>Atención al cliente</h3><p class="desc">Casos por estado y tiempo de respuesta, con asignación y avisos automáticos al responsable.</p><p class="tech">Power BI · Power Automate · SharePoint</p><span class="soon">Demo en construcción</span></div>
     </article>
   </div>
 </section>
 
-<section id="metodo" class="wrap">
-  <div class="section-head" style="margin-bottom:64px">
-    <p class="eyebrow reveal">Cómo trabajamos</p>
+<!-- PLANES -->
+<section id="planes" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow reveal">Planes</p>
     <h2 class="reveal">Empezamos pequeño.<br><span class="dim">Crecemos con resultados.</span></h2>
   </div>
+  <div class="plans">
+    <div class="card plan reveal">
+      <span class="step">Paso 1</span>
+      <h3>Diagnóstico</h3>
+      <p class="price"><b>[Sin costo / desde $0]</b>Una sesión de trabajo</p>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Reunión para entender sus procesos</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Revisión de la calidad de sus datos</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Propuesta de mejoras priorizadas</li>
+      </ul>
+      <a href="#contacto" class="btn btn-soft btn-lg">Agendar diagnóstico</a>
+    </div>
+    <div class="card plan featured reveal d2">
+      <span class="ribbon">Más solicitado</span>
+      <span class="step">Paso 2</span>
+      <h3>Implementación</h3>
+      <p class="price"><b>A cotizar</b>Según alcance del proyecto</p>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Dashboard o automatización llave en mano</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Alcance, hitos y pruebas definidos</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Entregas parciales con su equipo</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Manual y capacitación</li>
+      </ul>
+      <a href="#contacto" class="btn btn-primary btn-lg">Solicitar propuesta</a>
+    </div>
+    <div class="card plan reveal d3">
+      <span class="step">Paso 3</span>
+      <h3>Soporte mensual</h3>
+      <p class="price"><b>A cotizar</b>Plan mensual con horas definidas</p>
+      <ul>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Monitoreo y corrección de incidencias</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Ajustes y mejoras pactadas</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Reunión periódica de resultados</li>
+      </ul>
+      <a href="#contacto" class="btn btn-soft btn-lg">Conocer el plan</a>
+    </div>
+  </div>
+  <p class="note reveal">Cada propuesta incluye alcance, entregables y exclusiones por escrito, y acuerdo de confidencialidad sobre su información.</p>
+</section>
+
+<!-- CÓMO TRABAJAMOS -->
+<section id="metodo" class="wrap">
+  <div class="section-head" style="margin-bottom:60px">
+    <p class="eyebrow reveal">Cómo trabajamos</p>
+    <h2 class="reveal">Claro desde el primer día.</h2>
+  </div>
   <div class="steps">
-    <div class="reveal"><div class="n">01</div><h3>Diagnóstico</h3><p>Una reunión para entender qué informe o proceso les quita más horas.</p></div>
-    <div class="reveal d2"><div class="n">02</div><h3>Propuesta</h3><p>Proceso actual vs. propuesto, arquitectura y alcance claro.</p></div>
-    <div class="reveal d2"><div class="n">03</div><h3>Piloto</h3><p>Un reporte o automatización funcionando en pocas semanas.</p></div>
-    <div class="reveal d3"><div class="n">04</div><h3>Escalar</h3><p>Extendemos la solución a más proyectos, áreas y procesos.</p></div>
+    <div class="reveal"><div class="n">01</div><h3>Descubrir</h3><p>Entendemos sus fuentes de datos, reglas y proceso actual.</p></div>
+    <div class="reveal d2"><div class="n">02</div><h3>Proponer</h3><p>Alcance, tiempos, precio y riesgos acordados por escrito.</p></div>
+    <div class="reveal d2"><div class="n">03</div><h3>Construir</h3><p>Iteraciones cortas con pruebas y demostraciones.</p></div>
+    <div class="reveal d3"><div class="n">04</div><h3>Acompañar</h3><p>Entrega documentada y soporte para que siga funcionando.</p></div>
   </div>
 </section>
 
+<!-- EQUIPO -->
 <section id="equipo" class="wrap">
   <div class="section-head">
     <p class="eyebrow reveal">Equipo</p>
     <h2 class="reveal">Las personas detrás.</h2>
   </div>
   <div class="team">
-    <div class="reveal"><span class="avatar">[Foto]</span><h3>[Nombre]</h3><p>Comercial y clientes</p></div>
-    <div class="reveal d2"><span class="avatar">[Foto]</span><h3>[Nombre]</h3><p>Datos y BI</p></div>
-    <div class="reveal d2"><span class="avatar">[Foto]</span><h3>[Nombre]</h3><p>Automatización y desarrollo</p></div>
-    <div class="reveal d3"><span class="avatar">[Foto]</span><h3>[Nombre]</h3><p>Diseño, marca y web</p></div>
+    <div class="reveal"><span class="avatar">[Foto]</span><h3>Fabián [Apellido]</h3><p>[Rol] · Socio fundador</p></div>
+    <div class="reveal d2"><span class="avatar">[Foto]</span><h3>Kevin García</h3><p>[Rol] · Socio fundador</p></div>
+    <div class="reveal d3"><span class="avatar">[Foto]</span><h3>[Nombre Apellido]</h3><p>[Rol] · Socio fundador</p></div>
   </div>
 </section>
 
-<section id="contacto" class="wrap" style="padding-bottom:120px">
+<!-- CONTACTO -->
+<section id="contacto" class="wrap" style="padding-bottom:110px">
   <div class="contact rise">
-    <div style="display:flex;flex-direction:column;gap:18px;align-items:flex-start">
-      <p style="margin:0;color:var(--teal);font-weight:600;font-size:17px">Contacto</p>
-      <h2>Agende un diagnóstico sin costo.</h2>
-      <p style="margin:0;color:#B6C3D3;line-height:1.6;font-size:18px">Cuéntenos qué proceso o informe les quita más tiempo. En 30 minutos le decimos qué se puede automatizar.</p>
-      <p style="margin:0;line-height:1.9">[correo@sudominio.co]<br>[WhatsApp +57 300 000 0000]<br>Bogotá, Colombia</p>
+    <div class="contact-info">
+      <p style="color:var(--teal);font-weight:600;font-size:17px">Contacto</p>
+      <h2>Agende su diagnóstico.</h2>
+      <p style="color:#C9D4E1;line-height:1.6;font-size:18px">Cuéntenos qué informe o proceso les quita más tiempo. En 30 minutos le decimos qué se puede automatizar.</p>
+      <div class="contact-links">
+        <a href="#" data-wa><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 21l2.1-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg><span data-wa-label>WhatsApp</span></a>
+        <a href="#" data-mail><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span data-mail-label>Correo</span></a>
+        <span style="display:inline-flex;align-items:center;gap:10px;color:#C9D4E1"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Bogotá, Colombia</span>
+      </div>
     </div>
-    <form onsubmit="event.preventDefault(); alert('Formulario de ejemplo: conéctalo a Formspree o a tu correo antes de publicarlo.');">
-      <label>Nombre<input type="text" name="nombre" required></label>
-      <label>Empresa<input type="text" name="empresa"></label>
-      <label>Correo<input type="email" name="correo" required></label>
-      <label>¿Qué proceso quiere mejorar?<textarea name="mensaje" rows="4"></textarea></label>
+    <form id="form-contacto" novalidate>
+      <label>Nombre<input type="text" name="nombre" autocomplete="name" required></label>
+      <label>Empresa<input type="text" name="empresa" autocomplete="organization" required></label>
+      <label>Correo<input type="email" name="correo" autocomplete="email" required></label>
+      <label>Teléfono (opcional)<input type="tel" name="telefono" autocomplete="tel"></label>
+      <label>¿Qué proceso o informe quiere mejorar?<textarea name="mensaje" rows="4" required></textarea></label>
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+      <label class="consent"><input type="checkbox" name="autorizacion" required><span>Autorizo el tratamiento de mis datos personales para ser contactado, según la <a href="privacidad.html">política de privacidad</a>.</span></label>
       <button type="submit" class="btn btn-primary btn-lg">Enviar solicitud</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><div><span>© 2026 Cimiento Digital · Bogotá</span><span>Los proyectos del portafolio usan datos ficticios.</span></div></div></footer>
+<footer><div class="wrap"><div><span>© <span id="anio">2026</span> Soluciones TI · Bogotá, Colombia</span><span><a href="privacidad.html">Política de privacidad</a> · Las demos usan datos ficticios.</span></div></div></footer>
+
+<a href="#" class="wa" data-wa aria-label="Escríbanos por WhatsApp"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2a9.9 9.9 0 0 0-8.5 15l-1.5 5.1 5.3-1.4A9.9 9.9 0 1 0 12.04 2zm0 18.1a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3.1.8.8-3-.2-.3a8.2 8.2 0 1 1 7 3.9zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.7a2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg></a>
 
 <script>
-// Aparecer al hacer scroll
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.reveal, .rise').forEach((el) => io.observe(el));
+/* ============ CONFIGURACIÓN: cambie estos tres valores ============ */
+const CONFIG = {
+  whatsapp: '573000000000',          // Número con indicativo 57, sin + ni espacios
+  correo: 'contacto@sudominio.co',   // Correo de contacto
+  formspree: ''                       // ID de Formspree, ej. 'xyzabcd' (de https://formspree.io/f/xyzabcd)
+};
+/* ================================================================== */
 
-// Filtros del portafolio
-const buttons = document.querySelectorAll('.filters button');
-buttons.forEach((btn) => btn.addEventListener('click', () => {
-  const f = btn.dataset.filter;
-  buttons.forEach((b) => { b.classList.toggle('active', b === btn); b.setAttribute('aria-pressed', b === btn); });
-  document.querySelectorAll('.project').forEach((p) => {
-    p.hidden = !(f === 'todos' || p.dataset.cat === f);
-    if (!p.hidden) p.classList.add('in');
+const waMsg = encodeURIComponent('Hola, quiero agendar un diagnóstico con Soluciones TI.');
+document.querySelectorAll('[data-wa]').forEach(a => { a.href = 'https://wa.me/' + CONFIG.whatsapp + '?text=' + waMsg; a.target = '_blank'; a.rel = 'noopener'; });
+document.querySelectorAll('[data-wa-label]').forEach(s => { s.textContent = 'WhatsApp +' + CONFIG.whatsapp.replace(/^57(\d{3})(\d{3})(\d{4})$/, '57 $1 $2 $3'); });
+document.querySelectorAll('[data-mail]').forEach(a => { a.href = 'mailto:' + CONFIG.correo; });
+document.querySelectorAll('[data-mail-label]').forEach(s => { s.textContent = CONFIG.correo; });
+document.getElementById('anio').textContent = new Date().getFullYear();
+
+// Aparecer al hacer scroll
+if ('IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal, .rise').forEach((el) => io.observe(el));
+} else {
+  document.querySelectorAll('.reveal, .rise').forEach((el) => el.classList.add('in'));
+}
+
+// Mapa interactivo de áreas
+const I = (d) => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
+const AREAS = [
+  { id:'gerencia', x:18, y:18, label:'Gerencia general', icon:I('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 12v-2M11 12V8M15 12v-3M8 20h8M12 16v4"/>'),
+    pain:'La información llega tarde, en archivos distintos y cada área reporta cifras que no cuadran entre sí.',
+    auto:['Consolidación diaria de cifras de todas las áreas','Envío automático del informe de gestión semanal','Alertas cuando un indicador se sale de la meta'],
+    chips:['Tablero ejecutivo','Metas vs. real','Flujo de caja'] },
+  { id:'comercial', x:50, y:15, label:'Comercial y ventas', icon:I('<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>'),
+    pain:'Las ventas viven en Excel o en el CRM, y armar el informe del comité toma horas cada semana.',
+    auto:['Registro de prospectos y seguimiento desde formularios','Recordatorios automáticos de seguimiento a clientes','Cotizaciones y aprobaciones de descuentos por flujo'],
+    chips:['Ventas por asesor','Embudo comercial','Cumplimiento de meta'] },
+  { id:'servicio', x:82, y:18, label:'Servicio al cliente', icon:I('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M9 11h6M9 14h4"/>'),
+    pain:'Las solicitudes llegan por correo, WhatsApp y teléfono, y nadie sabe cuántas están abiertas ni quién las atiende.',
+    auto:['Registro único de casos desde correo y formularios','Asignación automática al responsable','Aviso cuando un caso está por vencer'],
+    chips:['Casos por estado','Tiempo de respuesta','Satisfacción'] },
+  { id:'finanzas', x:87, y:50, label:'Administrativa y financiera', icon:I('<rect x="2" y="6" width="20" height="13" rx="2"/><path d="M2 10h20M6 15h4"/>'),
+    pain:'La cartera se revisa a mano, los cobros se olvidan y las aprobaciones de pago se pierden en el correo.',
+    auto:['Recordatorios de pago a clientes antes del vencimiento','Aprobación de facturas y pagos por flujo','Conciliación y consolidación de archivos contables'],
+    chips:['Cartera por edades','Recaudo','Presupuesto vs. ejecutado'] },
+  { id:'operaciones', x:80, y:81, label:'Proyectos y operaciones', icon:I('<path d="M2 20h20M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/>'),
+    pain:'El avance de obra u operación se reporta en formatos distintos y las desviaciones se ven cuando ya es tarde.',
+    auto:['Reportes de avance desde el celular a SharePoint','Consolidación automática de informes de cada proyecto','Alertas de desviación en tiempo o presupuesto'],
+    chips:['Avance físico','Desviaciones','Productividad'] },
+  { id:'compras', x:50, y:84, label:'Compras y logística', icon:I('<path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>'),
+    pain:'Las solicitudes de compra van y vienen por correo, sin trazabilidad de quién aprobó ni cuándo llega el material.',
+    auto:['Solicitud y aprobación de compras por niveles','Seguimiento de órdenes y entregas de proveedores','Alertas de inventario bajo'],
+    chips:['Órdenes de compra','Proveedores','Inventario'] },
+  { id:'talento', x:20, y:81, label:'Talento humano', icon:I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/>'),
+    pain:'Vacaciones, permisos y novedades de nómina se gestionan en papel o correo y toca consolidarlas cada mes.',
+    auto:['Solicitudes de permisos y vacaciones con aprobación','Ingreso de personal con checklist automático','Consolidación de novedades de nómina'],
+    chips:['Rotación','Ausentismo','Novedades'] },
+  { id:'calidad', x:13, y:50, label:'Calidad y seguridad', icon:I('<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'),
+    pain:'Inspecciones, hallazgos y planes de acción quedan en formatos sueltos y es difícil demostrar el seguimiento.',
+    auto:['Inspecciones con formulario en el celular','Seguimiento automático de planes de acción','Recordatorio de vencimientos y certificaciones'],
+    chips:['Hallazgos','Incidentes','Cumplimiento'] }
+];
+(function initMap(){
+  const svg = document.getElementById('map-lines');
+  const wrap = document.getElementById('map-nodes');
+  const panel = document.getElementById('map-panel');
+  if (!svg || !wrap) return;
+  const cx = 500, cy = 350, ns = 'http://www.w3.org/2000/svg';
+  const ring = document.createElementNS(ns, 'path');
+  ring.setAttribute('class', 'ring');
+  ring.setAttribute('d', AREAS.map((a, i) => (i ? 'L' : 'M') + a.x * 10 + ' ' + a.y * 7).join(' ') + 'Z');
+  svg.appendChild(ring);
+  const lines = {};
+  AREAS.forEach((a) => {
+    const d = 'M' + a.x * 10 + ' ' + a.y * 7 + ' L' + cx + ' ' + cy;
+    ['link', 'flow'].forEach((cls) => {
+      const p = document.createElementNS(ns, 'path');
+      p.setAttribute('class', cls); p.setAttribute('d', d);
+      svg.appendChild(p);
+      (lines[a.id] = lines[a.id] || []).push(p);
+    });
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'node'; b.dataset.id = a.id;
+    b.style.left = a.x + '%'; b.style.top = a.y + '%';
+    b.setAttribute('aria-pressed', 'false');
+    b.innerHTML = '<span class="tile"><span class="pin"></span>' + a.icon + '</span><span class="lbl">' + a.label + '</span>';
+    b.addEventListener('click', () => select(a.id, true));
+    wrap.appendChild(b);
   });
-}));
+  function select(id, user) {
+    const a = AREAS.find((x) => x.id === id);
+    wrap.querySelectorAll('.node').forEach((n) => n.setAttribute('aria-pressed', n.dataset.id === id));
+    Object.entries(lines).forEach(([k, ps]) => ps.forEach((p) => p.classList.toggle('on', k === id)));
+    document.getElementById('p-icon').innerHTML = a.icon;
+    document.getElementById('p-title').textContent = a.label;
+    document.getElementById('p-pain').textContent = a.pain;
+    document.getElementById('p-auto').innerHTML = a.auto.map((t) => '<li>' + t + '</li>').join('');
+    document.getElementById('p-chips').innerHTML = a.chips.map((t) => '<span>' + t + '</span>').join('');
+    panel.classList.remove('swap'); void panel.offsetWidth; panel.classList.add('swap');
+    if (user && window.matchMedia('(max-width:900px)').matches) panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  select('gerencia', false);
+})();
+
+// Formulario de contacto (Formspree)
+const form = document.getElementById('form-contacto');
+const status = form.querySelector('.form-status');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  status.className = 'form-status';
+  if (!form.checkValidity()) {
+    status.textContent = 'Revise los campos obligatorios y la autorización de datos.';
+    status.classList.add('err');
+    form.reportValidity();
+    return;
+  }
+  if (!CONFIG.formspree) {
+    status.textContent = 'Formulario en configuración. Mientras tanto escríbanos por WhatsApp.';
+    status.classList.add('err');
+    return;
+  }
+  const btn = form.querySelector('button');
+  btn.disabled = true; btn.textContent = 'Enviando…';
+  try {
+    const r = await fetch('https://formspree.io/f/' + CONFIG.formspree, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+    if (!r.ok) throw new Error();
+    form.reset();
+    status.textContent = '¡Gracias! Le responderemos en menos de un día hábil.';
+    status.classList.add('ok');
+  } catch {
+    status.textContent = 'No se pudo enviar. Intente de nuevo o escríbanos por WhatsApp.';
+    status.classList.add('err');
+  } finally {
+    btn.disabled = false; btn.textContent = 'Enviar solicitud';
+  }
+});
 </script>
 </body>
 </html>
