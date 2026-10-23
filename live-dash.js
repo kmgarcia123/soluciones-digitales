@@ -12,6 +12,20 @@
   const fmtM = (v) => '$' + v.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' M';
   const fmtP = (v) => v.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
 
+  /* ---------- Sectores ---------- */
+  const SECT = {
+    constructora: { name: 'Constructora demo', ing: 'Ingresos', ingD: 'Ingresos diarios', m: { label: 'Margen bruto', v: 33.4, base: 31.8, lo: 29, hi: 38 }, cart: 'Cartera vencida', buckets: ['Al día', '1–30 días', '31–60 días', '+60 días'],
+      clientes: ['Constructora Andina', 'Inmobiliaria Los Cerros', 'Grupo Ladera', 'Urbanizadora Sabana', 'Proyecto Torre Norte', 'Conjunto Mirador'],
+      alerta: 'Alerta: cuota vence hoy', sync: 'ERP + Excel de obra' },
+    comercio: { name: 'Distribuidora demo', ing: 'Ventas', ingD: 'Ventas diarias', m: { label: 'Margen bruto', v: 22.1, base: 20.6, lo: 18, hi: 26 }, cart: 'Cartera vencida', buckets: ['Al día', '1–30 días', '31–60 días', '+60 días'],
+      clientes: ['Tienda La 80', 'Supermercado El Prado', 'Droguería Central', 'Ferretería del Norte', 'Minimercado Suba', 'Almacén La Esquina'],
+      alerta: 'Alerta: inventario bajo · Ref. ' , sync: 'POS + inventario de bodega' },
+    salud: { name: 'IPS demo', ing: 'Facturación', ingD: 'Facturación diaria', m: { label: 'Ocupación de agenda', v: 84.2, base: 80.5, lo: 74, hi: 93 }, cart: 'Cuentas por cobrar EPS', buckets: ['Al día', '1–60 días', '61–90 días', '+90 días'],
+      clientes: ['EPS Ejemplo Uno', 'EPS Ejemplo Dos', 'Póliza Ejemplo', 'Medicina prepagada demo', 'Particulares', 'Convenio empresarial demo'],
+      alerta: 'Alerta: glosa por responder', sync: 'Agenda + facturación' }
+  };
+  let S = SECT.constructora;
+
   /* ---------- Estado ---------- */
   const META = 48;                      // meta diaria de ingresos (M)
   let day = 30;
@@ -20,11 +34,11 @@
   const flujo = [];
   for (let i = 17; i <= 30; i++) flujo.push({ d: i, v: rnd(-22, 34) });
   const cartera = [
-    { k: 'Al día', v: 612 }, { k: '1–30 días', v: 184 }, { k: '31–60 días', v: 96 }, { k: '+60 días', v: 58 }
+    { k: S.buckets[0], v: 612 }, { k: S.buckets[1], v: 184 }, { k: S.buckets[2], v: 96 }, { k: S.buckets[3], v: 58 }
   ];
   const K = {
-    ingresos: { label: 'Ingresos del mes', v: ingresos.slice(-22).reduce((a, b) => a + b.v, 0), base: 0, fmt: fmtM, goodUp: true, hist: [] },
-    margen:   { label: 'Margen bruto', v: 33.4, base: 31.8, fmt: fmtP, goodUp: true, hist: [] },
+    ingresos: { label: S.ing + ' del mes', v: ingresos.slice(-22).reduce((a, b) => a + b.v, 0), base: 0, fmt: fmtM, goodUp: true, hist: [] },
+    margen:   { label: S.m.label, v: S.m.v, base: S.m.base, fmt: fmtP, goodUp: true, hist: [] },
     cartera:  { label: 'Cartera vencida', v: 338, base: 362, fmt: fmtM, goodUp: false, hist: [] },
     caja:     { label: 'Caja disponible', v: 1264, base: 1180, fmt: fmtM, goodUp: true, hist: [] }
   };
@@ -79,7 +93,7 @@
   const txt = (x, y, s, attrs) => { const n = el('text', Object.assign({ x, y }, attrs || {})); n.textContent = s; return n; };
 
   const LEG = {
-    ingresos: '<span><i style="background:' + C.pos + '"></i>Ingresos diarios</span><span><i class="ld-dash"></i>Meta</span>',
+    get ingresos() { return '<span><i style="background:' + C.pos + '"></i>' + S.ingD + '</span><span><i class="ld-dash"></i>Meta</span>'; },
     flujo: '<span><i class="sq" style="background:' + C.pos + '"></i>Entra más</span><span><i class="sq" style="background:' + C.neg + '"></i>Sale más</span>',
     cartera: ''
   };
@@ -184,15 +198,14 @@
 
   /* ---------- Actividad ---------- */
   const feed = document.getElementById('ld-feed');
-  const CLIENTES = ['Constructora Andina', 'Inmobiliaria Los Cerros', 'Grupo Ladera', 'Urbanizadora Sabana', 'Proyecto Torre Norte', 'Conjunto Mirador'];
-  const pick = (a) => a[Math.floor(Math.random() * a.length)];
+    const pick = (a) => a[Math.floor(Math.random() * a.length)];
   const EV = [
-    () => ({ ic: '$', bg: '#6FD8CC', t: 'Pago recibido', m: pick(CLIENTES), a: rnd(4, 38) }),
-    () => ({ ic: '$', bg: '#6FD8CC', t: 'Pago recibido', m: pick(CLIENTES), a: rnd(4, 38) }),
-    () => ({ ic: 'F', bg: '#A9BBF5', t: 'Factura emitida #' + Math.floor(rnd(4400, 4999)), m: pick(CLIENTES), a: rnd(6, 52) }),
-    () => ({ ic: '!', bg: '#F2A27B', t: 'Alerta: cuota vence hoy', m: pick(CLIENTES) + ' · aviso enviado', a: rnd(2, 15) }),
+    () => ({ ic: '$', bg: '#6FD8CC', t: 'Pago recibido', m: pick(S.clientes), a: rnd(4, 38) }),
+    () => ({ ic: '$', bg: '#6FD8CC', t: 'Pago recibido', m: pick(S.clientes), a: rnd(4, 38) }),
+    () => ({ ic: 'F', bg: '#A9BBF5', t: 'Factura emitida #' + Math.floor(rnd(4400, 4999)), m: pick(S.clientes), a: rnd(6, 52) }),
+    () => ({ ic: '!', bg: '#F2A27B', t: S.alerta + (S === SECT.comercio ? Math.floor(rnd(2100, 2999)) : ''), m: pick(S.clientes) + ' · aviso enviado', a: rnd(2, 15) }),
     () => ({ ic: '✓', bg: '#C8D2E0', t: 'Informe diario enviado', m: 'Gerencia · automático', a: null }),
-    () => ({ ic: '↻', bg: '#C8D2E0', t: 'Datos sincronizados', m: 'ERP + Excel de obra', a: null })
+    () => ({ ic: '↻', bg: '#C8D2E0', t: 'Datos sincronizados', m: S.sync, a: null })
   ];
   function addEvent(e, animate) {
     const li = document.createElement('li');
@@ -215,7 +228,7 @@
     flujo.push({ d: day, v: clamp(rnd(-24, 36), -38, 38) }); if (flujo.length > 30) flujo.shift();
     cartera.forEach((c, i) => { c.v = clamp(c.v + rnd(-14, 14) * (i ? 0.6 : 1), 20, 690); });
 
-    K.ingresos.v += v; K.margen.v = clamp(K.margen.v + rnd(-0.5, 0.55), 29, 38);
+    K.ingresos.v += v; K.margen.v = clamp(K.margen.v + rnd(-0.5, 0.55), S.m.lo, S.m.hi);
     K.cartera.v = cartera.slice(1).reduce((a, b) => a + b.v, 0);
     K.caja.v = clamp(K.caja.v + flujo[flujo.length - 1].v, 900, 1600);
     if (day % 30 === 0) { K.ingresos.base = K.ingresos.v; K.ingresos.v = v; }
@@ -251,6 +264,26 @@
     new IntersectionObserver((en) => { visible = en[0].isIntersecting; schedule(); }).observe(root);
   }
   document.addEventListener('visibilitychange', () => { visible = !document.hidden; schedule(); });
+
+  /* ---------- Cambio de sector ---------- */
+  function applySector(id) {
+    S = SECT[id];
+    root.querySelector('.dash-title').textContent = 'Finanzas en vivo · ' + S.name;
+    root.querySelector('.ld-tabs [data-view="ingresos"]').textContent = S.ing + ' vs. meta';
+    K.ingresos.label = S.ing + ' del mes';
+    K.margen.label = S.m.label; K.margen.v = S.m.v; K.margen.base = S.m.base; K.margen.shown = S.m.v;
+    K.margen.hist = []; for (let i = 0; i < 20; i++) K.margen.hist.push(S.m.v * (1 + rnd(-0.02, 0.02)));
+    K.cartera.label = S.cart;
+    cartera.forEach((c, i) => { c.k = S.buckets[i]; });
+    Object.entries(K).forEach(([kid, k]) => { k.el.querySelector('small').textContent = k.label; renderKpi(kid, false); });
+    feed.innerHTML = '';
+    for (let i = 0; i < 5; i++) addEvent(pick(EV)(), false);
+    root.querySelectorAll('.ld-sector button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.sector === id));
+    hoverIdx = null; tip.hidden = true;
+    draw();
+  }
+  root.querySelectorAll('.ld-sector button').forEach((b) => b.addEventListener('click', () => applySector(b.dataset.sector)));
+  K.cartera.label = S.cart; K.cartera.el.querySelector('small').textContent = S.cart;
 
   draw();
   schedule();

@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="styles.css">
 <script src="demos.js"></script>
 <script src="live-dash.js" defer></script>
+<script src="interactivos.js" defer></script>
 <script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
@@ -55,6 +56,11 @@
     <div class="dash-top">
       <div class="dash-id"><span class="dash-title">Finanzas en vivo · Constructora demo</span><span class="dash-sub">Simulación con datos ficticios</span></div>
       <div class="dash-right">
+        <div class="ld-sector" role="group" aria-label="Ver tablero de ejemplo para el sector">
+          <button type="button" data-sector="constructora" aria-pressed="true">Constructora</button>
+          <button type="button" data-sector="comercio" aria-pressed="false">Comercio</button>
+          <button type="button" data-sector="salud" aria-pressed="false">Salud</button>
+        </div>
         <span class="live"><span class="live-dot" aria-hidden="true"></span>En vivo · <span id="ld-ago">ahora</span></span>
         <button type="button" class="ld-pause" id="ld-pause" aria-pressed="false" aria-label="Pausar simulación"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
       </div>
@@ -89,6 +95,48 @@
   <p class="reveal">Horas armando informes a mano. Cifras que no cuadran. <span class="dim">Decisiones que llegan cuando ya cuestan dinero.</span></p>
   <p class="reveal d2">Ventas en un sistema, cartera en Excel, aprobaciones por correo. Lo conectamos todo para que su equipo tenga una sola cifra, siempre al día, sin contratar un área de analítica.</p>
 </div>
+
+<!-- CALCULADORA -->
+<section id="calculadora" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow reveal">Calculadora</p>
+    <h2 class="reveal">¿Cuánto le cuesta hoy<br><span class="dim">armar informes a mano?</span></h2>
+    <p class="lead reveal d2">Mueva los controles con los datos de su empresa y vea el tiempo y el dinero que podría recuperar.</p>
+  </div>
+  <div class="calc rise">
+    <div class="calc-inputs">
+      <div class="calc-field">
+        <div class="calc-row"><label for="c-personas">Personas que arman informes o tareas repetitivas</label><output id="o-personas" for="c-personas">3</output></div>
+        <input type="range" id="c-personas" min="1" max="20" step="1" value="3">
+      </div>
+      <div class="calc-field">
+        <div class="calc-row"><label for="c-horas">Horas a la semana por persona</label><output id="o-horas" for="c-horas">6 h</output></div>
+        <input type="range" id="c-horas" min="1" max="25" step="1" value="6">
+      </div>
+      <div class="calc-field">
+        <div class="calc-row"><label for="c-costo">Costo de una hora de trabajo</label><output id="o-costo" for="c-costo">$35.000</output></div>
+        <input type="range" id="c-costo" min="15000" max="150000" step="5000" value="35000">
+      </div>
+      <div class="calc-field">
+        <div class="calc-row"><label for="c-auto">Parte que se puede automatizar</label><output id="o-auto" for="c-auto">60%</output></div>
+        <input type="range" id="c-auto" min="30" max="90" step="5" value="60">
+      </div>
+      <p class="calc-note">Estimación de referencia con 48 semanas laborales al año. En el diagnóstico la ajustamos a su caso real.</p>
+    </div>
+    <div class="calc-result" aria-live="polite">
+      <p class="calc-kicker">Podría recuperar al año</p>
+      <div class="calc-big"><b id="r-ahorro">$0</b><span>en costo de horas de trabajo</span></div>
+      <div class="calc-grid">
+        <div><b id="r-horas">0</b><span>horas al año</span></div>
+        <div><b id="r-dias">0</b><span>días laborales</span></div>
+        <div><b id="r-mes">$0</b><span>al mes</span></div>
+      </div>
+      <div class="calc-bar" aria-hidden="true"><div class="calc-bar-auto" id="r-bar"></div></div>
+      <div class="calc-legend"><span><i style="background:var(--teal)"></i>Automatizable</span><span><i style="background:rgba(255,255,255,.18)"></i>Sigue siendo manual</span></div>
+      <button type="button" class="btn btn-primary btn-lg" id="calc-cta">Quiero validar este cálculo</button>
+    </div>
+  </div>
+</section>
 
 <!-- SERVICIOS -->
 <section id="servicios" class="wrap">
@@ -125,6 +173,26 @@
       <ul><li>Monitoreo y mantenimiento</li><li>Ajustes y nuevas mejoras</li><li>Revisión periódica de resultados</li></ul>
       <p class="stack">Plan mensual con horas definidas</p>
     </div>
+  </div>
+</section>
+
+<!-- SIMULADOR DE AUTOMATIZACIÓN -->
+<section id="automatizacion" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow reveal">Automatización en acción</p>
+    <h2 class="reveal">Lo que hoy toma horas,<br><span class="dim">en segundos.</span></h2>
+    <p class="lead reveal d2">Ejemplo: el informe semanal de cartera. Presione el botón y compare.</p>
+  </div>
+  <div class="flow rise">
+    <div class="flow-top">
+      <button type="button" class="btn btn-primary btn-lg" id="flow-run"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 5l12 7-12 7z"/></svg>Ejecutar flujo</button>
+      <div class="flow-clocks">
+        <div class="clock manual"><span>A mano</span><b id="flow-manual">0 h 00 min</b></div>
+        <div class="clock auto"><span>Automático</span><b id="flow-auto">0 s</b></div>
+      </div>
+    </div>
+    <ol class="flow-steps" id="flow-steps"></ol>
+    <p class="flow-result" id="flow-result" aria-live="polite">Simulación de un flujo típico con Power Automate. Los tiempos son de referencia.</p>
   </div>
 </section>
 
@@ -278,6 +346,19 @@
     <div class="reveal"><span class="avatar">[Foto]</span><h3>Fabián [Apellido]</h3><p>[Rol] · Socio fundador</p></div>
     <div class="reveal d2"><span class="avatar">[Foto]</span><h3>Kevin García</h3><p>[Rol] · Socio fundador</p></div>
     <div class="reveal d3"><span class="avatar">[Foto]</span><h3>Juan [Apellido]</h3><p>[Rol] · Socio fundador</p></div>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO -->
+<section id="diagnostico" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow reveal">Diagnóstico rápido</p>
+    <h2 class="reveal">¿Qué tan listos están<br><span class="dim">los datos de su empresa?</span></h2>
+    <p class="lead reveal d2">5 preguntas, 1 minuto. Reciba su nivel y recomendaciones al instante.</p>
+  </div>
+  <div class="quiz rise" id="quiz">
+    <div class="quiz-progress"><div class="quiz-bar" id="quiz-bar"></div></div>
+    <div class="quiz-body" id="quiz-body" aria-live="polite"></div>
   </div>
 </section>
 
