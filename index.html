@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script src="demos.js"></script>
+<script src="live-dash.js" defer></script>
 <script>document.documentElement.classList.remove('no-js');</script>
 </head>
 <body>
@@ -49,17 +50,37 @@
   </div>
 </section>
 
-<section class="wrap" style="padding-top:40px;padding-bottom:110px" aria-label="Ejemplo de dashboard">
-  <div class="dash rise">
-    <div class="dash-top"><span style="font-weight:600;color:#fff">Tablero de gestión · Empresa demo</span><span class="live">● Actualizado automáticamente</span></div>
-    <div class="kpis">
-      <div class="kpi"><small>Ventas del mes</small><b>[$0]</b></div>
-      <div class="kpi"><small>Cartera vencida</small><b>[$0]</b></div>
-      <div class="kpi"><small>Casos abiertos</small><b>[00]</b></div>
-      <div class="kpi"><small>Cumplimiento meta</small><b>[00%]</b></div>
+<section class="wrap" style="padding-top:40px;padding-bottom:110px" aria-label="Simulación de tablero financiero en vivo">
+  <div class="dash rise" id="live-dash">
+    <div class="dash-top">
+      <div class="dash-id"><span class="dash-title">Finanzas en vivo · Constructora demo</span><span class="dash-sub">Simulación con datos ficticios</span></div>
+      <div class="dash-right">
+        <span class="live"><span class="live-dot" aria-hidden="true"></span>En vivo · <span id="ld-ago">ahora</span></span>
+        <button type="button" class="ld-pause" id="ld-pause" aria-pressed="false" aria-label="Pausar simulación"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
+      </div>
     </div>
-    <div class="bars" aria-hidden="true"><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:55%"></i><i style="height:50%"></i><i style="height:66%"></i><i style="height:72%"></i><i style="height:84%;background:var(--accent)"></i><i style="height:96%;background:var(--teal)"></i></div>
-    <div class="cap">Ventas mensuales vs. meta · datos ficticios de ejemplo</div>
+    <div class="kpis" id="ld-kpis"></div>
+    <div class="dash-main">
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="ld-tabs" role="tablist" aria-label="Vista del gráfico">
+            <button type="button" role="tab" aria-selected="true" data-view="ingresos">Ingresos vs. meta</button>
+            <button type="button" role="tab" aria-selected="false" data-view="flujo">Flujo de caja</button>
+            <button type="button" role="tab" aria-selected="false" data-view="cartera">Cartera</button>
+          </div>
+          <div class="ld-legend" id="ld-legend"></div>
+        </div>
+        <div class="chart-wrap" id="ld-wrap">
+          <svg id="ld-chart" role="img" aria-label="Gráfico de ingresos diarios frente a la meta"></svg>
+          <div class="ld-tip" id="ld-tip" hidden></div>
+        </div>
+      </div>
+      <aside class="feed" aria-label="Actividad reciente">
+        <p class="feed-title">Actividad reciente</p>
+        <ul id="ld-feed"></ul>
+      </aside>
+    </div>
+    <div class="cap">Así se ve un tablero conectado: los datos llegan solos y las alertas avisan a tiempo. Cifras en millones de pesos (COP), ficticias.</div>
   </div>
 </section>
 
@@ -297,7 +318,7 @@
       <button type="button" class="demo-close" id="demo-close" aria-label="Cerrar demo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
   </div>
-  <div class="demo-frame"><iframe id="demo-iframe" title="Demo" loading="lazy" allowfullscreen allow="fullscreen; autoplay; encrypted-media"></iframe></div>
+  <div class="demo-frame"><iframe id="demo-iframe" title="Demo" loading="lazy" allowfullscreen allow="fullscreen"></iframe></div>
   <div class="demo-foot-modal"><span>¿Le gustaría algo así con sus datos?</span><a href="#contacto" class="btn btn-primary" id="demo-cta">Agendar diagnóstico</a></div>
 </dialog>
 
