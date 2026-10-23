@@ -30,3 +30,11 @@ Publicada en Vercel. **Cada cambio en la rama `main` se publica solo** en uno o 
 ## Datos de contacto y formulario
 
 Al final de `index.html`, en el bloque `CONFIG`: número de WhatsApp, correo e ID de Formspree.
+
+## Indicadores financieros reales (tablero de la portada)
+
+- **Dólar (TRM):** se actualiza solo desde datos.gov.co (Superfinanciera). No hay que hacer nada.
+- **Inflación y tasa del Banco de la República:** cambian una vez al mes. Actualízalas en `indicadores.js`:
+  - Inflación: DANE publica el IPC hacia el día 8 de cada mes.
+  - Tasa BanRep: cambia solo cuando la Junta Directiva lo decide.
+- Si datos.gov.co no responde, el tablero muestra el último dato guardado y lo indica.

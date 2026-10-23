@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="styles.css">
 <script src="demos.js"></script>
+<script src="indicadores.js"></script>
+<script src="indicadores-reales.js" defer></script>
 <script src="live-dash.js" defer></script>
 <script src="interactivos.js" defer></script>
 <script>document.documentElement.classList.remove('no-js');</script>
@@ -54,7 +56,7 @@
 <section class="wrap" style="padding-top:40px;padding-bottom:110px" aria-label="Simulación de tablero financiero en vivo">
   <div class="dash rise" id="live-dash">
     <div class="dash-top">
-      <div class="dash-id"><span class="dash-title">Finanzas en vivo · Constructora demo</span><span class="dash-sub">Simulación con datos ficticios</span></div>
+      <div class="dash-id"><span class="dash-title">Finanzas en vivo · Constructora demo</span><span class="dash-sub">Indicadores reales del país + una empresa simulada</span></div>
       <div class="dash-right">
         <div class="ld-sector" role="group" aria-label="Ver tablero de ejemplo para el sector">
           <button type="button" data-sector="constructora" aria-pressed="true">Constructora</button>
@@ -65,6 +67,35 @@
         <button type="button" class="ld-pause" id="ld-pause" aria-pressed="false" aria-label="Pausar simulación"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
       </div>
     </div>
+    <div class="real" id="real-ind" aria-label="Indicadores financieros reales de Colombia">
+      <div class="real-head"><span class="tag-real"><span class="live-dot" aria-hidden="true"></span>Indicadores reales · Colombia</span><span class="real-status" id="ri-status">Consultando fuentes oficiales…</span></div>
+      <div class="real-grid">
+        <div class="ri">
+          <small>Dólar (TRM) hoy</small>
+          <b id="ri-trm">—</b>
+          <span class="ri-delta" id="ri-trm-d">&nbsp;</span>
+          <svg class="ri-spark" id="ri-trm-spark-wrap" viewBox="0 0 100 30" preserveAspectRatio="none" role="img" aria-label="Tendencia de la TRM en 30 días"><path id="ri-trm-spark" fill="none" stroke="#20B7A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+          <span class="ri-src" id="ri-trm-src">Superfinanciera</span>
+        </div>
+        <div class="ri">
+          <small id="ri-ytd-label">Dólar en el año</small>
+          <b id="ri-ytd">—</b>
+          <span class="ri-src" id="ri-ytd-src">Variación en lo corrido del año</span>
+        </div>
+        <div class="ri">
+          <small>Inflación anual</small>
+          <b id="ri-inf">—</b>
+          <span class="ri-src" id="ri-inf-src">DANE</span>
+        </div>
+        <div class="ri">
+          <small>Tasa Banco de la República</small>
+          <b id="ri-tasa">—</b>
+          <span class="ri-delta" id="ri-real">&nbsp;</span>
+          <span class="ri-src" id="ri-tasa-src">Tasa de política monetaria</span>
+        </div>
+      </div>
+    </div>
+    <div class="sim-head"><span class="tag-sim">Empresa demo · simulación en vivo</span></div>
     <div class="kpis" id="ld-kpis"></div>
     <div class="dash-main">
       <div class="chart-card">
@@ -86,7 +117,7 @@
         <ul id="ld-feed"></ul>
       </aside>
     </div>
-    <div class="cap">Así se ve un tablero conectado: los datos llegan solos y las alertas avisan a tiempo. Cifras en millones de pesos (COP), ficticias.</div>
+    <div class="cap">Así se ve un tablero conectado: datos externos e internos en un solo lugar. Indicadores reales: Superfinanciera (datos.gov.co), DANE y Banco de la República. Cifras de la empresa: ficticias, en millones de pesos.</div>
   </div>
 </section>
 
