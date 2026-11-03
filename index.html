@@ -97,8 +97,8 @@
         </div>
       </div>
     </div>
-    <div class="sim-head"><span class="tag-sim">Empresa demo · simulación en vivo</span></div>
-    <div class="kpis" id="ld-kpis"></div>
+    <div class="sim-head"><span class="tag-sim">Empresa demo · simulación en vivo</span><span class="sim-hint">Toque un indicador para ver su evolución</span></div>
+    <div class="kpis" id="ld-kpis" role="group" aria-label="Indicadores de la empresa demo"></div>
     <div class="dash-main">
       <div class="chart-card">
         <div class="chart-head">
@@ -107,12 +107,25 @@
             <button type="button" role="tab" aria-selected="false" data-view="flujo">Flujo de caja</button>
             <button type="button" role="tab" aria-selected="false" data-view="cartera">Cartera</button>
           </div>
-          <div class="ld-legend" id="ld-legend"></div>
+          <div class="ld-tools">
+            <div class="ld-seg" id="ld-range" role="group" aria-label="Período">
+              <button type="button" data-range="7" aria-pressed="false">7 d</button>
+              <button type="button" data-range="14" aria-pressed="false">14 d</button>
+              <button type="button" data-range="30" aria-pressed="true">30 d</button>
+            </div>
+            <div class="ld-seg" id="ld-mode" role="group" aria-label="Mostrar como">
+              <button type="button" data-mode="chart" aria-pressed="true">Gráfico</button>
+              <button type="button" data-mode="table" aria-pressed="false">Datos</button>
+            </div>
+          </div>
         </div>
+        <div class="ld-sub"><div class="ld-legend" id="ld-legend"></div><button type="button" class="btn-ghost ld-csv" id="ld-csv" hidden>Descargar CSV</button></div>
         <div class="chart-wrap" id="ld-wrap">
           <svg id="ld-chart" role="img" aria-label="Gráfico de ingresos diarios frente a la meta"></svg>
           <div class="ld-tip" id="ld-tip" hidden></div>
         </div>
+        <div class="ld-table" id="ld-table" hidden tabindex="0" aria-label="Datos del gráfico"></div>
+        <dl class="ld-stats" id="ld-stats" aria-live="off"></dl>
       </div>
       <aside class="feed" aria-label="Actividad reciente">
         <p class="feed-title">Actividad reciente</p>
