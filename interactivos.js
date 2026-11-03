@@ -57,13 +57,12 @@
 
   /* ================= 2. Simulador de automatización ================= */
   if ($('flow-steps')) {
-    const ICON = (d) => '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
     const STEPS = [
-      { t: 'Llegan los Excel', d: '8 archivos de cartera por correo', man: 20, auto: 3, icon: ICON('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>') },
-      { t: 'Validación', d: 'Formatos, fechas y duplicados', man: 45, auto: 6, icon: ICON('<path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/>') },
-      { t: 'Consolidación', d: 'Todo en una sola tabla en SharePoint', man: 60, auto: 9, icon: ICON('<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>') },
-      { t: 'Aprobación', d: 'El jefe financiero aprueba en Teams', man: 30, auto: 12, icon: ICON('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>') },
-      { t: 'Informe enviado', d: 'PDF a gerencia y alertas a cobranza', man: 35, auto: 8, icon: ICON('<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>') }
+      { t: 'Llegan los Excel', d: '8 archivos de cartera por correo', man: 20, auto: 3, icon: TGI('correo') },
+      { t: 'Validación', d: 'Formatos, fechas y duplicados', man: 45, auto: 6, icon: TGI('validacion') },
+      { t: 'Consolidación', d: 'Todo en una sola tabla en SharePoint', man: 60, auto: 9, icon: TGI('consolidacion') },
+      { t: 'Aprobación', d: 'El jefe financiero aprueba en Teams', man: 30, auto: 12, icon: TGI('aprobacion') },
+      { t: 'Informe enviado', d: 'PDF a gerencia y alertas a cobranza', man: 35, auto: 8, icon: TGI('envio') }
     ];
     const list = $('flow-steps');
     STEPS.forEach((s, i) => {

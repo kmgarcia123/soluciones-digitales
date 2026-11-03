@@ -313,13 +313,13 @@
   const feed = $('ld-feed');
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
   const EV = [
-    () => ({ ic: '$', bg: '#6FD8CC', t: 'Pago recibido', m: pick(S.clientes), a: rnd(S.n.pay[0], S.n.pay[1]) }),
-    () => ({ ic: '$', bg: '#6FD8CC', t: 'Pago recibido', m: pick(S.clientes), a: rnd(S.n.pay[0], S.n.pay[1]) }),
-    () => ({ ic: 'F', bg: '#A9BBF5', t: 'Factura emitida #' + Math.floor(rnd(4400, 4999)), m: pick(S.clientes), a: rnd(S.n.fac[0], S.n.fac[1]) }),
-    () => ({ ic: '!', bg: '#F2A27B', t: S.alerta + (S === SECT.comercio ? Math.floor(rnd(2100, 2999)) : ''), m: (S === SECT.comercio ? 'Bodega principal · orden sugerida' : pick(S.clientes) + ' · aviso enviado'), a: S.n.alertAmt ? rnd(S.n.alertAmt[0], S.n.alertAmt[1]) : null }),
-    () => ({ ic: '✓', bg: '#C8D2E0', t: 'Informe diario enviado', m: 'Gerencia · automático', a: null }),
-    () => ({ ic: '↻', bg: '#C8D2E0', t: 'Datos sincronizados', m: S.sync, a: null }),
-    () => { const usd = Math.round(rnd(S.n.usd[0], S.n.usd[1])) * 1000, trm = window.TRM_HOY; return trm ? { ic: 'US', bg: '#A9BBF5', t: 'Compra importada USD ' + usd.toLocaleString('es-CO'), m: 'Convertida con la TRM real de hoy ($' + trm.toLocaleString('es-CO', { maximumFractionDigits: 0 }) + ')', a: usd * trm / 1e6 } : { ic: '✓', bg: '#C8D2E0', t: 'Informe diario enviado', m: 'Gerencia · automático', a: null }; }
+    () => ({ ic: TGI('pago'), bg: '#6FD8CC', t: 'Pago recibido', m: pick(S.clientes), a: rnd(S.n.pay[0], S.n.pay[1]) }),
+    () => ({ ic: TGI('pago'), bg: '#6FD8CC', t: 'Pago recibido', m: pick(S.clientes), a: rnd(S.n.pay[0], S.n.pay[1]) }),
+    () => ({ ic: TGI('factura'), bg: '#A9BBF5', t: 'Factura emitida #' + Math.floor(rnd(4400, 4999)), m: pick(S.clientes), a: rnd(S.n.fac[0], S.n.fac[1]) }),
+    () => ({ ic: TGI('alerta'), bg: '#F2A27B', t: S.alerta + (S === SECT.comercio ? Math.floor(rnd(2100, 2999)) : ''), m: (S === SECT.comercio ? 'Bodega principal · orden sugerida' : pick(S.clientes) + ' · aviso enviado'), a: S.n.alertAmt ? rnd(S.n.alertAmt[0], S.n.alertAmt[1]) : null }),
+    () => ({ ic: TGI('listo'), bg: '#C8D2E0', t: 'Informe diario enviado', m: 'Gerencia · automático', a: null }),
+    () => ({ ic: TGI('sync'), bg: '#C8D2E0', t: 'Datos sincronizados', m: S.sync, a: null }),
+    () => { const usd = Math.round(rnd(S.n.usd[0], S.n.usd[1])) * 1000, trm = window.TRM_HOY; return trm ? { ic: TGI('global'), bg: '#A9BBF5', t: 'Compra importada USD ' + usd.toLocaleString('es-CO'), m: 'Convertida con la TRM real de hoy ($' + trm.toLocaleString('es-CO', { maximumFractionDigits: 0 }) + ')', a: usd * trm / 1e6 } : { ic: TGI('listo'), bg: '#C8D2E0', t: 'Informe diario enviado', m: 'Gerencia · automático', a: null }; }
   ];
   function addEvent(e, animate) {
     const li = document.createElement('li');

@@ -581,3 +581,47 @@ button.kpi[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px var(--teal);backgro
   @keyframes checkA{0%,15%{stroke-dashoffset:14}45%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:14}}
   .service:hover .ia{box-shadow:0 10px 24px -12px currentColor}
 @media (prefers-reduced-motion: reduce){.ia *{animation:none !important}.ia .trend,.ia .check{stroke-dashoffset:0 !important}}
+
+/* ===== Íconos animados (iconos.js) · mismo lenguaje que Servicios ===== */
+.tgi{--tgi-acc:#20B7A9;overflow:visible}
+.tgi .duo{fill:currentColor;fill-opacity:.14;stroke:none}
+.tgi .acc{stroke:var(--tgi-acc)}
+.tgi .acc-f{fill:var(--tgi-acc);stroke:none}
+.tgi .a-bar,.tgi .a-drop,.tgi .a-move,.tgi .a-pop,.tgi .a-fly,.tgi .a-blink{transform-box:fill-box;transform-origin:50% 100%}
+.tgi .a-pop{transform-origin:center}
+/* Dónde se activan: nodo seleccionado o con el mouse, panel del mapa, paso activo del simulador, miniaturas en pantalla */
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-bar{animation:tgBar 2.4s cubic-bezier(.4,0,.2,1) infinite}
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-draw{stroke-dasharray:1;animation:tgDraw 2.6s ease-in-out infinite}
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-dash{animation:tgDash .9s linear infinite}
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-blink{animation:tgBlink 1.4s ease-in-out infinite}
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-drop{animation:tgDrop 1.6s cubic-bezier(.5,0,.3,1) infinite}
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-move{animation:tgMove 1.2s ease-in-out infinite}
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-pop{animation:tgPop 1.8s ease-in-out infinite}
+:is(.tgi-on,.node[aria-pressed="true"],.node:hover,.fstep.active) .tgi .a-fly{animation:tgFly 1.8s cubic-bezier(.5,0,.3,1) infinite}
+.tgi .d2{animation-delay:.18s !important}.tgi .d3{animation-delay:.36s !important}
+@keyframes tgBar{0%,100%{transform:scaleY(.55)}45%{transform:scaleY(1.1)}70%{transform:scaleY(.85)}}
+@keyframes tgDraw{0%{stroke-dashoffset:1}45%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:-1}}
+@keyframes tgDash{to{stroke-dashoffset:-12}}
+@keyframes tgBlink{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes tgDrop{0%{transform:translateY(-4px);opacity:0}35%{opacity:1}70%,100%{transform:translateY(2px);opacity:0}}
+@keyframes tgMove{0%,100%{transform:translateX(-1px)}50%{transform:translateX(1.5px)}}
+@keyframes tgPop{0%,60%,100%{transform:scale(1)}30%{transform:scale(1.25)}}
+@keyframes tgFly{0%{transform:translate(-3px,3px);opacity:.3}50%{transform:translate(0,0);opacity:1}100%{transform:translate(3px,-3px);opacity:0}}
+/* Contraste del acento según el fondo */
+.node[aria-pressed="true"] .tgi{--tgi-acc:#fff}
+.fstep.active .tgi{--tgi-acc:#fff}
+.node .tile .tgi{width:52%;height:52%}
+.fstep-ic .tgi{width:24px;height:24px}
+.panel-icon .tgi{width:28px;height:28px}
+/* Actividad del tablero: ícono real en vez de letra; aparece con un pequeño salto */
+.feed .ic .tgi{width:14px;height:14px;stroke-width:2.3;--tgi-acc:currentColor}
+.feed li.new .ic .tgi{animation:tgIn .6s cubic-bezier(.2,.7,.2,1)}
+@keyframes tgIn{0%{transform:scale(.4) rotate(-30deg)}70%{transform:scale(1.15)}100%{transform:none}}
+/* Checks de planes: se dibujan al aparecer la tarjeta */
+.plan.in .ck path{stroke-dasharray:1;stroke-dashoffset:1;animation:tgCk .5s cubic-bezier(.6,0,.2,1) forwards}
+.plan.in li:nth-child(1) .ck path{animation-delay:.35s}.plan.in li:nth-child(2) .ck path{animation-delay:.5s}.plan.in li:nth-child(3) .ck path{animation-delay:.65s}.plan.in li:nth-child(4) .ck path{animation-delay:.8s}
+@keyframes tgCk{to{stroke-dashoffset:0}}
+/* Miniatura de Ventas: barras vivas mientras se ve */
+.play.bars-thumb i{transform-origin:50% 100%;animation:tgBar 3s cubic-bezier(.4,0,.2,1) infinite}
+.play.bars-thumb i:nth-child(2){animation-delay:.12s}.play.bars-thumb i:nth-child(3){animation-delay:.24s}.play.bars-thumb i:nth-child(4){animation-delay:.36s}.play.bars-thumb i:nth-child(5){animation-delay:.48s}.play.bars-thumb i:nth-child(6){animation-delay:.6s}
+@media (prefers-reduced-motion: reduce){.tgi *,.feed li.new .ic .tgi,.play.bars-thumb i{animation:none !important}.plan.in .ck path{animation:none;stroke-dashoffset:0}}
