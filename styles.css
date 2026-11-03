@@ -558,3 +558,26 @@ button.kpi[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px var(--teal);backgro
   .ld-table th,.ld-table td{padding:7px 8px}
   .ld-stats dt,.ld-stats dd{white-space:normal}
 }
+
+/* ===== Íconos de Servicios: mini escenas animadas (opción A, aprobada 3 nov 2026) ===== */
+.ia{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .ia svg{width:48px;height:48px;overflow:visible}
+  .ia.c1{background:#E3EAFF;color:#2246C4}.ia.c2{background:#DBF3F0;color:#0B776D}.ia.c3{background:#EAEFFA;color:#182333}.ia.c4{background:#E3EAFF;color:#2246C4}
+  .play .ia .bar{transform-box:fill-box;transform-origin:50% 100%;animation:barA 2.8s cubic-bezier(.4,0,.2,1) infinite}
+  .ia .bar:nth-child(2){animation-delay:.15s}.ia .bar:nth-child(3){animation-delay:.3s}.ia .bar:nth-child(4){animation-delay:.45s}
+  @keyframes barA{0%,100%{transform:scaleY(.45)}45%{transform:scaleY(1)}70%{transform:scaleY(.8)}}
+  .ia .trend{stroke-dasharray:40;stroke-dashoffset:40}
+  .play .ia .trend{animation:draw 2.8s ease-in-out infinite}
+  @keyframes draw{0%{stroke-dashoffset:40}50%,80%{stroke-dashoffset:0}100%{stroke-dashoffset:-40}}
+  .ia .wire{stroke-dasharray:3 4}
+  .play .ia .wire{animation:dash 1s linear infinite}
+  @keyframes dash{to{stroke-dashoffset:-14}}
+  .play .ia .gear{transform-box:fill-box;transform-origin:center;animation:spin 6s linear infinite}
+  .ia .packet{offset-rotate:0deg}
+  .play .ia .pulse{transform-box:fill-box;transform-origin:center;animation:pulseR 2.4s ease-out infinite}
+  @keyframes pulseR{0%{transform:scale(.7);opacity:.6}100%{transform:scale(1.5);opacity:0}}
+  .ia .check{stroke-dasharray:14;stroke-dashoffset:14}
+  .play .ia .check{animation:checkA 2.4s ease-in-out infinite}
+  @keyframes checkA{0%,15%{stroke-dashoffset:14}45%,85%{stroke-dashoffset:0}100%{stroke-dashoffset:14}}
+  .service:hover .ia{box-shadow:0 10px 24px -12px currentColor}
+@media (prefers-reduced-motion: reduce){.ia *{animation:none !important}.ia .trend,.ia .check{stroke-dashoffset:0 !important}}
