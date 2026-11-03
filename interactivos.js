@@ -9,7 +9,9 @@
   const num = (v) => Math.round(v).toLocaleString('es-CO');
   const msg = () => document.querySelector('#form-contacto textarea[name="mensaje"]');
   const goContact = (text) => {
-    const m = msg(); if (m) m.value = text;
+    const m = msg();
+    // No borrar lo que la persona ya escribió: se agrega al final
+    if (m) m.value = m.value.trim() && !m.value.includes(text) ? m.value.trim() + '\n\n' + text : text;
     $('contacto').scrollIntoView({ behavior: 'smooth' });
     setTimeout(() => { const n = document.querySelector('#form-contacto input[name="nombre"]'); n && n.focus({ preventScroll: true }); }, 700);
   };

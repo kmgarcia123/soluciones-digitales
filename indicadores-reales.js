@@ -8,11 +8,13 @@
   const nf = (v, d) => v.toLocaleString('es-CO', { minimumFractionDigits: d, maximumFractionDigits: d });
   const fecha = (iso, opt) => new Date(iso.slice(0, 10) + 'T12:00:00').toLocaleDateString('es-CO', opt || { day: 'numeric', month: 'short' }).replace('.', '');
   const $ = (id) => document.getElementById(id);
+  const fin = (...ids) => ids.forEach((i) => $(i) && $(i).classList.remove('sk'));
 
   /* Inflación y tasa (mensuales, del archivo de configuración) */
   if (CFG.inflacion) {
     $('ri-inf').textContent = nf(CFG.inflacion.valor, 2) + '%';
     $('ri-inf-src').textContent = CFG.inflacion.fuente + ' · ' + CFG.inflacion.periodo;
+    fin('ri-inf', 'ri-inf-src');
   }
   if (CFG.tasaBanRep) {
     $('ri-tasa').textContent = nf(CFG.tasaBanRep.valor, 2) + '%';
@@ -22,6 +24,7 @@
       $('ri-real').textContent = 'Tasa real ≈ ' + nf(real, 1) + '%';
     }
     $('ri-tasa-src').textContent = txt;
+    fin('ri-tasa', 'ri-real', 'ri-tasa-src');
   }
 
   /* TRM */
@@ -48,6 +51,7 @@
     const y = hoy.d.slice(0, 4);
     const enAnio = pts.filter((p) => p.d.slice(0, 4) === y);
     const ini = enAnio[enAnio.length - 1];
+    $('ri-ytd').textContent = '—'; $('ri-ytd-src').textContent = 'Variación en lo corrido del año';
     if (ini && ini !== hoy) {
       const ytd = (hoy.v - ini.v) / ini.v * 100;
       $('ri-ytd').textContent = (ytd > 0 ? '+' : '') + nf(ytd, 1) + '%';
@@ -58,11 +62,13 @@
     document.dispatchEvent(new CustomEvent('trm', { detail: hoy.v }));
     $('ri-status').textContent = origen === 'red' ? 'Actualizado ' + new Date().toLocaleTimeString('es-CO', { hour: 'numeric', minute: '2-digit' }) : 'Último dato disponible';
     box.classList.add('ready');
+    fin('ri-trm', 'ri-trm-d', 'ri-trm-spark-wrap', 'ri-trm-src', 'ri-ytd', 'ri-ytd-src');
   }
   function fallback() {
     const f = CFG.trmRespaldo;
     if (f) render([{ valor: String(f.valor), vigenciadesde: f.fecha + 'T00:00:00.000' }], 'respaldo');
     $('ri-status').textContent = 'Sin conexión con la fuente · último dato conocido';
+    if (!f) { ['ri-trm', 'ri-trm-d', 'ri-trm-src', 'ri-ytd', 'ri-ytd-src'].forEach((i) => { $(i).textContent = i === 'ri-trm' || i === 'ri-ytd' ? '—' : ''; }); $('ri-trm-spark-wrap').style.visibility = 'hidden'; fin('ri-trm', 'ri-trm-d', 'ri-trm-src', 'ri-ytd', 'ri-ytd-src', 'ri-trm-spark-wrap'); }
   }
   let cached = null;
   try { cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null'); } catch (e) { cached = null; }

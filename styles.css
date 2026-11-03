@@ -192,7 +192,7 @@ section{padding-bottom:130px}
 .contact-links a{color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-weight:500}
 .contact-links a:hover{text-decoration:underline}
 form{background:#fff;color:var(--ink);border-radius:26px;padding:28px;display:flex;flex-direction:column;gap:16px}
-label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:6px}
+label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:6px;color:#3A3A3F;transition:color .15s}
 input,textarea,select{border:1px solid #C9CDD4;border-radius:12px;padding:13px 14px;font-size:16px;font-family:inherit;background:var(--bg);font-weight:400;color:var(--ink)}
 input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:1px}
 .consent{flex-direction:row;align-items:flex-start;gap:10px;font-weight:400;font-size:13px;color:var(--muted);line-height:1.5}
@@ -426,7 +426,6 @@ footer a{color:var(--muted)}
 .ri-delta.up,.ri-delta.down{color:#E4EAF2}
 .ri-spark{width:100%;height:26px;display:block}
 .ri-src{font-size:11px;color:#8FA0B8;margin-top:auto}
-.real:not(.ready) .ri b{opacity:.5}
 .tag-sim{font-size:12.5px;font-weight:700;color:#A3B1C6;letter-spacing:.02em;display:inline-flex;align-items:center;gap:8px}
 .tag-sim::before{content:"";width:8px;height:8px;border-radius:2px;background:#6F8CF0}
 .sim-head{margin-bottom:-6px}
@@ -473,3 +472,37 @@ footer .wrap>div{padding-bottom:96px}
   .ld-tabs button{font-size:11.5px;padding:7px 6px}
 }
 .contact-links a{min-height:44px}
+
+/* ===== Formulario: label arriba fijo, placeholder = formato, ayuda abajo, label activo ===== */
+.field{display:flex;flex-direction:column;gap:6px}
+.field input::placeholder,.field textarea::placeholder{color:#8A8F98;opacity:1}
+.help{font-size:13px;line-height:1.4;color:var(--muted);min-height:18px}
+.field:focus-within>label{color:var(--accent)}
+.field:focus-within input,.field:focus-within textarea{border-color:var(--accent);background:#fff}
+.field.invalid>label,.field.invalid .help,.field-check.invalid .consent{color:#B42318}
+.field.invalid input:not([type=checkbox]),.field.invalid textarea{border-color:#B42318;background:#FFF8F7}
+.field.invalid input:focus,.field.invalid textarea:focus{outline-color:#B42318}
+.field-check .help:empty{display:none}
+
+/* ===== Spinner (acciones cortas) ===== */
+.spinner{display:none;width:18px;height:18px;border-radius:999px;border:2.5px solid currentColor;border-right-color:transparent;animation:spin .7s linear infinite;flex:none}
+.btn.loading .spinner{display:inline-block}
+.btn.loading{cursor:progress;opacity:.85;transform:none;box-shadow:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ===== Skeleton (contenido que carga): mismo tamaño que el dato final, brillo suave ===== */
+.sk{color:transparent !important;border-radius:6px;background:linear-gradient(90deg,rgba(255,255,255,.07) 0%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.07) 100%) 0 0/200% 100%;animation:shimmer 1.4s ease-in-out infinite;user-select:none;align-self:flex-start}
+.sk path{stroke:transparent}
+svg.sk{align-self:stretch}
+@keyframes shimmer{from{background-position:100% 0}to{background-position:-100% 0}}
+.demo-sk{position:absolute;inset:0;padding:clamp(14px,3vw,28px);display:none;flex-direction:column;gap:14px;background:var(--chip);z-index:1}
+.demo-frame.loading .demo-sk{display:flex}
+.demo-sk i{display:block;border-radius:12px;background:linear-gradient(90deg,#D6DFEE 0%,#EEF2F9 50%,#D6DFEE 100%) 0 0/200% 100%;animation:shimmer 1.4s ease-in-out infinite}
+.demo-sk .sk-bar{height:28px;width:40%}
+.demo-sk .sk-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.demo-sk .sk-row i{height:72px}
+.demo-sk .sk-chart{flex:1}
+.demo-modal.is-video .demo-sk{background:#111}
+.demo-modal.is-video .demo-sk i{background:linear-gradient(90deg,#1c1c1c 0%,#2a2a2a 50%,#1c1c1c 100%) 0 0/200% 100%}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion: reduce){.sk,.demo-sk i{animation:none}.spinner{animation-duration:1.6s}}

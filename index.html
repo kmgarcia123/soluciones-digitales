@@ -74,26 +74,26 @@
       <div class="real-grid">
         <div class="ri">
           <small>Dólar (TRM) hoy</small>
-          <b id="ri-trm">—</b>
-          <span class="ri-delta" id="ri-trm-d">&nbsp;</span>
-          <svg class="ri-spark" id="ri-trm-spark-wrap" viewBox="0 0 100 30" preserveAspectRatio="none" role="img" aria-label="Tendencia de la TRM en 30 días"><path id="ri-trm-spark" fill="none" stroke="#20B7A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
-          <span class="ri-src" id="ri-trm-src">Superfinanciera</span>
+          <b id="ri-trm" class="sk">$0.000,00</b>
+          <span class="ri-delta sk" id="ri-trm-d">▲ 0,00% vs. anterior</span>
+          <svg class="ri-spark sk" id="ri-trm-spark-wrap" viewBox="0 0 100 30" preserveAspectRatio="none" role="img" aria-label="Tendencia de la TRM en 30 días"><path id="ri-trm-spark" fill="none" stroke="#20B7A9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+          <span class="ri-src sk" id="ri-trm-src">Superfinanciera · vigente 00 de oct</span>
         </div>
         <div class="ri">
           <small id="ri-ytd-label">Dólar en el año</small>
-          <b id="ri-ytd">—</b>
-          <span class="ri-src" id="ri-ytd-src">Variación en lo corrido del año</span>
+          <b id="ri-ytd" class="sk">+0,0%</b>
+          <span class="ri-src sk" id="ri-ytd-src">Desde $0.000 el 0 de ene</span>
         </div>
         <div class="ri">
           <small>Inflación anual</small>
-          <b id="ri-inf">—</b>
-          <span class="ri-src" id="ri-inf-src">DANE</span>
+          <b id="ri-inf" class="sk">0,00%</b>
+          <span class="ri-src sk" id="ri-inf-src">DANE · sep 2026</span>
         </div>
         <div class="ri">
           <small>Tasa Banco de la República</small>
-          <b id="ri-tasa">—</b>
-          <span class="ri-delta" id="ri-real">&nbsp;</span>
-          <span class="ri-src" id="ri-tasa-src">Tasa de política monetaria</span>
+          <b id="ri-tasa" class="sk">00,00%</b>
+          <span class="ri-delta sk" id="ri-real">Tasa real ≈ 0,0%</span>
+          <span class="ri-src sk" id="ri-tasa-src">Desde 00 sep 2026</span>
         </div>
       </div>
     </div>
@@ -367,14 +367,37 @@
       </div>
     </div>
     <form id="form-contacto" novalidate>
-      <label>Nombre<input type="text" name="nombre" autocomplete="name" required></label>
-      <label>Empresa<input type="text" name="empresa" autocomplete="organization" required></label>
-      <label>Correo<input type="email" name="correo" autocomplete="email" required></label>
-      <label>Teléfono (opcional)<input type="tel" name="telefono" autocomplete="tel"></label>
-      <label>¿Qué proceso o informe quiere mejorar?<textarea name="mensaje" rows="4" required></textarea></label>
+      <div class="field">
+        <label for="f-nombre">Nombre</label>
+        <input id="f-nombre" type="text" name="nombre" autocomplete="name" placeholder="Ana Pérez" required aria-describedby="h-nombre">
+        <small class="help" id="h-nombre" data-help="Nombre y apellido de quien atenderá la reunión.">Nombre y apellido de quien atenderá la reunión.</small>
+      </div>
+      <div class="field">
+        <label for="f-empresa">Empresa</label>
+        <input id="f-empresa" type="text" name="empresa" autocomplete="organization" placeholder="Constructora Andina S.A.S." required aria-describedby="h-empresa">
+        <small class="help" id="h-empresa" data-help="Razón social o nombre comercial.">Razón social o nombre comercial.</small>
+      </div>
+      <div class="field">
+        <label for="f-correo">Correo</label>
+        <input id="f-correo" type="email" name="correo" autocomplete="email" inputmode="email" placeholder="nombre@empresa.com" required aria-describedby="h-correo">
+        <small class="help" id="h-correo" data-help="Le enviamos aquí la confirmación de la reunión.">Le enviamos aquí la confirmación de la reunión.</small>
+      </div>
+      <div class="field">
+        <label for="f-telefono">Teléfono (opcional)</label>
+        <input id="f-telefono" type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="300 123 4567" pattern="^\+?[0-9 ]{7,15}$" aria-describedby="h-telefono">
+        <small class="help" id="h-telefono" data-help="Celular de 10 dígitos, con o sin +57.">Celular de 10 dígitos, con o sin +57.</small>
+      </div>
+      <div class="field">
+        <label for="f-mensaje">¿Qué proceso o informe quiere mejorar?</label>
+        <textarea id="f-mensaje" name="mensaje" rows="4" placeholder="Armamos a mano el informe de cartera cada lunes." required aria-describedby="h-mensaje"></textarea>
+        <small class="help" id="h-mensaje" data-help="Con una o dos frases es suficiente.">Con una o dos frases es suficiente.</small>
+      </div>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-      <label class="consent"><input type="checkbox" name="autorizacion" required><span>Autorizo el tratamiento de mis datos personales para ser contactado, según la <a href="privacidad.html">política de privacidad</a>.</span></label>
-      <button type="submit" class="btn btn-primary btn-lg">Enviar solicitud</button>
+      <div class="field field-check">
+        <label class="consent"><input type="checkbox" name="autorizacion" required aria-describedby="h-autorizacion"><span>Autorizo el tratamiento de mis datos personales para ser contactado, según la <a href="privacidad.html">política de privacidad</a>.</span></label>
+        <small class="help" id="h-autorizacion" data-help=""></small>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg" id="form-submit"><span class="spinner" aria-hidden="true"></span><span class="btn-label">Enviar solicitud</span></button>
       <p class="form-status" role="status" aria-live="polite"></p>
     </form>
   </div>
@@ -390,7 +413,7 @@
       <button type="button" class="demo-close" id="demo-close" aria-label="Cerrar demo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
   </div>
-  <div class="demo-frame"><iframe id="demo-iframe" title="Demo" loading="lazy" allowfullscreen allow="fullscreen"></iframe></div>
+  <div class="demo-frame"><div class="demo-sk" aria-hidden="true"><i class="sk-bar"></i><span class="sk-row"><i></i><i></i><i></i><i></i></span><i class="sk-chart"></i></div><p class="sr-only" id="demo-loading" aria-live="polite"></p><iframe id="demo-iframe" title="Demo" loading="lazy" allowfullscreen allow="fullscreen"></iframe></div>
   <div class="demo-foot-modal"><span>¿Le gustaría algo así con sus datos?</span><a href="#contacto" class="btn btn-primary" id="demo-cta">Agendar diagnóstico</a></div>
 </dialog>
 
@@ -544,6 +567,10 @@ const AREAS = [
       if (d.tipo === 'enlace' || typeof modal.showModal !== 'function') { window.open(url, '_blank', 'noopener'); return; }
       document.getElementById('demo-title').textContent = d.titulo || 'Demo';
       iframe.title = d.titulo || 'Demo';
+      const frame = iframe.parentElement;
+      frame.classList.add('loading');
+      document.getElementById('demo-loading').textContent = 'Cargando demo…';
+      iframe.onload = () => { if (iframe.src !== 'about:blank') { frame.classList.remove('loading'); document.getElementById('demo-loading').textContent = 'Demo cargada'; } };
       iframe.src = url;
       document.getElementById('demo-open').href = d.url.trim();
       modal.classList.toggle('is-video', d.tipo === 'video');
@@ -573,13 +600,49 @@ function datosLead() {
     utm: { source: q.get('utm_source') || '', medium: q.get('utm_medium') || '', campaign: q.get('utm_campaign') || '' }
   };
 }
+const submitBtn = document.getElementById('form-submit');
+const submitLabel = submitBtn.querySelector('.btn-label');
+const LABEL_ENVIAR = CONFIG.crm ? 'Enviar solicitud' : 'Enviar por WhatsApp';
+submitLabel.textContent = LABEL_ENVIAR;
+const ERRORES = {
+  nombre: 'Escriba su nombre.',
+  empresa: 'Escriba el nombre de su empresa.',
+  correo: (el) => el.validity.valueMissing ? 'Escriba su correo.' : 'Revise el correo. Ejemplo: nombre@empresa.com',
+  telefono: 'Use solo números. Ejemplo: 300 123 4567',
+  mensaje: 'Cuéntenos en una frase qué quiere mejorar.',
+  autorizacion: 'Marque la autorización para poder contactarlo.'
+};
+// Ayuda abajo del campo; si hay error, el mensaje reemplaza la ayuda en el mismo lugar
+function revisar(el) {
+  const field = el.closest('.field'); if (!field) return true;
+  const help = field.querySelector('.help');
+  const ok = el.checkValidity();
+  field.classList.toggle('invalid', !ok);
+  el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+  const m = ERRORES[el.name];
+  help.textContent = ok ? help.dataset.help : (typeof m === 'function' ? m(el) : m);
+  return ok;
+}
+form.querySelectorAll('.field input, .field textarea').forEach((el) => {
+  el.addEventListener('blur', () => { if (el.value || el.type === 'checkbox') revisar(el); });
+  el.addEventListener('input', () => { if (el.closest('.field').classList.contains('invalid')) revisar(el); });
+  el.addEventListener('change', () => { if (el.type === 'checkbox') revisar(el); });
+});
+function enviando(on) {
+  submitBtn.disabled = on;
+  submitBtn.classList.toggle('loading', on);
+  submitBtn.setAttribute('aria-busy', on ? 'true' : 'false');
+  submitLabel.textContent = on ? 'Enviando…' : LABEL_ENVIAR;
+}
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  status.className = 'form-status';
-  if (!form.checkValidity()) {
-    status.textContent = 'Revise los campos obligatorios y la autorización de datos.';
+  status.className = 'form-status'; status.textContent = '';
+  const campos = [...form.querySelectorAll('.field input, .field textarea')];
+  const malos = campos.filter((el) => !revisar(el));
+  if (malos.length) {
+    status.textContent = malos.length === 1 ? 'Falta corregir 1 campo.' : 'Faltan corregir ' + malos.length + ' campos.';
     status.classList.add('err');
-    form.reportValidity();
+    malos[0].focus();
     return;
   }
   if (form.querySelector('[name="_gotcha"]').value) { form.reset(); return; } // bot
@@ -593,19 +656,19 @@ form.addEventListener('submit', async (e) => {
     status.classList.add('ok');
     return;
   }
-  const btn = form.querySelector('button');
-  btn.disabled = true; btn.textContent = 'Enviando…';
+  enviando(true);
   try {
     const r = await fetch(CONFIG.crm, { method: 'POST', body: JSON.stringify(lead), headers: { 'Content-Type': 'application/json', Accept: 'application/json' } });
     if (!r.ok) throw new Error();
     form.reset();
+    campos.forEach((el) => { el.closest('.field').classList.remove('invalid'); el.closest('.field').querySelector('.help').textContent = el.closest('.field').querySelector('.help').dataset.help; });
     status.textContent = '¡Gracias! Le responderemos en menos de un día hábil.';
     status.classList.add('ok');
   } catch {
     status.textContent = 'No se pudo enviar. Intente de nuevo o escríbanos por WhatsApp.';
     status.classList.add('err');
   } finally {
-    btn.disabled = false; btn.textContent = 'Enviar solicitud';
+    enviando(false);
   }
 });
 </script>
