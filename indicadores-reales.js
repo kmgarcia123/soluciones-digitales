@@ -38,6 +38,8 @@
     $('ri-trm-src').textContent = 'Superfinanciera · vigente ' + fecha(hoy.d);
     // tendencia 30 días
     const last30 = pts.slice(0, 30).reverse();
+    $('ri-trm-spark-wrap').style.visibility = last30.length < 2 ? 'hidden' : '';
+    if (last30.length < 2) last30.push(last30[0]);
     const mn = Math.min(...last30.map((p) => p.v)), mx = Math.max(...last30.map((p) => p.v)), r = mx - mn || 1;
     const path = last30.map((p, i) => (i ? 'L' : 'M') + (i / (last30.length - 1) * 100).toFixed(1) + ' ' + (27 - (p.v - mn) / r * 24).toFixed(1)).join(' ');
     $('ri-trm-spark').setAttribute('d', path);

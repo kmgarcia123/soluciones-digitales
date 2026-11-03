@@ -9,7 +9,7 @@
   const NS = 'http://www.w3.org/2000/svg';
   const rnd = (a, b) => a + Math.random() * (b - a);
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
-  const fmtM = (v) => '$' + v.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' M';
+  const fmtM = (v) => { const d = Math.abs(v) >= 1000 ? 0 : 1; return '$' + v.toLocaleString('es-CO', { minimumFractionDigits: d, maximumFractionDigits: d }) + ' M'; };
   const fmtP = (v) => v.toLocaleString('es-CO', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%';
 
   /* ---------- Sectores ---------- */
@@ -93,7 +93,7 @@
   let view = 'ingresos', W = 600, H = 240, hoverIdx = null;
   const M = { l: 40, r: 22, t: 14, b: 24 };
   const T0 = Date.now() - 30 * 864e5;
-  const dLabel = (d) => new Date(T0 + d * 864e5).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' }).replace('.', '');
+  const dLabel = (d) => new Date(T0 + d * 864e5).toLocaleDateString('es-CO', { day: 'numeric', month: 'short' }).replace('.', '').replace(' de ', ' ');
   const el = (tag, attrs, parent) => { const n = document.createElementNS(NS, tag); for (const a in attrs) n.setAttribute(a, attrs[a]); (parent || svg).appendChild(n); return n; };
   const txt = (x, y, s, attrs) => { const n = el('text', Object.assign({ x, y }, attrs || {})); n.textContent = s; return n; };
 
@@ -129,7 +129,7 @@
     const ticks = Math.ceil((META * 1.6 - min) / step), max = min + ticks * step, pw = W - M.l - M.r, ph = H - M.t - M.b;
     const X = (i) => M.l + i / (n - 1) * pw, Y = (v) => M.t + ph - (v - min) / (max - min) * ph;
     yAxis(min, max, ticks, (v) => '$' + Math.round(v));
-    pts.forEach((p, i) => { if ((n - 1 - i) % (W < 520 ? 7 : 4) === 0) txt(X(i), H - 6, dLabel(p.d), { 'text-anchor': i === n - 1 ? 'end' : 'middle' }); });
+    pts.forEach((p, i) => { if ((n - 1 - i) % (W < 420 ? 9 : W < 520 ? 7 : 4) === 0) txt(X(i), H - 6, dLabel(p.d), { 'text-anchor': i === n - 1 ? 'end' : 'middle' }); });
     el('line', { x1: M.l, x2: W - M.r, y1: Y(META), y2: Y(META), stroke: C.meta, 'stroke-width': 1.5, 'stroke-dasharray': '5 4' });
     txt(M.l + 6, Y(META) - 6, 'Meta ' + fmtM(META).replace(',0 M', ' M'));
     const d = pts.map((p, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(p.v).toFixed(1)).join(' ');
@@ -163,7 +163,7 @@
         ? 'M' + x + ' ' + (top + h) + 'V' + (top + r) + 'Q' + x + ' ' + top + ' ' + (x + r) + ' ' + top + 'H' + (x + w - r) + 'Q' + (x + w) + ' ' + top + ' ' + (x + w) + ' ' + (top + r) + 'V' + (top + h) + 'Z'
         : 'M' + x + ' ' + top + 'V' + (top + h - r) + 'Q' + x + ' ' + (top + h) + ' ' + (x + r) + ' ' + (top + h) + 'H' + (x + w - r) + 'Q' + (x + w) + ' ' + (top + h) + ' ' + (x + w) + ' ' + (top + h - r) + 'V' + top + 'Z';
       const bar = el('path', { d: dpath, fill: up ? C.pos : C.neg, opacity: hoverIdx == null || hoverIdx === i ? 1 : 0.45 });
-      if ((n - 1 - i) % (W < 520 ? 5 : 3) === 0) txt(x + w / 2, H - 6, dLabel(p.d), { 'text-anchor': 'middle' });
+      if ((n - 1 - i) % (W < 420 ? 6 : W < 520 ? 5 : 3) === 0) txt(x + w / 2, H - 6, dLabel(p.d), { 'text-anchor': 'middle' });
       if (i === n - 1) txt(x + w / 2, up ? top - 6 : top + h + 14, (up ? '+' : '') + p.v.toFixed(1), { class: 'val', 'text-anchor': 'middle' });
       if (hoverIdx === i) showTip(x + w / 2, top, '<div>' + dLabel(p.d) + '</div><div><span class="sw" style="background:' + (up ? C.pos : C.neg) + '"></span>Flujo neto <b>' + (up ? '+' : '−') + fmtM(Math.abs(p.v)) + '</b></div>');
       bar.style.transition = 'opacity .2s';
@@ -279,7 +279,7 @@
     S = SECT[id];
     seed();
     root.querySelector('.dash-title').textContent = 'Finanzas en vivo · ' + S.name;
-    root.querySelector('.ld-tabs [data-view="ingresos"]').textContent = S.ing + ' vs. meta';
+    root.querySelector('.ld-tabs [data-view="ingresos"]').innerHTML = S.ing + '<span class="hide-xs"> vs. meta</span>';
     Object.entries(K).forEach(([kid, k]) => { k.el.querySelector('small').textContent = k.label; renderKpi(kid, false); });
     feed.innerHTML = '';
     for (let i = 0; i < 5; i++) addEvent(pick(EV)(), false);

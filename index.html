@@ -13,6 +13,7 @@
 <meta property="og:description" content="Dashboards, automatización con Power Automate e integración de datos para pymes.">
 <meta property="og:image" content="https://teggnar.com/og-image.png">
 <meta property="og:url" content="https://teggnar.com/">
+<link rel="canonical" href="https://teggnar.com/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,7 +103,7 @@
       <div class="chart-card">
         <div class="chart-head">
           <div class="ld-tabs" role="tablist" aria-label="Vista del gráfico">
-            <button type="button" role="tab" aria-selected="true" data-view="ingresos">Ingresos vs. meta</button>
+            <button type="button" role="tab" aria-selected="true" data-view="ingresos">Ingresos<span class="hide-xs"> vs. meta</span></button>
             <button type="button" role="tab" aria-selected="false" data-view="flujo">Flujo de caja</button>
             <button type="button" role="tab" aria-selected="false" data-view="cartera">Cartera</button>
           </div>
@@ -400,9 +401,9 @@
 <script>
 /* ============ CONFIGURACIÓN: cambie estos tres valores ============ */
 const CONFIG = {
-  whatsapp: '573000000000',          // Número con indicativo 57, sin + ni espacios
+  whatsapp: '573185567706',          // Número con indicativo 57, sin + ni espacios (Fabián)
   correo: 'teggnar.admin@gmail.com',   // Correo de contacto
-  formspree: ''                       // ID de Formspree, ej. 'xyzabcd' (de https://formspree.io/f/xyzabcd)
+  crm: ''                             // URL del CRM que recibe el formulario (POST JSON). Vacío = se envía por WhatsApp.
 };
 /* ================================================================== */
 
@@ -465,27 +466,38 @@ const AREAS = [
   const panel = document.getElementById('map-panel');
   if (!svg || !wrap) return;
   const cx = 500, cy = 350, ns = 'http://www.w3.org/2000/svg';
+  const narrow = window.matchMedia('(max-width:640px)');
+  // En celular los nodos se acercan al centro para que los nombres no se corten en los bordes
+  const P = (a) => narrow.matches ? { x: 50 + (a.x - 50) * 0.86, y: 50 + (a.y - 50) * 0.94 } : { x: a.x, y: a.y };
   const ring = document.createElementNS(ns, 'path');
   ring.setAttribute('class', 'ring');
-  ring.setAttribute('d', AREAS.map((a, i) => (i ? 'L' : 'M') + a.x * 10 + ' ' + a.y * 7).join(' ') + 'Z');
   svg.appendChild(ring);
-  const lines = {};
+  const lines = {}, nodes = {};
   AREAS.forEach((a) => {
-    const d = 'M' + a.x * 10 + ' ' + a.y * 7 + ' L' + cx + ' ' + cy;
     ['link', 'flow'].forEach((cls) => {
       const p = document.createElementNS(ns, 'path');
-      p.setAttribute('class', cls); p.setAttribute('d', d);
+      p.setAttribute('class', cls);
       svg.appendChild(p);
       (lines[a.id] = lines[a.id] || []).push(p);
     });
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'node'; b.dataset.id = a.id;
-    b.style.left = a.x + '%'; b.style.top = a.y + '%';
     b.setAttribute('aria-pressed', 'false');
     b.innerHTML = '<span class="tile"><span class="pin"></span>' + a.icon + '</span><span class="lbl">' + a.label + '</span>';
     b.addEventListener('click', () => select(a.id, true));
     wrap.appendChild(b);
+    nodes[a.id] = b;
   });
+  function place() {
+    ring.setAttribute('d', AREAS.map((a, i) => { const q = P(a); return (i ? 'L' : 'M') + q.x * 10 + ' ' + q.y * 7; }).join(' ') + 'Z');
+    AREAS.forEach((a) => {
+      const q = P(a);
+      lines[a.id].forEach((p) => p.setAttribute('d', 'M' + q.x * 10 + ' ' + q.y * 7 + ' L' + cx + ' ' + cy));
+      nodes[a.id].style.left = q.x + '%'; nodes[a.id].style.top = q.y + '%';
+    });
+  }
+  place();
+  if (narrow.addEventListener) narrow.addEventListener('change', place);
   function select(id, user) {
     const a = AREAS.find((x) => x.id === id);
     wrap.querySelectorAll('.node').forEach((n) => n.setAttribute('aria-pressed', n.dataset.id === id));
@@ -546,9 +558,21 @@ const AREAS = [
   modal.addEventListener('close', () => { iframe.src = 'about:blank'; document.body.style.overflow = ''; });
 })();
 
-// Formulario de contacto (Formspree)
+// Formulario de contacto → CRM (formato de datos en README, sección "Formulario y CRM")
 const form = document.getElementById('form-contacto');
 const status = form.querySelector('.form-status');
+function datosLead() {
+  const f = new FormData(form), q = new URLSearchParams(location.search);
+  const v = (k) => String(f.get(k) || '').trim();
+  return {
+    nombre: v('nombre'), empresa: v('empresa'), correo: v('correo'), telefono: v('telefono'), mensaje: v('mensaje'),
+    autorizacion_datos: f.get('autorizacion') === 'on',
+    autorizacion_fecha: new Date().toISOString(),
+    origen: 'teggnar.com · formulario de contacto',
+    pagina: location.href,
+    utm: { source: q.get('utm_source') || '', medium: q.get('utm_medium') || '', campaign: q.get('utm_campaign') || '' }
+  };
+}
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
   status.className = 'form-status';
@@ -558,15 +582,21 @@ form.addEventListener('submit', async (e) => {
     form.reportValidity();
     return;
   }
-  if (!CONFIG.formspree) {
-    status.textContent = 'Formulario en configuración. Mientras tanto escríbanos por WhatsApp.';
-    status.classList.add('err');
+  if (form.querySelector('[name="_gotcha"]').value) { form.reset(); return; } // bot
+  const lead = datosLead();
+  if (!CONFIG.crm) {
+    // Mientras el CRM no exista: la solicitud sale por WhatsApp con los datos ya escritos
+    const t = 'Hola, quiero agendar un diagnóstico con TEGGNAR.\n\nNombre: ' + lead.nombre + '\nEmpresa: ' + lead.empresa +
+      '\nCorreo: ' + lead.correo + (lead.telefono ? '\nTeléfono: ' + lead.telefono : '') + '\n\n' + lead.mensaje;
+    window.open('https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(t), '_blank', 'noopener');
+    status.textContent = 'Abrimos WhatsApp con su solicitud lista. Solo presione enviar.';
+    status.classList.add('ok');
     return;
   }
   const btn = form.querySelector('button');
   btn.disabled = true; btn.textContent = 'Enviando…';
   try {
-    const r = await fetch('https://formspree.io/f/' + CONFIG.formspree, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+    const r = await fetch(CONFIG.crm, { method: 'POST', body: JSON.stringify(lead), headers: { 'Content-Type': 'application/json', Accept: 'application/json' } });
     if (!r.ok) throw new Error();
     form.reset();
     status.textContent = '¡Gracias! Le responderemos en menos de un día hábil.';

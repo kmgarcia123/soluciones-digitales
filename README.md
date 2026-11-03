@@ -14,6 +14,7 @@ Publicada en Vercel. **Cada cambio en la rama `main` se publica solo** en uno o 
 | `demos.js` | **Enlaces de las demos del portafolio** |
 | `favicon.svg`, `og-image.png` | Ícono y vista previa al compartir |
 | `vercel.json` | Configuración de Vercel (URLs limpias) |
+| `robots.txt`, `sitemap.xml` | Para que Google encuentre la página |
 
 ## Cómo publicar una demo (para Juan)
 
@@ -29,7 +30,31 @@ Publicada en Vercel. **Cada cambio en la rama `main` se publica solo** en uno o 
 
 ## Datos de contacto y formulario
 
-Al final de `index.html`, en el bloque `CONFIG`: número de WhatsApp, correo e ID de Formspree.
+Al final de `index.html`, en el bloque `CONFIG`: número de WhatsApp, correo y `crm` (dirección del CRM).
+
+## Formulario y CRM
+
+- **Mientras `crm` esté vacío:** al enviar el formulario se abre WhatsApp (número de `CONFIG.whatsapp`) con los datos ya escritos. No se pierde ningún contacto.
+- **Cuando el CRM exista:** pegue en `crm` la URL que recibe las solicitudes (ej. `https://crm.teggnar.com/api/leads`). El formulario envía un `POST` con `Content-Type: application/json`:
+
+```json
+{
+  "nombre": "Ana Pérez",
+  "empresa": "Constructora X",
+  "correo": "ana@empresa.co",
+  "telefono": "",
+  "mensaje": "Quiero automatizar el informe de cartera",
+  "autorizacion_datos": true,
+  "autorizacion_fecha": "2026-11-03T20:13:57.006Z",
+  "origen": "teggnar.com · formulario de contacto",
+  "pagina": "https://teggnar.com/?utm_source=linkedin",
+  "utm": { "source": "linkedin", "medium": "", "campaign": "" }
+}
+```
+
+  Requisitos del CRM: responder `2xx` si guardó la solicitud (cualquier otro código muestra el mensaje de error) y permitir CORS desde `https://teggnar.com` y `https://www.teggnar.com` (incluida la petición `OPTIONS`). Guardar `autorizacion_fecha`: es la prueba de la autorización de datos que pide la Ley 1581.
+- Los mensajes del diagnóstico rápido, el mapa y las demos llegan dentro de `mensaje`.
+- El campo oculto `_gotcha` atrapa bots: si viene lleno, no se envía nada.
 
 ## Indicadores financieros reales (tablero de la portada)
 
