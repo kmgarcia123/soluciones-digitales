@@ -19,8 +19,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="demo-lab.css">
+<link rel="stylesheet" href="demo-analytics.css">
+<link rel="stylesheet" href="demo-journeys.css">
+<link rel="stylesheet" href="demo-operations.css">
 <script src="iconos.js"></script>
-<script src="demos.js"></script>
+<script src="demo-analytics.js" defer></script>
+<script src="demo-journeys.js" defer></script>
+<script src="demo-operations.js" defer></script>
+<script src="demo-lab.js" defer></script>
+<script src="demo-orbit.js" defer></script>
 <script src="indicadores.js"></script>
 <script src="indicadores-reales.js" defer></script>
 <script src="live-dash.js" defer></script>
@@ -325,39 +333,41 @@
   </div>
 </section>
 
-<!-- PORTAFOLIO -->
-<section id="portafolio" class="wrap">
-  <div class="section-head">
-    <p class="eyebrow reveal">Portafolio</p>
-    <h2 class="reveal">Véalo funcionando.</h2>
-    <p class="lead reveal d2">Demos construidas con datos ficticios de una empresa de ejemplo. Así se verían con los suyos.</p>
-  </div>
-  <div class="projects">
-    <article class="card project reveal">
-      <div class="thumb bars-thumb scene" aria-hidden="true"><i style="height:40%"></i><i style="height:62%"></i><i style="height:50%"></i><i style="height:74%"></i><i style="height:86%;background:var(--accent)"></i><i style="height:95%;background:var(--teal)"></i></div>
-      <div class="body"><span class="tag" style="color:#1B389E">Dashboard</span><h3>Ventas</h3><p class="desc">Ventas por vendedor, producto y región, cumplimiento de meta y tendencia mensual.</p><p class="tech">Power BI · Excel</p><div class="demo-foot"><span class="demo-status">Demo en construcción</span><button type="button" class="btn btn-soft demo-btn" data-demo="ventas">Solicitar demo</button></div></div>
-    </article>
-    <article class="card project reveal d2">
-      <div class="thumb" aria-hidden="true">
-        <div class="mini">
-          <div>Al día<b>62%</b><div class="meter" style="background:var(--teal);width:80%"></div></div>
-          <div>1–30 días<b>21%</b><div class="meter" style="background:var(--navy3);width:45%"></div></div>
-          <div>31–60 días<b>11%</b><div class="meter" style="background:var(--accent);width:28%"></div></div>
-          <div>+60 días<b>6%</b><div class="meter" style="background:#F59E0B;width:16%"></div></div>
-        </div>
+<!-- PORTAFOLIO: LABORATORIO INTERACTIVO -->
+<section id="portafolio" class="lab-section" aria-labelledby="lab-heading">
+  <div class="wrap">
+    <div class="lab-intro">
+      <p class="lab-eyebrow"><span></span> TEGGNAR EXPERIENCE LAB <span class="lab-version">01 / INTERACTIVO</span></p>
+      <h2 id="lab-heading">No lo imagine.<br><span>Hágalo funcionar.</span></h2>
+      <p>Sus datos, sus conversaciones y sus procesos.<br class="lab-desktop-break"> Un universo de posibilidades. Explore lo que podemos construir.</p>
+    </div>
+    <div id="demo-lab" class="demo-lab">
+      <div class="lab-ambient" aria-hidden="true"></div>
+      <div class="lab-shell-top">
+        <div class="lab-window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <span class="lab-shell-label">TEGGNAR <span>/</span> playground</span>
+        <div class="lab-shell-tools"><span class="lab-live"><i></i> Demo interactiva</span><button id="lab-motion" type="button" aria-pressed="false" aria-label="Pausar animaciones decorativas">Pausar efectos</button></div>
       </div>
-      <div class="body"><span class="tag" style="color:#1B389E">Dashboard</span><h3>Cartera y recaudo</h3><p class="desc">Cartera por edades, clientes en mora, recaudo proyectado y alertas de vencimiento.</p><p class="tech">Power BI · Power Automate</p><div class="demo-foot"><span class="demo-status">Demo en construcción</span><button type="button" class="btn btn-soft demo-btn" data-demo="cartera">Solicitar demo</button></div></div>
-    </article>
-    <article class="card project reveal d3">
-      <div class="thumb" style="flex-direction:column;gap:8px" aria-hidden="true">
-        <div class="row"><span>Caso #1042 · Garantía</span><span style="color:var(--teal)">Resuelto</span></div>
-        <div class="row"><span>Caso #1043 · Facturación</span><span style="color:#FCD34D">En curso</span></div>
-        <div class="row"><span>Caso #1044 · Entrega</span><span style="color:#FCA5A5">Vence hoy</span></div>
+      <div class="lab-tabs" role="tablist" aria-label="Explorar servicios">
+        <button type="button" role="tab" id="lab-tab-analytics" data-lab-tab="analytics" aria-selected="true" aria-controls="lab-panel" tabindex="0"><span aria-hidden="true">▥</span> Dashboards <small>01</small></button>
+        <button type="button" role="tab" id="lab-tab-whatsapp" data-lab-tab="whatsapp" aria-selected="false" aria-controls="lab-panel" tabindex="-1"><span aria-hidden="true">◉</span> WhatsApp <small>02</small></button>
+        <button type="button" role="tab" id="lab-tab-data" data-lab-tab="data" aria-selected="false" aria-controls="lab-panel" tabindex="-1"><span aria-hidden="true">◇</span> Arquitectura <small>03</small></button>
+        <button type="button" role="tab" id="lab-tab-automation" data-lab-tab="automation" aria-selected="false" aria-controls="lab-panel" tabindex="-1"><span aria-hidden="true">ϟ</span> Automatización <small>04</small></button>
+        <button type="button" role="tab" id="lab-tab-crm" data-lab-tab="crm" aria-selected="false" aria-controls="lab-panel" tabindex="-1"><span aria-hidden="true">▦</span> CRM <small>05</small></button>
       </div>
-      <div class="body"><span class="tag" style="color:#0B776D">Dashboard + automatización</span><h3>Atención al cliente</h3><p class="desc">Casos por estado y tiempo de respuesta, con asignación y avisos automáticos al responsable.</p><p class="tech">Power BI · Power Automate · SharePoint</p><div class="demo-foot"><span class="demo-status">Demo en construcción</span><button type="button" class="btn btn-soft demo-btn" data-demo="servicio">Solicitar demo</button></div></div>
-    </article>
+      <div class="lab-experience-head">
+        <div><p class="lab-mini-label">MENOS FRICCIÓN. MÁS POSIBILIDADES.</p><h3 id="lab-title">Los números cuentan una historia.<br>Ahora puede explorarla.</h3><p id="lab-description">Cambie de plataforma, filtre sus ventas y reorganice el tablero. El control está en sus manos.</p></div>
+        <div class="lab-orbit-wrap" aria-hidden="true"><div class="lab-orbit-fallback"><i></i><i></i><i></i><b></b></div><canvas id="lab-orbit" width="180" height="140"></canvas><span>CONNECTED INTELLIGENCE</span></div>
+      </div>
+      <div id="lab-panel" class="lab-panel" role="tabpanel" aria-labelledby="lab-tab-analytics" tabindex="0"><div class="lab-loading">Preparando su espacio de exploración…</div></div>
+      <noscript><p class="lab-noscript">Active JavaScript para probar las demos interactivas. Diseñamos dashboards, bots de WhatsApp, arquitectura de datos, automatizaciones y CRM a la medida. <a href="#contacto">Cuéntenos qué necesita.</a></p></noscript>
+      <div class="lab-bottom"><span><i></i> Entorno de demostración · datos ficticios</span><span>Explore. Pruebe. Imagine su empresa aquí.</span></div>
+      <p id="lab-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+    <div class="lab-conversion"><div><span class="lab-mini-label">DE ESTA DEMO A SU OPERACIÓN</span><h3>Su próximo gran cambio<br>empieza con una conversación.</h3><p>Diseñamos su solución y su despliegue en nuestra nube, según las necesidades de su empresa.</p></div><a href="#contacto" id="lab-contact" class="lab-contact">Quiero esto para mi empresa <span aria-hidden="true">↗</span></a></div>
   </div>
 </section>
+
 
 <!-- PLANES -->
 <section id="planes" class="wrap">
@@ -432,7 +442,7 @@
     </div>
     <div class="trust-grid">
       <article class="reveal"><span class="tile" style="--g1:#2246C4;--g2:#5B7BEA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h3>Ley 1581 de 2012</h3><p>Autorización y política de tratamiento de datos desde el primer contacto.</p></article>
-      <article class="reveal d2"><span class="tile" style="--g1:#0B776D;--g2:#20B7A9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><h3>En su propio entorno</h3><p>Las soluciones se construyen en su Microsoft 365 y sus sistemas, no en los nuestros.</p></article>
+      <article class="reveal d2"><span class="tile" style="--g1:#0B776D;--g2:#20B7A9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><h3>Un entorno definido con usted</h3><p>Definimos con usted el alojamiento en nuestra nube o la integración con sus sistemas, con accesos y responsabilidades claros.</p></article>
       <article class="reveal d2"><span class="tile" style="--g1:#34496A;--g2:#6F8CF0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Usted aprueba</h3><p>Los flujos piden su visto bueno en los pasos importantes antes de enviar o registrar.</p></article>
       <article class="reveal d3"><span class="tile" style="--g1:#B06A12;--g2:#E09A3E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Confidencialidad por escrito</h3><p>Acuerdo de confidencialidad, alcance y entregables firmados antes de empezar.</p></article>
     </div>
@@ -504,17 +514,7 @@
 </main>
 
 
-<dialog class="demo-modal" id="demo-modal" aria-labelledby="demo-title">
-  <div class="demo-head">
-    <div><p class="demo-kicker">Demo · datos ficticios</p><h3 id="demo-title">Demo</h3></div>
-    <div class="demo-tools">
-      <a href="#" id="demo-open" class="btn btn-soft" target="_blank" rel="noopener">Pantalla completa ↗</a>
-      <button type="button" class="demo-close" id="demo-close" aria-label="Cerrar demo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
-    </div>
-  </div>
-  <div class="demo-frame"><div class="demo-sk" aria-hidden="true"><i class="sk-bar"></i><span class="sk-row"><i></i><i></i><i></i><i></i></span><i class="sk-chart"></i></div><p class="sr-only" id="demo-loading" aria-live="polite"></p><iframe id="demo-iframe" title="Demo" loading="lazy" allowfullscreen allow="fullscreen"></iframe></div>
-  <div class="demo-foot-modal"><span>¿Le gustaría algo así con sus datos?</span><a href="#contacto" class="btn btn-primary" id="demo-cta">Agendar diagnóstico</a></div>
-</dialog>
+
 
 <footer><div class="wrap"><div><span>© <span id="anio">2026</span> TEGGNAR · Bogotá, Colombia</span><span><a href="privacidad.html">Política de privacidad</a> · Las demos usan datos ficticios.</span></div></div></footer>
 
@@ -708,55 +708,6 @@ document.querySelectorAll('.plan [data-msg]').forEach((a) => a.addEventListener(
   const m = document.querySelector('#form-contacto textarea[name="mensaje"]');
   if (m && !m.value.includes(a.dataset.msg)) m.value = m.value.trim() ? m.value.trim() + '\n\n' + a.dataset.msg : a.dataset.msg;
 }));
-
-// Demos del portafolio (configurar en demos.js)
-(function initDemos(){
-  const D = window.DEMOS || {};
-  const modal = document.getElementById('demo-modal');
-  const iframe = document.getElementById('demo-iframe');
-  const msg = document.querySelector('#form-contacto textarea[name="mensaje"]');
-  const toVideo = (u) => {
-    let m = u.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]{6,})/); if (m) return 'https://www.youtube.com/embed/' + m[1];
-    m = u.match(/vimeo\.com\/(\d+)/); if (m && !u.includes('player.')) return 'https://player.vimeo.com/video/' + m[1];
-    m = u.match(/loom\.com\/share\/(\w+)/); if (m) return 'https://www.loom.com/embed/' + m[1];
-    return u;
-  };
-  document.querySelectorAll('.demo-btn').forEach((btn) => {
-    const d = D[btn.dataset.demo] || {};
-    const status = btn.parentElement.querySelector('.demo-status');
-    const listo = !!(d.url && d.url.trim());
-    if (listo) {
-      status.textContent = 'Demo disponible'; status.classList.add('ready');
-      btn.textContent = d.tipo === 'enlace' ? 'Ver demo ↗' : 'Ver demo';
-      btn.classList.replace('btn-soft', 'btn-primary');
-    }
-    btn.addEventListener('click', () => {
-      if (!listo) {
-        if (msg && !msg.value) msg.value = 'Me gustaría ver la demo de ' + (d.titulo || 'su portafolio') + '.';
-        document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
-      const url = d.tipo === 'video' ? toVideo(d.url.trim()) : d.url.trim();
-      if (d.tipo === 'enlace' || typeof modal.showModal !== 'function') { window.open(url, '_blank', 'noopener'); return; }
-      document.getElementById('demo-title').textContent = d.titulo || 'Demo';
-      iframe.title = d.titulo || 'Demo';
-      const frame = iframe.parentElement;
-      frame.classList.add('loading');
-      document.getElementById('demo-loading').textContent = 'Cargando demo…';
-      iframe.onload = () => { if (iframe.src !== 'about:blank') { frame.classList.remove('loading'); document.getElementById('demo-loading').textContent = 'Demo cargada'; } };
-      iframe.src = url;
-      document.getElementById('demo-open').href = d.url.trim();
-      modal.classList.toggle('is-video', d.tipo === 'video');
-      modal.showModal();
-      document.body.style.overflow = 'hidden';
-    });
-  });
-  const close = () => modal.close();
-  document.getElementById('demo-close').addEventListener('click', close);
-  document.getElementById('demo-cta').addEventListener('click', close);
-  modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
-  modal.addEventListener('close', () => { iframe.src = 'about:blank'; document.body.style.overflow = ''; });
-})();
 
 // Formulario de contacto → CRM (formato de datos en README, sección "Formulario y CRM")
 const form = document.getElementById('form-contacto');
