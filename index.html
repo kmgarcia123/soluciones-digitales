@@ -30,7 +30,7 @@
 <body>
 <a href="#contenido" class="skip">Saltar al contenido</a>
 
-<header>
+<header id="site-header" class="on-hero">
   <div class="wrap nav">
     <a href="#inicio" class="brand" aria-label="TEGGNAR, inicio"><span class="logo" aria-hidden="true"><i style="height:7px"></i><i style="height:12px"></i><i style="height:18px;background:var(--teal)"></i></span>TEGGNAR</a>
     <nav aria-label="Principal">
@@ -39,24 +39,41 @@
       <a href="#planes" class="nav-link">Planes</a>
       <a href="#metodo" class="nav-link">Cómo trabajamos</a>
       <a href="#contacto" class="btn btn-primary btn-sm">Agendar diagnóstico</a>
+      <button type="button" class="menu-btn" id="menu-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil"><span></span><span></span><span></span></button>
     </nav>
+  </div>
+  <div class="menu-movil" id="menu-movil" hidden>
+    <a href="#servicios">Servicios</a>
+    <a href="#portafolio">Portafolio</a>
+    <a href="#planes">Planes</a>
+    <a href="#metodo">Cómo trabajamos</a>
+    <a href="#contacto">Contacto</a>
   </div>
 </header>
 
 <main id="contenido">
 
-<!-- PORTADA -->
-<section id="inicio" class="wrap hero">
-  <span class="pill reveal"><span class="dot"></span>Datos y automatización para pymes</span>
-  <h1 class="reveal">Sus datos trabajando.<br><span class="dim">Sus informes, solos.</span></h1>
-  <p class="lead reveal d2">Convertimos los Excel y bases de datos de su empresa en dashboards que se actualizan solos y procesos que ya no dependen de trabajo manual.</p>
-  <div class="ctas reveal d2">
-    <a href="#contacto" class="btn btn-primary btn-lg">Agendar diagnóstico</a>
-    <a href="#portafolio" class="btn btn-soft btn-lg">Ver demos ›</a>
+<!-- PORTADA CON VIDEO -->
+<section id="inicio" class="hero-video" data-hero>
+  <div class="hv-media" aria-hidden="true">
+    <video id="hv-video" autoplay muted loop playsinline preload="metadata" poster="media/hero-poster.jpg">
+      <source src="media/hero.webm" type="video/webm">
+      <source src="media/hero.mp4" type="video/mp4">
+    </video>
   </div>
+  <div class="wrap hero">
+    <span class="pill reveal"><span class="dot"></span>Datos y automatización para pymes</span>
+    <h1 class="reveal">Sus datos trabajando.<br><span class="dim">Sus informes, solos.</span></h1>
+    <p class="lead reveal d2">Convertimos los Excel y bases de datos de su empresa en dashboards que se actualizan solos y procesos que ya no dependen de trabajo manual.</p>
+    <div class="ctas reveal d2">
+      <a href="#contacto" class="btn btn-primary btn-lg">Agendar diagnóstico</a>
+      <a href="#portafolio" class="btn-ghost hv-link">Ver demos ›</a>
+    </div>
+  </div>
+  <button type="button" class="hv-pause" id="hv-pause" aria-pressed="false">Pausar video</button>
 </section>
 
-<section class="wrap" style="padding-top:40px;padding-bottom:110px" aria-label="Simulación de tablero financiero en vivo">
+<section class="wrap" style="padding-top:90px;padding-bottom:110px" aria-label="Simulación de tablero financiero en vivo">
   <div class="dash rise" id="live-dash">
     <div class="dash-top">
       <div class="dash-id"><span class="dash-title">Finanzas en vivo · Constructora demo</span><span class="dash-sub">Indicadores reales del país + una empresa simulada</span></div>
@@ -139,9 +156,58 @@
 
 <!-- PROBLEMA -->
 <div class="statement">
-  <p class="reveal">Horas armando informes a mano. Cifras que no cuadran. <span class="dim">Decisiones que llegan cuando ya cuestan dinero.</span></p>
+  <p data-highlight>Horas armando informes a mano. Cifras que no cuadran. <span class="dim">Decisiones que llegan cuando ya cuestan dinero.</span></p>
   <p class="reveal d2">Ventas en un sistema, cartera en Excel, aprobaciones por correo. Lo conectamos todo para que su equipo tenga una sola cifra, siempre al día, sin contratar un área de analítica.</p>
 </div>
+
+<!-- QUÉ HACE TEGGNAR -->
+<section id="que-hacemos" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow reveal">Qué hace TEGGNAR</p>
+    <h2 class="reveal">Conectamos. Ordenamos.<br><span class="dim">Automatizamos.</span></h2>
+    <p class="lead reveal d2">Convertimos archivos y sistemas sueltos en informes y flujos que su equipo puede usar, revisar y mejorar.</p>
+    <a href="#metodo" class="btn-ghost wf-link reveal d2">Ver cómo trabajamos →</a>
+  </div>
+  <div class="wf scene">
+    <article class="wf-step reveal">
+      <div class="wf-panel wf-connect" aria-hidden="true">
+        <span class="wf-label">Conectar</span>
+        <span class="wf-chip" style="--x:-90px;--y:-70px;--d:0s"><i style="background:#1F9D63">X</i>Excel</span>
+        <span class="wf-chip" style="--x:90px;--y:-80px;--d:.12s"><i style="background:#0F7C8C">S</i>SharePoint</span>
+        <span class="wf-chip" style="--x:-110px;--y:10px;--d:.24s"><i style="background:#5B7BEA">C</i>CRM</span>
+        <span class="wf-chip" style="--x:110px;--y:16px;--d:.36s"><i style="background:#C9862B">E</i>ERP</span>
+        <span class="wf-chip" style="--x:-80px;--y:80px;--d:.48s"><i style="background:#34496A">{}</i>SQL</span>
+        <span class="wf-chip" style="--x:90px;--y:84px;--d:.6s"><i style="background:#20B7A9">@</i>Correo</span>
+        <span class="wf-pill"><i class="ok"></i>TEGGNAR · conectado</span>
+      </div>
+      <div class="wf-copy"><span class="wf-n">01</span><div><h3>Conecta sus fuentes</h3><p>Excel, correo, CRM, ERP y bases de datos, en un solo lugar.</p></div></div>
+    </article>
+    <article class="wf-step reveal d2">
+      <div class="wf-panel wf-order" aria-hidden="true">
+        <span class="wf-label">Ordenar</span>
+        <div class="wf-tables">
+          <span class="wf-table" style="--d:0s"><b>VENTAS</b><i style="width:78%"></i><i style="width:92%"></i><i style="width:60%"></i></span>
+          <span class="wf-table" style="--d:.15s"><b>CARTERA</b><i style="width:70%"></i><i style="width:88%"></i><i style="width:52%"></i></span>
+          <span class="wf-table" style="--d:.3s"><b>CLIENTES</b><i style="width:84%"></i><i style="width:66%"></i><i style="width:74%"></i></span>
+        </div>
+        <span class="wf-pill"><i class="info"></i>Una sola cifra para todos</span>
+      </div>
+      <div class="wf-copy"><span class="wf-n">02</span><div><h3>Ordena la información</h3><p>Limpiamos y unimos los datos para que todas las áreas vean la misma cifra.</p></div></div>
+    </article>
+    <article class="wf-step reveal d3">
+      <div class="wf-panel wf-auto" aria-hidden="true">
+        <span class="wf-label">Automatizar</span>
+        <div class="wf-rows">
+          <span class="wf-row" style="--d:0s">El flujo arma el informe<em>Listo</em></span>
+          <span class="wf-row" style="--d:.5s">Usted lo revisa y aprueba<em>Aprobado</em></span>
+          <span class="wf-row" style="--d:1s">Llega a gerencia cada lunes<em>Enviado</em></span>
+        </div>
+        <span class="wf-pill"><i class="ok"></i>Con su aprobación</span>
+      </div>
+      <div class="wf-copy"><span class="wf-n">03</span><div><h3>Automatiza el trabajo</h3><p>Informes y procesos que corren solos, con su visto bueno donde importa.</p></div></div>
+    </article>
+  </div>
+</section>
 
 <!-- SERVICIOS -->
 <section id="servicios" class="wrap">
@@ -356,6 +422,23 @@
   </div>
 </section>
 
+<!-- CONFIANZA -->
+<section id="confianza" class="wrap">
+  <div class="trust">
+    <div class="trust-copy">
+      <p class="eyebrow reveal">Confianza</p>
+      <h2 class="reveal">Sus datos,<br><span class="dim">bajo su control.</span></h2>
+      <p class="lead reveal d2">Trabajamos con información sensible de su empresa. Por eso las reglas quedan claras desde el primer día.</p>
+    </div>
+    <div class="trust-grid">
+      <article class="reveal"><span class="tile" style="--g1:#2246C4;--g2:#5B7BEA"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><h3>Ley 1581 de 2012</h3><p>Autorización y política de tratamiento de datos desde el primer contacto.</p></article>
+      <article class="reveal d2"><span class="tile" style="--g1:#0B776D;--g2:#20B7A9"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><h3>En su propio entorno</h3><p>Las soluciones se construyen en su Microsoft 365 y sus sistemas, no en los nuestros.</p></article>
+      <article class="reveal d2"><span class="tile" style="--g1:#34496A;--g2:#6F8CF0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span><h3>Usted aprueba</h3><p>Los flujos piden su visto bueno en los pasos importantes antes de enviar o registrar.</p></article>
+      <article class="reveal d3"><span class="tile" style="--g1:#B06A12;--g2:#E09A3E"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><h3>Confidencialidad por escrito</h3><p>Acuerdo de confidencialidad, alcance y entregables firmados antes de empezar.</p></article>
+    </div>
+  </div>
+</section>
+
 <!-- DIAGNÓSTICO -->
 <section id="diagnostico" class="wrap">
   <div class="section-head">
@@ -468,6 +551,69 @@ if ('IntersectionObserver' in window) {
 } else {
   document.querySelectorAll('.reveal, .rise').forEach((el) => el.classList.add('in'));
 }
+
+// ===== Portada con video =====
+(function initHero(){
+  const v = document.getElementById('hv-video'), btn = document.getElementById('hv-pause');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const setBtn = () => { const p = v.paused; btn.textContent = p ? 'Reproducir video' : 'Pausar video'; btn.setAttribute('aria-pressed', p ? 'true' : 'false'); };
+  if (v) {
+    if (reduce.matches) v.removeAttribute('autoplay'), v.pause();
+    v.addEventListener('play', setBtn); v.addEventListener('pause', setBtn);
+    btn.addEventListener('click', () => { v.paused ? v.play() : v.pause(); });
+    // Ahorra batería: el video se pausa cuando sale de pantalla (si el usuario no lo pausó)
+    let userPaused = false;
+    btn.addEventListener('click', () => { userPaused = v.paused; });
+    if ('IntersectionObserver' in window) new IntersectionObserver((es) => es.forEach((e) => {
+      if (userPaused || reduce.matches) return;
+      e.isIntersecting ? v.play().catch(() => {}) : v.pause();
+    })).observe(v);
+    setBtn();
+  }
+  // Menú transparente sobre el video, sólido al bajar
+  const header = document.getElementById('site-header'), hero = document.querySelector('[data-hero]');
+  const onScroll = () => header.classList.toggle('on-hero', window.scrollY < hero.offsetHeight - 80);
+  onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
+  // Menú en celular
+  const mb = document.getElementById('menu-btn'), mm = document.getElementById('menu-movil');
+  const cerrar = () => { mm.hidden = true; mb.setAttribute('aria-expanded', 'false'); mb.setAttribute('aria-label', 'Abrir menú'); header.classList.remove('menu-open'); };
+  mb.addEventListener('click', () => {
+    const abrir = mm.hidden;
+    mm.hidden = !abrir; mb.setAttribute('aria-expanded', abrir); mb.setAttribute('aria-label', abrir ? 'Cerrar menú' : 'Abrir menú');
+    header.classList.toggle('menu-open', abrir);
+  });
+  mm.querySelectorAll('a').forEach((a) => a.addEventListener('click', cerrar));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !mm.hidden) { cerrar(); mb.focus(); } });
+  window.matchMedia('(min-width:761px)').addEventListener('change', (e) => { if (e.matches) cerrar(); });
+})();
+
+// ===== Manifiesto: las palabras se iluminan al bajar =====
+(function initHighlight(){
+  const el = document.querySelector('[data-highlight]'); if (!el) return;
+  const words = [];
+  const split = (node) => {
+    [...node.childNodes].forEach((n) => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach((t) => {
+          if (!t) return;
+          if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
+          const w = document.createElement('span'); w.className = 'hw'; w.textContent = t; words.push(w); frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) split(n);
+    });
+  };
+  split(el);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { words.forEach((w) => w.classList.add('on')); return; }
+  const tick = () => {
+    const r = el.getBoundingClientRect(), vh = window.innerHeight;
+    const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * 0.5 + r.height * 0.5)));
+    const n = Math.round(p * words.length);
+    words.forEach((w, i) => w.classList.toggle('on', i < n));
+  };
+  tick(); window.addEventListener('scroll', tick, { passive: true }); window.addEventListener('resize', tick);
+})();
 
 // Mapa interactivo de áreas
 const AREAS = [

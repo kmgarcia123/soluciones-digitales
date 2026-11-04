@@ -625,3 +625,112 @@ button.kpi[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px var(--teal);backgro
 .play.bars-thumb i{transform-origin:50% 100%;animation:tgBar 3s cubic-bezier(.4,0,.2,1) infinite}
 .play.bars-thumb i:nth-child(2){animation-delay:.12s}.play.bars-thumb i:nth-child(3){animation-delay:.24s}.play.bars-thumb i:nth-child(4){animation-delay:.36s}.play.bars-thumb i:nth-child(5){animation-delay:.48s}.play.bars-thumb i:nth-child(6){animation-delay:.6s}
 @media (prefers-reduced-motion: reduce){.tgi *,.feed li.new .ic .tgi,.play.bars-thumb i{animation:none !important}.plan.in .ck path{animation:none;stroke-dashoffset:0}}
+
+/* ===== Propuesta: portada con video, qué hacemos, confianza y menú móvil (nov 2026) ===== */
+/* Menú: transparente sobre el video, sólido al bajar */
+header{position:fixed;left:0;right:0;transition:background .3s,border-color .3s,backdrop-filter .3s}
+header.on-hero:not(.menu-open){background:transparent;border-bottom-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+header.on-hero:not(.menu-open) .brand{color:#fff}
+header.on-hero:not(.menu-open) .logo{box-shadow:0 0 0 1px rgba(255,255,255,.22)}
+header.on-hero:not(.menu-open) .nav-link{color:rgba(255,255,255,.86)}
+header.on-hero:not(.menu-open) .nav-link:hover{background:rgba(255,255,255,.1);color:#fff}
+.menu-btn{display:none;width:44px;height:44px;border:0;background:none;border-radius:12px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;margin-left:4px;color:var(--ink)}
+.menu-btn span{display:block;width:20px;height:2px;border-radius:2px;background:currentColor;transition:transform .25s,opacity .2s}
+header.on-hero:not(.menu-open) .menu-btn{color:#fff}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.menu-btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.menu-movil{display:flex;flex-direction:column;padding:8px 16px 18px;border-top:1px solid rgba(0,0,0,.06)}
+.menu-movil[hidden]{display:none}
+.menu-movil a{padding:14px 8px;font-size:17px;font-weight:600;color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(0,0,0,.06)}
+.menu-movil a:last-child{border-bottom:0}
+@media (max-width:760px){.menu-btn{display:inline-flex}}
+header.menu-open{background:rgba(247,249,254,.98)}
+@media (min-width:761px){.menu-movil{display:none!important}}
+
+/* Portada con video */
+.hero-video{position:relative;min-height:min(100svh,940px);display:flex;align-items:center;padding:0;overflow:hidden;background:#0A111D;color:#fff;isolation:isolate}
+.hv-media{position:absolute;inset:0;z-index:-1}
+.hv-media video{width:100%;height:100%;object-fit:cover;display:block}
+.hv-media::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(7,12,22,.78),rgba(7,12,22,.5) 70%,rgba(7,12,22,.35)),linear-gradient(180deg,rgba(7,12,22,.55),transparent 22%,transparent 80%,rgba(7,12,22,.6))}
+.hero-video .hero{padding-top:120px;padding-bottom:110px;width:100%}
+.hero-video h1{color:#fff}
+.hero-video h1 .dim{color:rgba(255,255,255,.58)}
+.hero-video .lead{color:#C8D2E0}
+.hero-video .pill{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero-video .ctas{align-items:center;gap:20px}
+.hv-link{color:#fff;font-size:16px;min-height:44px;padding:8px 6px}
+.hv-pause{position:absolute;left:20px;bottom:20px;border:0;border-radius:999px;padding:8px 14px;min-height:36px;font:600 12.5px 'Plus Jakarta Sans',system-ui,sans-serif;color:rgba(255,255,255,.8);background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);cursor:pointer}
+.hv-pause:hover{background:rgba(255,255,255,.16);color:#fff}
+.hv-pause:focus-visible,.hv-link:focus-visible{outline:2px solid #6FD8CC;outline-offset:2px}
+@media (max-width:640px){.hero-video{min-height:100svh}.hero-video .hero{padding-top:104px;padding-bottom:90px}.hv-pause{left:14px;bottom:14px}}
+
+/* Manifiesto: palabras que se iluminan */
+.statement [data-highlight] .hw{opacity:.18;transition:opacity .35s ease}
+.statement [data-highlight] .hw.on{opacity:1}
+.statement{padding-top:20px}
+
+/* Qué hace TEGGNAR: 3 tarjetas animadas */
+.wf-link{font-size:15px;margin-top:14px}
+.wf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:900px){.wf{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+.wf-step{display:flex;flex-direction:column;gap:18px}
+.wf-panel{position:relative;aspect-ratio:1/0.92;border-radius:28px;overflow:hidden;background:radial-gradient(ellipse at 50% 40%,#1B2A45,#0E1626);box-shadow:var(--shadow);color:#fff}
+.wf-label{position:absolute;left:20px;top:18px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8FA0B8}
+.wf-pill{position:absolute;left:50%;bottom:22px;transform:translate(-50%,12px);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);font-size:13.5px;font-weight:600;opacity:0}
+.wf-pill i{width:8px;height:8px;border-radius:99px;background:#20B7A9;box-shadow:0 0 0 4px rgba(32,183,169,.18)}
+.wf-pill i.info{background:#6F8CF0;box-shadow:0 0 0 4px rgba(111,140,240,.2)}
+.wf-copy{display:flex;gap:14px;align-items:flex-start;padding:0 6px}
+.wf-n{font-size:13px;font-weight:700;color:var(--accent-ink);background:var(--chip);border-radius:8px;padding:4px 8px;margin-top:2px}
+.wf-copy h3{margin:0 0 4px;font-size:19px;letter-spacing:-.02em}
+.wf-copy p{margin:0;color:var(--muted);line-height:1.5}
+/* 1. Conectar: los chips llegan desde afuera y se ordenan */
+.wf-connect{display:grid;grid-template-columns:repeat(2,auto);align-content:center;justify-content:center;gap:12px 14px;padding-bottom:40px}
+.wf-chip{display:inline-flex;align-items:center;gap:8px;padding:9px 14px 9px 9px;border-radius:12px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-size:13.5px;font-weight:600;opacity:0;transform:translate(var(--x),var(--y)) scale(.9)}
+.wf-chip i{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-style:normal;font-size:10px;font-weight:800}
+/* 2. Ordenar */
+.wf-tables{position:absolute;inset:56px 18px 84px;display:flex;gap:10px;align-items:center;justify-content:center}
+.wf-table{flex:1;max-width:120px;display:flex;flex-direction:column;gap:7px;padding:12px;border-radius:12px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);opacity:0;transform:translateY(18px)}
+.wf-table b{font-size:10.5px;letter-spacing:.06em;color:#C8D2E0;margin-bottom:3px}
+.wf-table i{display:block;height:5px;border-radius:3px;background:rgba(255,255,255,.18)}
+/* 3. Automatizar */
+.wf-rows{position:absolute;inset:58px 18px 84px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.wf-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:12px;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-size:13.5px;font-weight:600;opacity:0;transform:translateX(-14px)}
+.wf-row em{font-style:normal;font-size:12px;font-weight:700;color:#6FD8CC;opacity:0}
+/* Animaciones (se repiten cada vez que la sección entra en pantalla) */
+.wf.play .wf-chip{animation:wfChip .8s cubic-bezier(.2,.7,.2,1) calc(.2s + var(--d)) both}
+.wf.play .wf-table{animation:wfUp .7s cubic-bezier(.2,.7,.2,1) calc(.3s + var(--d)) both}
+.wf.play .wf-table i{animation:wfBar 1.2s ease calc(.9s + var(--d)) both;transform-origin:left}
+.wf.play .wf-row{animation:wfRow .6s cubic-bezier(.2,.7,.2,1) calc(.3s + var(--d)) both}
+.wf.play .wf-row em{animation:wfFade .4s ease calc(.75s + var(--d)) both}
+.wf.play .wf-pill{animation:wfPill .6s cubic-bezier(.2,.7,.2,1) 1.6s both}
+.wf.play .wf-auto .wf-pill{animation-delay:2.1s}
+@keyframes wfChip{from{opacity:0;transform:translate(var(--x),var(--y)) scale(.9)}to{opacity:1;transform:none}}
+@keyframes wfUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes wfBar{from{transform:scaleX(.3)}to{transform:scaleX(1)}}
+@keyframes wfRow{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+@keyframes wfFade{from{opacity:0}to{opacity:1}}
+@keyframes wfPill{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
+.no-js .wf-chip,.no-js .wf-table,.no-js .wf-row,.no-js .wf-row em{opacity:1;transform:none}
+.no-js .wf-pill{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion: reduce){
+  .statement [data-highlight] .hw{opacity:1;transition:none}
+  .wf *{animation:none!important}
+  .wf-chip,.wf-table,.wf-row,.wf-row em{opacity:1!important;transform:none!important}
+  .wf-pill{opacity:1!important;transform:translate(-50%,0)!important}
+}
+
+/* Confianza */
+.trust{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}
+.trust-copy{text-align:left}
+.trust-copy h2{margin:0}
+.trust-copy .lead{margin-top:18px}
+.trust-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.trust-grid article{background:#fff;border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+.trust-grid .tile{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--g1),var(--g2));margin-bottom:16px}
+.trust-grid .tile svg{width:22px;height:22px}
+.trust-grid h3{margin:0 0 6px;font-size:17px;letter-spacing:-.01em}
+.trust-grid p{margin:0;color:var(--muted);font-size:15px;line-height:1.5}
+@media (max-width:900px){.trust{grid-template-columns:1fr;gap:32px}.trust-copy{text-align:center}.trust-copy .lead{margin-left:auto;margin-right:auto}}
+@media (max-width:520px){.trust-grid{grid-template-columns:1fr}}
