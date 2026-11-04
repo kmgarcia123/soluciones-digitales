@@ -1,0 +1,366 @@
+/* Platform-specific shells. Scoped to the TEGGNAR demo. */
+.demo-lab .bi-demo { color: #243147; min-width: 0; }
+.demo-lab .bi-demo *, .demo-lab .bi-demo *::before, .demo-lab .bi-demo *::after { box-sizing: border-box; }
+.demo-lab .bi-demo button, .demo-lab .bi-demo select { font-family: inherit; font-size: 11px; }
+.demo-lab .bi-demo button { cursor: pointer; }
+.demo-lab .bi-demo button:focus-visible, .demo-lab .bi-demo select:focus-visible { outline: 3px solid #417be0; outline-offset: 3px; }
+.demo-lab .bi-switcher-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 16px; }
+.demo-lab .bi-eyebrow { color: #57708e; font-size: 9px; font-weight: 700; letter-spacing: .16em; }
+.demo-lab .bi-switcher-row p { font-size: 12px; margin: 5px 0 0; color: #657b96; }
+.demo-lab .bi-interactive-label { display: inline-flex; align-items: center; gap: 7px; font-size: 10px; white-space: nowrap; color: #3e746c; }
+.demo-lab .bi-interactive-label i { width: 6px; height: 6px; border-radius: 50%; background: #28ad93; box-shadow: 0 0 0 4px #28ad9310; }
+.demo-lab .bi-platform-picker { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; padding: 6px; background: #e6edf6; border: 1px solid #d9e3f0; border-radius: 14px; margin-bottom: 22px; }
+.demo-lab .bi-platform-button { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 50px; border-radius: 9px; border: 1px solid transparent; color: #63728a; background: transparent; transition: background .2s, box-shadow .2s; }
+.demo-lab .bi-platform-button[aria-pressed="true"] { background: #fff; color: #26324a; border-color: #d8e1ed; box-shadow: 0 3px 9px #29497412; font-weight: 700; }
+.demo-lab .bi-platform-button:hover { background: #ffffffb3; }
+.demo-lab .bi-mark { flex: none; display: inline-flex; align-items: center; justify-content: center; width: 27px; height: 27px; }
+.demo-lab .bi-mark-power { gap: 2px; align-items: flex-end; padding: 4px; }
+.demo-lab .bi-mark-power i { width: 6px; border-radius: 2px; background: #e4ae07; height: 9px; }
+.demo-lab .bi-mark-power i:nth-child(2) { height: 15px; background: #efbe24; }
+.demo-lab .bi-mark-power i:nth-child(3) { height: 21px; background: #f7d456; }
+.demo-lab .bi-mark-looker { position: relative; }
+.demo-lab .bi-mark-looker i { position: absolute; border: 3px solid #4285f4; width: 14px; height: 14px; border-radius: 50%; left: 11px; top: 12px; }
+.demo-lab .bi-mark-looker i:nth-child(2) { width: 10px; height: 10px; left: 5px; top: 6px; border-width: 2px; }
+.demo-lab .bi-mark-looker i:nth-child(3) { width: 6px; height: 6px; left: 1px; top: 0; border-width: 2px; }
+.demo-lab .bi-mark-qlik { color: #159447; font-size: 27px; font-weight: 800; font-family: Arial, sans-serif; }
+.demo-lab .bi-mark-tableau { color: #336e9b; font-size: 32px; font-weight: 500; }
+.demo-lab .bi-perspective { perspective: 1500px; min-width: 0; }
+.demo-lab .bi-stage { transform-origin: center center; transform-style: preserve-3d; backface-visibility: hidden; min-width: 0; }
+.demo-lab .bi-app { --bi-accent: #bd9718; --bi-secondary: #4b88a0; --bi-tertiary: #bfd3d8; color: #323943; background: #f1f1f1; border: 1px solid #cbd3df; box-shadow: 0 16px 36px -22px #132b60a6; border-radius: 10px; overflow: hidden; min-width: 0; font-family: 'Segoe UI', Arial, sans-serif; }
+.demo-lab .bi-app h3, .demo-lab .bi-app h4, .demo-lab .bi-app p { margin: 0; }
+.demo-lab .bi-appbar { min-height: 49px; display: flex; align-items: center; gap: 10px; padding: 8px 16px; font-size: 11px; background: #f2c811; color: #292929; }
+.demo-lab .bi-appbar > strong { font-size: 15px; white-space: nowrap; }
+.demo-lab .bi-appbar-divider { height: 17px; width: 1px; background: currentColor; opacity: .25; }
+.demo-lab .bi-appbar-spacer, .demo-lab .bi-ribbon-spacer { flex: 1; }
+.demo-lab .bi-app-avatar { display: grid; place-items: center; width: 27px; height: 27px; border-radius: 50%; background: #ffffffb5; font-weight: 700; font-size: 9px; }
+.demo-lab .bi-ribbon { display: flex; align-items: center; gap: 22px; padding: 0 16px; background: #fff; border-bottom: 1px solid #d9dde1; font-size: 10px; min-height: 43px; }
+.demo-lab .bi-ribbon-active { border-bottom: 2px solid #bf9817; align-self: stretch; display: flex; align-items: center; }
+.demo-lab .bi-export { display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: transparent; border: 1px solid #cbd2db; padding: 7px 9px; border-radius: 4px; min-height: 34px; color: inherit; white-space: nowrap; }
+.demo-lab .bi-export svg { width: 14px; height: 14px; }
+.demo-lab .bi-export:hover { background: #f0f4f9; }
+.demo-lab .bi-power-workspace { display: grid; grid-template-columns: 40px minmax(0, 1fr) 150px; align-items: stretch; }
+.demo-lab .bi-iconrail { display: flex; flex-direction: column; background: #f9f9f9; border-right: 1px solid #d9dde1; }
+.demo-lab .bi-iconrail span { display: grid; place-items: center; height: 44px; color: #747777; }
+.demo-lab .bi-iconrail .is-current { color: #292d31; background: #fff; border-left: 3px solid #e2b624; }
+.demo-lab .bi-iconrail svg { width: 17px; height: 17px; }
+.demo-lab .bi-report { padding: 22px 20px 0; min-width: 0; }
+.demo-lab .bi-report-heading { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin: 0 0 20px; }
+.demo-lab .bi-caption { font-size: 8px; font-weight: 600; letter-spacing: .1em; color: #7c858e; }
+.demo-lab .bi-report-heading h3 { font-size: 23px; line-height: 1.2; letter-spacing: -.035em; color: #273547; margin-top: 6px; }
+.demo-lab .bi-report-heading p { font-size: 10px; color: #7b8694; margin-top: 7px; }
+.demo-lab .bi-report-tag { color: #7c8390; font-size: 7px; letter-spacing: .06em; border: 1px solid #d5d9dd; border-radius: 3px; padding: 5px 6px; white-space: nowrap; }
+.demo-lab .bi-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 15px; }
+.demo-lab .bi-metric { padding: 14px 12px; background: #fff; border: 1px solid #d9dde1; min-width: 0; border-top: 3px solid #e7e9eb; }
+.demo-lab .bi-metric-label { display: flex; justify-content: space-between; align-items: center; color: #707c88; font-size: 9px; gap: 5px; }
+.demo-lab .bi-metric-label i { font-style: normal; font-size: 14px; color: var(--bi-accent); }
+.demo-lab .bi-metric > strong { display: block; font-size: clamp(17px, 1.8vw, 25px); letter-spacing: -.04em; margin: 10px 0 7px; line-height: 1.2; color: #28394b; font-weight: 600; }
+.demo-lab .bi-metric > small { font-size: 8px; color: #7c8995; display: block; }
+.demo-lab .bi-metric-primary { border-top-color: #e2b624; }
+.demo-lab .bi-visualizations { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 12px; min-width: 0; align-items: stretch; }
+.demo-lab .bi-visualizations:has(> .bi-channels:first-child) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
+.demo-lab .bi-viz { min-width: 0; border: 1px solid #d9dde1; background: #fff; padding: 16px 14px 12px; }
+.demo-lab .bi-viz-heading { display: flex; gap: 8px; justify-content: space-between; align-items: start; margin-bottom: 10px; }
+.demo-lab .bi-viz-heading h4 { font-size: 13px; line-height: 1.3; font-weight: 600; color: #344354; margin-top: 5px; }
+.demo-lab .bi-reorder { flex: none; width: 29px; height: 30px; background: transparent; border: 0; color: #9aa6b2; display: grid; place-items: center; border-radius: 4px; }
+.demo-lab .bi-reorder:hover { background: #edf2f8; color: #365373; }
+.demo-lab .bi-reorder svg { width: 17px; height: 17px; }
+.demo-lab .bi-chart-mode { display: flex; align-items: center; gap: 3px; margin: 10px 0 4px; }
+.demo-lab .bi-chart-mode button { border: 1px solid #dce2e7; border-radius: 3px; min-height: 29px; padding: 5px 10px; background: #fff; color: #6e7b88; font-size: 9px; }
+.demo-lab .bi-chart-mode button[aria-pressed="true"] { background: var(--bi-accent); border-color: var(--bi-accent); color: #fff; }
+.demo-lab .bi-powerbi .bi-chart-mode button[aria-pressed="true"] { color: #202020; background: #efc946; border-color: #efc946; }
+.demo-lab .bi-chart { color: var(--bi-accent); width: 100%; margin-top: 8px; }
+.demo-lab .bi-chart svg { width: 100%; height: auto; display: block; overflow: visible; animation: bi-chart-enter .32s ease both; }
+.demo-lab .bi-chart-grid path { stroke: #e8edf1; stroke-width: 1; stroke-dasharray: 3 3; }
+.demo-lab .bi-chart-grid text { fill: #9ca7b4; font-size: 11px; font-family: inherit; }
+.demo-lab .bi-chart-line { stroke: var(--bi-accent); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+.demo-lab .bi-chart-area { fill: var(--bi-accent); opacity: .07; }
+.demo-lab .bi-chart-point, .demo-lab .bi-chart-bar { fill: var(--bi-accent); }
+.demo-lab .bi-months { display: flex; margin-left: 5%; gap: 2px; }
+.demo-lab .bi-months button { flex: 1; padding: 4px 0; min-height: 28px; border: 0; background: transparent; color: #7e8b96; font-size: 9px; border-radius: 4px; }
+.demo-lab .bi-months button[aria-pressed="true"] { color: #27394c; background: #edf1f6; font-weight: 700; }
+.demo-lab .bi-selection-detail { display: flex; align-items: center; gap: 8px; border-top: 1px solid #edf0f3; padding-top: 10px; margin-top: 12px; font-size: 9px; color: #7e8996; }
+.demo-lab .bi-selection-detail > strong { font-size: 18px; color: #344354; font-weight: 600; margin-left: auto; white-space: nowrap; }
+.demo-lab .bi-selection-detail > small { font-size: 8px; }
+.demo-lab .bi-channel-visual { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.demo-lab .bi-donut { margin: 2px auto; width: 132px; height: 132px; border-radius: 50%; background: conic-gradient(var(--bi-accent) 0 48%, var(--bi-secondary) 48% 82%, var(--bi-tertiary) 82% 100%); padding: 18px; transform: rotate(-90deg); }
+.demo-lab .bi-donut > div { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; border-radius: 50%; background: #fff; transform: rotate(90deg); }
+.demo-lab .bi-donut small { font-size: 8px; color: #8b98a4; }
+.demo-lab .bi-donut strong { font-size: 18px; letter-spacing: -.04em; color: #324356; margin-top: 5px; font-weight: 600; }
+.demo-lab .bi-channel-list { width: 100%; display: grid; gap: 9px; }
+.demo-lab .bi-channel-list > div { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 7px; align-items: center; font-size: 9px; }
+.demo-lab .bi-channel-list span { display: flex; align-items: center; gap: 6px; color: #778695; }
+.demo-lab .bi-channel-list i { height: 6px; width: 6px; border-radius: 2px; flex: none; }
+.demo-lab .bi-channel-list strong { color: #4b5a6c; font-weight: 600; }
+.demo-lab .bi-channel-list small { color: #8994a2; font-size: 8px; }
+.demo-lab .bi-channel-insight { display: flex; gap: 8px; margin-top: 16px; background: #f6f8fa; padding: 10px; color: #7e8c9b; border: 1px solid #edf0f3; }
+.demo-lab .bi-channel-insight > span { flex: none; color: var(--bi-accent); }
+.demo-lab .bi-channel-insight svg { width: 13px; height: 13px; }
+.demo-lab .bi-channel-insight p { font-size: 9px; line-height: 1.65; }
+.demo-lab .bi-channel-insight strong { display: block; margin-bottom: 4px; color: #536376; font-size: 9px; }
+.demo-lab .bi-sheets { display: flex; gap: 2px; margin: 18px -20px 0; padding: 0 12px; background: #e8e9ea; border-top: 1px solid #d4d9dd; }
+.demo-lab .bi-sheets button { min-height: 36px; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px; background: transparent; color: #677482; font-size: 9px; }
+.demo-lab .bi-sheets button[aria-pressed="true"] { border-bottom-color: var(--bi-accent); color: #293a4b; background: #fff; }
+.demo-lab .bi-filterpane { background: #fff; border-left: 1px solid #d9dde1; padding: 18px 12px; min-width: 0; }
+.demo-lab .bi-filterpane h4 { font-size: 13px; display: flex; gap: 7px; align-items: center; }
+.demo-lab .bi-filterpane h4 svg { width: 13px; height: 13px; }
+.demo-lab .bi-filterpane > p { font-size: 9px; color: #929aa2; margin: 19px 0 12px; }
+.demo-lab .bi-filter { min-width: 0; display: flex; flex-direction: column; gap: 7px; font-size: 9px; font-weight: 500; color: #798692; }
+.demo-lab .bi-filter select { width: 100%; max-width: 100%; min-width: 0; border: 1px solid #d7dde2; background: #fff; padding: 8px 22px 8px 8px; color: #445363; border-radius: 3px; min-height: 35px; font-size: 10px; }
+.demo-lab .bi-filterpane .bi-filter { margin-bottom: 17px; }
+.demo-lab .bi-filter-info { margin-top: 26px; font-size: 9px; display: flex; flex-direction: column; gap: 8px; color: #798692; border-top: 1px solid #e7ebef; padding-top: 16px; }
+.demo-lab .bi-filter-info strong { font-size: 10px; color: #5b6976; }
+.demo-lab .bi-filter-info small { font-size: 8px; color: #939da5; line-height: 1.6; }
+.demo-lab .bi-reset { padding: 7px 0; border: 0; background: transparent; color: #6a7784; text-decoration: underline; text-underline-offset: 3px; font-size: 9px; min-height: 32px; }
+.demo-lab .bi-filterpane .bi-reset { margin-top: 18px; }
+.demo-lab .bi-detail-table { padding: 18px; border: 1px solid #dae1e8; background: #fff; min-height: 340px; }
+.demo-lab .bi-detail-table table { width: 100%; border-collapse: collapse; font-size: 11px; color: #596c82; margin-top: 25px; }
+.demo-lab .bi-detail-table th, .demo-lab .bi-detail-table td { border-bottom: 1px solid #e7edf4; padding: 15px 9px; text-align: left; font-weight: 400; }
+.demo-lab .bi-detail-table thead th { font-size: 9px; color: #8392a4; background: #f6f8fb; }
+.demo-lab .bi-detail-table tfoot th, .demo-lab .bi-detail-table tfoot td { font-weight: 700; }
+.demo-lab .bi-detail-table > p { font-size: 10px; color: #8491a0; margin-top: 20px; }
+.demo-lab .bi-table-meter { width: 60px; height: 5px; display: inline-flex; background: #eef2f7; border-radius: 6px; margin-right: 10px; vertical-align: middle; }
+.demo-lab .bi-table-meter i { display: block; background: var(--bi-accent); border-radius: 6px; }
+.demo-lab .bi-demo-footer { display: flex; justify-content: space-between; align-items: center; gap: 25px; margin-top: 14px; color: #8998ad; }
+.demo-lab .bi-demo-footer p { font-size: 9px; line-height: 1.7; max-width: 560px; margin: 0; }
+.demo-lab .bi-demo-footer > span { display: flex; align-items: center; gap: 4px; font-size: 9px; white-space: nowrap; }
+.demo-lab .bi-demo-footer svg { width: 15px; height: 15px; }
+
+/* Looker: document chrome, page navigation and a clean report canvas. */
+.demo-lab .bi-looker { --bi-accent: #4285f4; --bi-secondary: #68c5e7; --bi-tertiary: #bcdff4; background: #f3f6fb; font-family: Arial, sans-serif; }
+.demo-lab .bi-looker .bi-appbar { background: #fff; border-bottom: 1px solid #e5e9ee; min-height: 66px; }
+.demo-lab .bi-document-title strong { display: block; font-size: 14px; font-weight: 500; color: #3d434b; }
+.demo-lab .bi-document-title small { display: block; font-size: 9px; color: #8b949c; margin-top: 5px; }
+.demo-lab .bi-document-title small span { margin: 0 7px; }
+.demo-lab .bi-cloud-check { color: #9da8b5; }
+.demo-lab .bi-looker .bi-export { border-color: #d8e5fc; background: #eef4ff; color: #3165ad; border-radius: 20px; padding-left: 13px; padding-right: 13px; }
+.demo-lab .bi-looker-nav { display: flex; align-items: center; justify-content: space-between; background: #fff; border-bottom: 1px solid #e3e9f0; padding: 0 20px; }
+.demo-lab .bi-looker-nav .bi-sheets { margin: 0; padding: 0; border: 0; background: transparent; }
+.demo-lab .bi-looker-nav .bi-sheets button { font-size: 10px; padding: 11px 14px; min-height: 42px; }
+.demo-lab .bi-looker-view { font-size: 9px; color: #97a4b2; }
+.demo-lab .bi-looker .bi-report { padding: 28px 30px 16px; }
+.demo-lab .bi-looker .bi-report-heading { padding: 4px 0 23px; margin-bottom: 22px; border-bottom: 1px solid #dfe7f1; }
+.demo-lab .bi-looker .bi-report-heading h3 { font-size: 28px; font-weight: 500; color: #2e4c6f; }
+.demo-lab .bi-topfilters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; flex: none; }
+.demo-lab .bi-topfilters select { border-radius: 6px; min-width: 112px; }
+.demo-lab .bi-looker .bi-metric { border: 0; border-radius: 9px; background: #fff; box-shadow: 0 2px 7px #25477308; padding: 17px; }
+.demo-lab .bi-looker .bi-metric-primary { background: #e6efff; }
+.demo-lab .bi-looker .bi-metric > strong { color: #3566ac; font-weight: 400; font-size: 29px; }
+.demo-lab .bi-looker .bi-visualizations { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; }
+.demo-lab .bi-looker .bi-visualizations:has(> .bi-channels:first-child) { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); }
+.demo-lab .bi-looker .bi-viz { border: 0; border-radius: 9px; padding: 20px; box-shadow: 0 2px 7px #25477308; }
+.demo-lab .bi-looker .bi-channel-insight { border: 0; border-radius: 5px; background: #f2f6fd; }
+.demo-lab .bi-looker-footer { display: flex; justify-content: space-between; font-size: 8px; color: #9baabd; margin: 20px 0 0; }
+
+/* Qlik: dark navigation, green selections and a free exploration sheet. */
+.demo-lab .bi-qlik { --bi-accent: #12934a; --bi-secondary: #67c48a; --bi-tertiary: #c0e3cc; background: #f1f3f4; }
+.demo-lab .bi-qlik .bi-appbar { background: #25272c; color: #f3f5f8; min-height: 50px; }
+.demo-lab .bi-qlik .bi-mark-qlik { color: #64d485; }
+.demo-lab .bi-qlik-sheet-label { border: 1px solid #555860; border-radius: 4px; padding: 5px 8px; font-size: 9px; color: #d0d6df; }
+.demo-lab .bi-selectionbar { display: flex; align-items: center; gap: 7px; background: #e1e4e7; border-bottom: 1px solid #ccd2d7; padding: 7px 16px; min-height: 55px; }
+.demo-lab .bi-selection-count { font-size: 10px; color: #656e77; margin-right: 7px; }
+.demo-lab .bi-selection-count > span { display: inline-grid; place-items: center; width: 21px; height: 21px; border-radius: 50%; background: #fff; color: #3e5650; margin-right: 5px; font-weight: 600; }
+.demo-lab .bi-qlik-chip { display: flex; flex-direction: column-reverse; min-width: 110px; font-size: 11px; border-left: 4px solid #13a64e; background: #fff; padding: 4px 9px; gap: 3px; color: #3d4c43; }
+.demo-lab .bi-qlik-chip small { font-size: 7px; color: #8a968e; }
+.demo-lab .bi-selectionbar .bi-reset { margin-left: auto; padding: 7px; font-size: 9px; }
+.demo-lab .bi-qlik .bi-report { padding: 24px; }
+.demo-lab .bi-qlik .bi-report-heading h3 { font-size: 24px; font-weight: 600; }
+.demo-lab .bi-qlik-filterrow { display: flex; align-items: end; gap: 12px; margin-bottom: 20px; }
+.demo-lab .bi-qlik-filterrow .bi-filter { min-width: 135px; flex: 1; }
+.demo-lab .bi-qlik-filterrow .bi-filter select { border-radius: 5px; }
+.demo-lab .bi-qlik-filterrow .bi-sheets { background: transparent; border: 0; margin: 0 0 0 auto; padding: 0; align-self: stretch; align-items: end; }
+.demo-lab .bi-qlik-filterrow .bi-sheets button { border: 1px solid #d2dad7; border-radius: 5px; font-size: 9px; background: #fff; }
+.demo-lab .bi-qlik-filterrow .bi-sheets button[aria-pressed="true"] { border-color: #11934b; color: #0c7038; background: #e9f7ed; }
+.demo-lab .bi-qlik .bi-metric { border: 1px solid #e2e6e4; border-radius: 7px; box-shadow: 0 1px 3px #092b1710; }
+.demo-lab .bi-qlik .bi-metric > strong { color: #168d4e; font-size: 30px; font-weight: 500; }
+.demo-lab .bi-qlik .bi-metric-primary { background: #fff; border-top: 1px solid #e2e6e4; }
+.demo-lab .bi-qlik .bi-viz { border-radius: 7px; border-color: #e0e5e2; box-shadow: 0 1px 3px #092b1710; }
+.demo-lab .bi-qlik .bi-chart-area { opacity: .12; }
+.demo-lab .bi-qlik .bi-channel-insight { background: #eff8f1; border-color: #e2f0e5; border-radius: 4px; }
+
+/* Tableau: workbook, data pane, shelves and worksheet tabs. */
+.demo-lab .bi-tableau { --bi-accent: #4d82ab; --bi-secondary: #e79846; --bi-tertiary: #b7cbd9; background: #fff; font-family: 'Segoe UI', Arial, sans-serif; }
+.demo-lab .bi-tableau .bi-appbar { background: #f4f4f4; color: #545b63; border-bottom: 1px solid #d6d6d6; min-height: 46px; }
+.demo-lab .bi-tableau .bi-appbar > strong { font-weight: 400; font-size: 17px; }
+.demo-lab .bi-tableau-menubar { display: flex; align-items: center; gap: 20px; font-size: 9px; color: #5f666d; background: #fbfbfb; border-bottom: 1px solid #d7d7d7; padding: 8px 15px; }
+.demo-lab .bi-tableau-workspace { display: grid; grid-template-columns: 137px minmax(0, 1fr); }
+.demo-lab .bi-datapane { padding: 10px 10px 20px; border-right: 1px solid #d5d7d9; background: #fafafa; font-size: 10px; color: #6d7882; }
+.demo-lab .bi-datapane-tabs { display: flex; gap: 18px; border-bottom: 1px solid #ddd; padding: 5px 0 13px; margin-bottom: 13px; font-size: 10px; }
+.demo-lab .bi-datapane-tabs strong { color: #3672a2; font-weight: 500; }
+.demo-lab .bi-datasource { display: flex; gap: 5px; align-items: center; font-size: 9px; color: #4f6e83; margin-bottom: 26px; }
+.demo-lab .bi-datasource svg { width: 14px; height: 14px; }
+.demo-lab .bi-datapane > small { display: block; color: #8a929b; font-size: 8px; margin-bottom: 10px; }
+.demo-lab .bi-datapane > p { font-size: 9px; padding: 7px 0; }
+.demo-lab .bi-datapane > p i { font-style: normal; color: #4d8dac; margin-right: 8px; font-size: 9px; }
+.demo-lab .bi-datapane > hr { border: 0; border-top: 1px solid #ddd; margin: 15px 0; }
+.demo-lab .bi-tableau-marks { margin-top: 30px; padding: 10px; border: 1px solid #d8dde2; }
+.demo-lab .bi-tableau-marks > strong { display: block; font-size: 9px; font-weight: 500; margin-bottom: 10px; color: #5b6771; }
+.demo-lab .bi-tableau-marks > span { border: 1px solid #d0d8df; display: block; padding: 5px; background: #fff; font-size: 9px; }
+.demo-lab .bi-tableau-marks > div { display: flex; flex-wrap: wrap; gap: 8px; font-size: 8px; margin-top: 12px; }
+.demo-lab .bi-tableau-main { min-width: 0; padding: 8px 10px 0; }
+.demo-lab .bi-shelf { border: 1px solid #d9dce0; padding: 4px 8px; display: flex; align-items: center; gap: 15px; margin-bottom: 5px; min-height: 31px; font-size: 9px; }
+.demo-lab .bi-shelf > span { width: 60px; color: #7b8793; }
+.demo-lab .bi-shelf > b { font-size: 8px; font-weight: 400; padding: 4px 17px 4px 11px; border-radius: 15px; color: #fff; min-width: 160px; }
+.demo-lab .bi-shelf-dimension { background: #5b99c1; }
+.demo-lab .bi-shelf-measure { background: #4c9c7c; }
+.demo-lab .bi-tableau .bi-report { padding: 16px 7px 17px; }
+.demo-lab .bi-tableau .bi-report-heading { padding-bottom: 15px; border-bottom: 1px solid #dedede; margin-bottom: 15px; }
+.demo-lab .bi-tableau .bi-report-heading h3 { font-size: 22px; font-weight: 400; color: #5b6c79; }
+.demo-lab .bi-tableau-filters { display: flex; gap: 12px; margin-bottom: 15px; }
+.demo-lab .bi-tableau-filters .bi-filter { flex: 1; }
+.demo-lab .bi-tableau-filters .bi-filter select { border-radius: 0; padding-top: 6px; padding-bottom: 6px; min-height: 30px; }
+.demo-lab .bi-tableau .bi-metric { border: 0; border-right: 1px solid #e3e7ec; padding: 10px; }
+.demo-lab .bi-tableau .bi-metric:last-child { border-right: 0; }
+.demo-lab .bi-tableau .bi-metric > strong { font-size: 26px; color: #4d82ab; font-weight: 400; }
+.demo-lab .bi-tableau .bi-metric-label i { display: none; }
+.demo-lab .bi-tableau .bi-viz { border: 1px solid #e0e5ea; padding: 13px 11px; }
+.demo-lab .bi-tableau .bi-viz-heading h4 { font-weight: 400; color: #5f6e7a; }
+.demo-lab .bi-tableau .bi-channel-insight { background: #f6f7f8; }
+.demo-lab .bi-tableau .bi-sheets { margin: 0 -10px; background: #e9e9e9; padding-left: 0; }
+.demo-lab .bi-tableau .bi-sheets button { font-size: 9px; border-right: 1px solid #ccc; }
+.demo-lab .bi-tableau .bi-sheets button[aria-pressed="true"] { border-bottom-color: #4d82ab; }
+
+@keyframes bi-chart-enter { from { opacity: .3; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 1100px) {
+  .demo-lab .bi-power-workspace { grid-template-columns: 33px minmax(0, 1fr) 130px; }
+  .demo-lab .bi-report { padding: 18px 14px 0; }
+  .demo-lab .bi-powerbi .bi-sheets { margin-left: -14px; margin-right: -14px; }
+  .demo-lab .bi-metric { padding: 12px 9px; }
+  .demo-lab .bi-metric-label { font-size: 8px; }
+  .demo-lab .bi-metric > strong { font-size: 22px; }
+  .demo-lab .bi-tableau .bi-metric > strong { font-size: 22px; }
+  .demo-lab .bi-report-heading h3 { font-size: 21px; }
+  .demo-lab .bi-looker .bi-report-heading h3 { font-size: 23px; }
+  .demo-lab .bi-looker .bi-report { padding: 22px 20px 14px; }
+  .demo-lab .bi-topfilters { gap: 7px; }
+  .demo-lab .bi-topfilters select { min-width: 100px; }
+  .demo-lab .bi-viz { padding: 12px; }
+  .demo-lab .bi-caption { font-size: 7px; }
+  .demo-lab .bi-viz-heading h4 { font-size: 12px; }
+  .demo-lab .bi-channel-list > div { grid-template-columns: minmax(0, 1fr) auto; }
+  .demo-lab .bi-channel-list small { display: none; }
+  .demo-lab .bi-selection-detail > small { display: none; }
+  .demo-lab .bi-tableau-workspace { grid-template-columns: 110px minmax(0, 1fr); }
+}
+@media (max-width: 800px) {
+  .demo-lab .bi-power-workspace { grid-template-columns: 30px minmax(0, 1fr); }
+  .demo-lab .bi-filterpane { grid-column: 1 / -1; grid-row: 1; display: flex; align-items: end; gap: 10px; padding: 10px 13px; border: 0; border-bottom: 1px solid #d9dde1; }
+  .demo-lab .bi-filterpane h4 { align-self: center; font-size: 10px; }
+  .demo-lab .bi-filterpane .bi-filter { flex: 1; margin: 0; }
+  .demo-lab .bi-filterpane > p, .demo-lab .bi-filter-info { display: none; }
+  .demo-lab .bi-filterpane .bi-reset { margin: 0; font-size: 8px; }
+  .demo-lab .bi-looker .bi-report-heading { flex-direction: column; align-items: stretch; }
+  .demo-lab .bi-topfilters { display: flex; margin-top: 4px; }
+  .demo-lab .bi-topfilters .bi-filter { flex: 1; }
+  .demo-lab .bi-qlik-filterrow { flex-wrap: wrap; }
+  .demo-lab .bi-qlik-filterrow .bi-sheets { margin: 0; flex-basis: 100%; }
+  .demo-lab .bi-qlik-filterrow .bi-sheets button { flex: 1; }
+  .demo-lab .bi-datapane { display: none; }
+  .demo-lab .bi-tableau-workspace { grid-template-columns: minmax(0, 1fr); }
+  .demo-lab .bi-demo-footer > span { display: none; }
+}
+@media (max-width: 600px) {
+  .demo-lab .bi-platform-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 16px; gap: 4px; }
+  .demo-lab .bi-platform-button { min-height: 46px; justify-content: start; padding: 8px 12px; font-size: 11px; }
+  .demo-lab .bi-switcher-row { margin-bottom: 12px; }
+  .demo-lab .bi-switcher-row p { font-size: 11px; line-height: 1.6; }
+  .demo-lab .bi-eyebrow { font-size: 7px; letter-spacing: .12em; }
+  .demo-lab .bi-interactive-label { display: none; }
+  .demo-lab .bi-appbar { padding: 8px 11px; gap: 7px; font-size: 9px; min-height: 46px; }
+  .demo-lab .bi-appbar > strong { font-size: 13px; }
+  .demo-lab .bi-appbar > span:not([class]), .demo-lab .bi-qlik-sheet-label, .demo-lab .bi-appbar-divider { display: none; }
+  .demo-lab .bi-appbar .bi-export { padding: 7px; min-height: 36px; }
+  .demo-lab .bi-appbar .bi-export span { display: none; }
+  .demo-lab .bi-appbar .bi-export { width: 36px; }
+  .demo-lab .bi-appbar .bi-export::after { content: none; }
+  .demo-lab .bi-ribbon { padding: 0 10px; gap: 14px; font-size: 9px; }
+  .demo-lab .bi-export { min-height: 44px; font-size: 10px; }
+  .demo-lab .bi-power-workspace { grid-template-columns: minmax(0, 1fr); }
+  .demo-lab .bi-iconrail { display: none; }
+  .demo-lab .bi-filterpane { flex-wrap: wrap; padding: 10px; gap: 8px; }
+  .demo-lab .bi-filterpane h4 { display: none; }
+  .demo-lab .bi-filterpane .bi-filter { flex-basis: calc(50% - 5px); }
+  .demo-lab .bi-filterpane .bi-reset { min-height: 35px; font-size: 9px; padding: 4px 0; }
+  .demo-lab .bi-filter { font-size: 9px; gap: 5px; }
+  .demo-lab .bi-filter select, .demo-lab .bi-tableau-filters .bi-filter select { min-height: 44px; font-size: 11px; }
+  .demo-lab .bi-report, .demo-lab .bi-qlik .bi-report, .demo-lab .bi-looker .bi-report { padding: 17px 10px 0; }
+  .demo-lab .bi-report-heading, .demo-lab .bi-looker .bi-report-heading { margin-bottom: 17px; gap: 10px; }
+  .demo-lab .bi-report-heading h3, .demo-lab .bi-looker .bi-report-heading h3, .demo-lab .bi-qlik .bi-report-heading h3, .demo-lab .bi-tableau .bi-report-heading h3 { font-size: 21px; }
+  .demo-lab .bi-report-heading p { font-size: 10px; line-height: 1.5; }
+  .demo-lab .bi-report-tag { display: none; }
+  .demo-lab .bi-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
+  .demo-lab .bi-metric, .demo-lab .bi-looker .bi-metric { padding: 13px 11px; }
+  .demo-lab .bi-metric-label { font-size: 10px; }
+  .demo-lab .bi-metric > strong, .demo-lab .bi-looker .bi-metric > strong, .demo-lab .bi-qlik .bi-metric > strong, .demo-lab .bi-tableau .bi-metric > strong { font-size: 25px; margin: 9px 0 6px; }
+  .demo-lab .bi-metric > small { font-size: 9px; }
+  .demo-lab .bi-visualizations, .demo-lab .bi-visualizations:has(> .bi-channels:first-child), .demo-lab .bi-looker .bi-visualizations, .demo-lab .bi-looker .bi-visualizations:has(> .bi-channels:first-child) { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .demo-lab .bi-viz, .demo-lab .bi-looker .bi-viz { padding: 15px 11px; }
+  .demo-lab .bi-viz-heading { margin-bottom: 7px; }
+  .demo-lab .bi-viz-heading h4 { font-size: 14px; }
+  .demo-lab .bi-caption { font-size: 7px; letter-spacing: .07em; }
+  .demo-lab .bi-reorder { min-height: 44px; min-width: 36px; }
+  .demo-lab .bi-chart-mode button, .demo-lab .bi-months button { min-height: 44px; font-size: 11px; }
+  .demo-lab .bi-chart-mode button { padding: 7px 13px; }
+  .demo-lab .bi-months { margin-left: 0; }
+  .demo-lab .bi-selection-detail { font-size: 10px; }
+  .demo-lab .bi-selection-detail > strong { font-size: 22px; }
+  .demo-lab .bi-channel-visual { gap: 16px; padding: 9px 5px 0; }
+  .demo-lab .bi-donut { width: 150px; height: 150px; padding: 20px; }
+  .demo-lab .bi-donut strong { font-size: 22px; }
+  .demo-lab .bi-donut small { font-size: 9px; }
+  .demo-lab .bi-channel-list > div { grid-template-columns: minmax(0, 1fr) auto auto; gap: 9px; font-size: 11px; }
+  .demo-lab .bi-channel-list small { display: block; font-size: 10px; }
+  .demo-lab .bi-channel-insight p, .demo-lab .bi-channel-insight strong { font-size: 10px; }
+  .demo-lab .bi-sheets { margin: 17px -10px 0; padding: 0 6px; }
+  .demo-lab .bi-powerbi .bi-sheets { margin-left: -10px; margin-right: -10px; }
+  .demo-lab .bi-sheets button, .demo-lab .bi-looker-nav .bi-sheets button { min-height: 44px; font-size: 10px; padding: 9px 10px; }
+  .demo-lab .bi-looker-nav { padding: 0 8px; }
+  .demo-lab .bi-looker-view, .demo-lab .bi-cloud-check { display: none; }
+  .demo-lab .bi-document-title strong { font-size: 11px; }
+  .demo-lab .bi-document-title small { font-size: 8px; }
+  .demo-lab .bi-looker .bi-report-heading { padding-bottom: 17px; }
+  .demo-lab .bi-topfilters { gap: 7px; }
+  .demo-lab .bi-topfilters select { min-width: 0; }
+  .demo-lab .bi-looker-footer { font-size: 7px; line-height: 1.6; gap: 17px; padding-bottom: 14px; }
+  .demo-lab .bi-looker-footer span:last-child { white-space: nowrap; }
+  .demo-lab .bi-selectionbar { padding: 8px; flex-wrap: wrap; gap: 6px; }
+  .demo-lab .bi-selection-count { display: none; }
+  .demo-lab .bi-qlik-chip { flex: 1; min-width: 0; font-size: 10px; }
+  .demo-lab .bi-selectionbar .bi-reset { flex-basis: 100%; text-align: left; min-height: 36px; padding: 4px; }
+  .demo-lab .bi-qlik .bi-report { padding-bottom: 12px; }
+  .demo-lab .bi-qlik .bi-report-heading { flex-direction: column; align-items: start; }
+  .demo-lab .bi-qlik-filterrow { gap: 8px; margin-bottom: 12px; }
+  .demo-lab .bi-qlik-filterrow .bi-filter { min-width: 0; }
+  .demo-lab .bi-qlik-filterrow .bi-sheets button { min-height: 44px; font-size: 9px; padding: 8px; }
+  .demo-lab .bi-tableau-menubar { gap: 13px; font-size: 8px; padding: 10px; overflow: hidden; }
+  .demo-lab .bi-tableau-menubar span { white-space: nowrap; }
+  .demo-lab .bi-tableau-menubar span:nth-last-child(-n+2) { display: none; }
+  .demo-lab .bi-tableau-main { padding: 7px 7px 0; }
+  .demo-lab .bi-shelf { gap: 7px; padding: 5px; font-size: 8px; }
+  .demo-lab .bi-shelf > span { width: 50px; }
+  .demo-lab .bi-shelf > b { min-width: 130px; font-size: 8px; }
+  .demo-lab .bi-tableau .bi-report { padding: 12px 3px 15px; }
+  .demo-lab .bi-tableau .bi-metric { padding: 10px 8px; border: 1px solid #e4e9ef; }
+  .demo-lab .bi-tableau .bi-metric:last-child { border-right: 1px solid #e4e9ef; }
+  .demo-lab .bi-tableau .bi-sheets { margin: 0 -7px; }
+  .demo-lab .bi-detail-table { padding: 12px 8px; min-height: 330px; }
+  .demo-lab .bi-detail-table table { font-size: 10px; margin-top: 20px; }
+  .demo-lab .bi-detail-table th, .demo-lab .bi-detail-table td { padding: 14px 5px; }
+  .demo-lab .bi-detail-table thead th { font-size: 8px; }
+  .demo-lab .bi-table-meter { display: none; }
+  .demo-lab .bi-demo-footer { margin-top: 12px; }
+  .demo-lab .bi-demo-footer p { font-size: 9px; }
+}
+@media (max-width: 360px) {
+  .demo-lab .bi-platform-button { font-size: 10px; gap: 7px; padding: 7px; }
+  .demo-lab .bi-appbar { padding: 7px; }
+  .demo-lab .bi-report-heading h3, .demo-lab .bi-looker .bi-report-heading h3, .demo-lab .bi-qlik .bi-report-heading h3, .demo-lab .bi-tableau .bi-report-heading h3 { font-size: 19px; }
+  .demo-lab .bi-metric > strong, .demo-lab .bi-looker .bi-metric > strong, .demo-lab .bi-qlik .bi-metric > strong, .demo-lab .bi-tableau .bi-metric > strong { font-size: 22px; }
+  .demo-lab .bi-metric-label { font-size: 9px; }
+  .demo-lab .bi-channel-list > div { font-size: 10px; }
+  .demo-lab .bi-channel-list small { font-size: 9px; }
+  .demo-lab .bi-viz-heading h4 { font-size: 13px; }
+}
+.demo-lab.lab-motion-paused .bi-demo *, .demo-lab.lab-motion-paused .bi-demo *::before, .demo-lab.lab-motion-paused .bi-demo *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .demo-lab .bi-demo *, .demo-lab .bi-demo *::before, .demo-lab .bi-demo *::after { animation: none !important; transition: none !important; }
+}

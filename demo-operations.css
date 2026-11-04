@@ -1,0 +1,541 @@
+/* Operations and CRM — scoped to the shared demo shell. */
+.demo-lab .op-workspace,
+.demo-lab .crm-workspace {
+  --op-accent: #3678d8;
+  --op-soft: #eaf2ff;
+  color: #233957;
+  font-size: 13px;
+}
+.demo-lab .op-workspace[data-tone="green"] { --op-accent: #177f67; --op-soft: #e6f5ee; }
+.demo-lab .op-workspace[data-tone="rose"] { --op-accent: #b85873; --op-soft: #fcecf1; }
+.demo-lab .op-workspace[data-tone="violet"] { --op-accent: #7954bd; --op-soft: #f2edfc; }
+.demo-lab .op-workspace *,
+.demo-lab .crm-workspace * { box-sizing: border-box; }
+.demo-lab :is(.op-workspace, .crm-workspace) button { font: inherit; cursor: pointer; }
+.demo-lab :is(.op-workspace, .crm-workspace) :is(button, select):focus-visible {
+  outline: 3px solid #139f91;
+  outline-offset: 3px;
+}
+.demo-lab :is(.op-workspace, .crm-workspace) button:disabled { cursor: default; opacity: .48; }
+.demo-lab :is(.op-workspace, .crm-workspace) select {
+  min-height: 42px;
+  max-width: 100%;
+  border: 1px solid #cfdae8;
+  border-radius: 8px;
+  padding: 8px 27px 8px 10px;
+  background: #fff;
+  color: #385775;
+  font: inherit;
+  font-size: 11px;
+}
+.demo-lab :is(.op-eyebrow, .crm-eyebrow) {
+  color: #72859b;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.8;
+}
+.demo-lab :is(.op-heading, .crm-heading) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 28px 0 24px;
+}
+.demo-lab :is(.op-heading, .crm-heading) h3 {
+  margin: 7px 0 8px;
+  font-size: clamp(20px, 2.2vw, 27px);
+  line-height: 1.25;
+  letter-spacing: -.035em;
+}
+.demo-lab :is(.op-heading, .crm-heading) p {
+  max-width: 640px;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.8;
+  color: #70839a;
+}
+.demo-lab :is(.op-button, .crm-button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 42px;
+  padding: 9px 13px;
+  border: 1px solid #ccd9e9;
+  border-radius: 9px;
+  color: #466588;
+  background: #ffffffb8;
+  font-size: 11px;
+  font-weight: 600;
+  transition: background .2s, box-shadow .2s, transform .2s;
+  white-space: normal;
+}
+.demo-lab :is(.op-button, .crm-button):hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #fff;
+  box-shadow: 0 4px 10px #35567b10;
+}
+.demo-lab .op-button.is-primary {
+  background: var(--op-accent);
+  border-color: var(--op-accent);
+  color: #fff;
+}
+.demo-lab .crm-button.is-primary { background: #305dd0; border-color: #305dd0; color: #fff; }
+.demo-lab :is(.op-button, .crm-button).is-primary:hover:not(:disabled) { filter: brightness(1.08); background: var(--op-accent, #305dd0); }
+
+/* Recipes and orchestration canvas. */
+.demo-lab .op-recipe-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 7px;
+  border: 1px solid #dce5ef;
+  border-radius: 14px;
+  background: #e3ebf570;
+}
+.demo-lab .op-recipe-tabs button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #6f8199;
+  text-align: left;
+  min-height: 66px;
+}
+.demo-lab .op-recipe-tabs button>span {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 35px;
+  font-size: 25px;
+  flex: none;
+}
+.demo-lab .op-recipe-tabs b { display: block; font-size: 11px; font-weight: 600; line-height: 1.5; }
+.demo-lab .op-recipe-tabs small { display: block; font-size: 7px; letter-spacing: .07em; margin-top: 4px; }
+.demo-lab .op-recipe-tabs button[aria-pressed="true"] {
+  background: linear-gradient(130deg, #fff, #f7fbff);
+  color: var(--op-accent);
+  border-color: #fff;
+  box-shadow: 0 3px 10px #27486f0b;
+}
+.demo-lab .op-tool-label {
+  max-width: 230px;
+  border: 1px solid #d4e0ed;
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 9px;
+  color: #6e849b;
+  line-height: 1.8;
+  background: #ffffff80;
+}
+.demo-lab .op-command-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid #d7e2ed;
+  border-radius: 12px;
+  background: #ffffffa3;
+}
+.demo-lab .op-controls { display: flex; flex-wrap: wrap; gap: 7px; }
+.demo-lab .op-reset { min-width: 42px; font-size: 19px; }
+.demo-lab .op-run-status { display: flex; align-items: center; gap: 8px; font-size: 10px; color: #6d8298; }
+.demo-lab .op-run-status i { width: 6px; height: 6px; background: var(--op-accent); border-radius: 50%; flex: none; }
+.demo-lab .op-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding: 28px 10px 26px;
+  isolation: isolate;
+}
+.demo-lab .op-connection {
+  position: absolute;
+  top: 57px;
+  left: 13%;
+  right: 13%;
+  height: 2px;
+  background: #ccdae9;
+  z-index: -1;
+  overflow: hidden;
+}
+.demo-lab .op-connection i { display: block; height: 100%; background: var(--op-accent); transition: width .6s; }
+.demo-lab .op-connection b { position: absolute; top: -2px; left: 0; width: 30px; height: 6px; border-radius: 6px; background: var(--op-accent); opacity: 0; box-shadow: 0 0 8px var(--op-accent); }
+.demo-lab .op-step { text-align: center; position: relative; }
+.demo-lab .op-step-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 11px;
+  background: linear-gradient(135deg, #fefeff, #edf3fa);
+  border: 1px solid #d3dfed;
+  border-radius: 18px;
+  color: #7f95af;
+  box-shadow: 0 5px 10px #4a65860b, inset 0 1px 0 #fff;
+  font-size: 24px;
+}
+.demo-lab .op-step small { display: none; }
+.demo-lab .op-step strong { display: block; font-size: 11px; font-weight: 600; line-height: 1.5; }
+.demo-lab .op-step em { display: block; font-style: normal; font-size: 8px; color: #8ca0b5; margin-top: 5px; }
+.demo-lab .op-step.is-current .op-step-icon { border-color: var(--op-accent); color: var(--op-accent); background: var(--op-soft); box-shadow: 0 0 0 5px #4e81bd09; }
+.demo-lab .op-step.is-current em { color: var(--op-accent); }
+.demo-lab .op-step.is-done .op-step-icon { border-color: #b6dccd; background: #ebf8f1; color: #278b70; }
+.demo-lab .op-scene-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 18px; }
+.demo-lab .op-console {
+  background: radial-gradient(ellipse at 100% 0, #23748130, transparent 65%), #172b44;
+  color: #c7d9ed;
+  border: 1px solid #1e3858;
+  border-radius: 16px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.demo-lab .op-console-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 7px; letter-spacing: .11em; color: #98b2d0; margin-bottom: 22px; }
+.demo-lab .op-console-title i { font-style: normal; background: #ffffff0d; border: 1px solid #ffffff16; border-radius: 4px; padding: 4px 5px; font-size: 6px; white-space: nowrap; }
+.demo-lab .op-file-stack { display: flex; flex-direction: column; gap: 9px; }
+.demo-lab .op-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 13px;
+  border: 1px solid #8bafcb35;
+  border-radius: 10px;
+  background: linear-gradient(120deg, #ffffff0c, #ffffff05);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 #ffffff09;
+}
+.demo-lab .op-file>span { display: grid; place-items: center; width: 30px; height: 33px; border-radius: 7px; background: #72d2bb16; color: #85d6ce; font-size: 22px; flex: none; }
+.demo-lab .op-file b { display: block; font-size: 10px; color: #cfdfed; font-weight: 500; overflow-wrap: anywhere; }
+.demo-lab .op-file small { display: block; font-size: 8px; color: #7e9ab8; margin-top: 4px; }
+.demo-lab .op-processing { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 17px 0; }
+.demo-lab .op-processing>span { display: grid; place-items: center; width: 33px; height: 33px; color: #91beed; background: #6c9ee816; border: 1px solid #91beed26; border-radius: 50%; flex: none; }
+.demo-lab .op-processing svg { width: 16px; height: 16px; }
+.demo-lab .op-processing-line { height: 1px; width: 55px; background: linear-gradient(90deg, transparent, #7295bd, transparent); }
+.demo-lab .op-output { border-style: dashed; opacity: .5; }
+.demo-lab .op-output.is-ready { opacity: 1; border-style: solid; border-color: #66c6b773; background: #41ba9c14; }
+.demo-lab .op-output.is-ready small { color: #80cdbd; }
+.demo-lab .op-event-log { border-top: 1px solid #96b6d51c; margin-top: 22px; padding-top: 17px; }
+.demo-lab .op-event-log>b { color: #7da0c6; font-size: 7px; letter-spacing: .12em; }
+.demo-lab .op-event-log p { font-size: 10px; line-height: 1.8; color: #a9bfd5; margin: 8px 0 0; }
+.demo-lab .op-result { padding: 20px; background: #fff9; border: 1px solid #d6e1ec; border-radius: 16px; box-shadow: 0 5px 18px #44678c04; }
+.demo-lab .op-result-head { display: flex; align-items: start; justify-content: space-between; gap: 12px; margin-bottom: 21px; }
+.demo-lab .op-result-head h4 { font-size: 15px; font-weight: 600; line-height: 1.5; margin: 6px 0 0; }
+.demo-lab .op-pill { border: 1px solid #dae5f0; background: #eff4fb; padding: 5px 7px; border-radius: 5px; font-size: 8px; color: #6a83a4; white-space: nowrap; }
+.demo-lab .op-pill.is-green { border-color: #b9decb; background: #eaf8f0; color: #2b8b69; }
+.demo-lab .op-table-wrap { width: 100%; overflow-x: auto; border: 1px solid #e0e8f1; border-radius: 9px; }
+.demo-lab .op-table-wrap table { border-collapse: collapse; width: 100%; font-size: 10px; text-align: left; }
+.demo-lab .op-table-wrap th { padding: 11px 10px; background: #edf3f9; color: #6a829c; font-weight: 600; white-space: nowrap; }
+.demo-lab .op-table-wrap td { padding: 12px 10px; border-bottom: 1px solid #e8eef5; color: #52708d; white-space: nowrap; }
+.demo-lab .op-table-wrap tr:last-child td { border-bottom: 0; }
+.demo-lab .op-table-wrap tbody tr:nth-child(even) { background: #f5f8fc80; }
+.demo-lab .op-result-summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0 0; padding: 12px; border: 1px solid #d4e8de; border-radius: 8px; background: #edf7f2; color: #438773; font-size: 9px; }
+.demo-lab .op-result-summary strong { font-size: 15px; color: #27735e; }
+.demo-lab .op-pdf { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+.demo-lab .op-paper { background: #fff; border: 1px solid #dce3ec; border-radius: 4px 4px 12px 4px; box-shadow: 6px 7px 0 #e8edf6; padding: 18px 13px; transform: rotate(-2deg); }
+.demo-lab .op-paper>span { display: block; font-size: 7px; letter-spacing: .15em; color: #ac7b87; }
+.demo-lab .op-paper>b { display: block; font-size: 10px; color: #43516b; margin: 14px 0 4px; }
+.demo-lab .op-paper>p { font-size: 9px; color: #8090a4; margin: 0 0 20px; }
+.demo-lab .op-paper>i { display: block; height: 5px; margin: 9px 0; background: #e9edf4; border-radius: 2px; }
+.demo-lab .op-paper>i:nth-of-type(2) { width: 70%; }
+.demo-lab .op-paper>div { border-top: 1px solid #e1e7ef; margin-top: 21px; padding-top: 15px; }
+.demo-lab .op-paper small { display: block; font-size: 8px; color: #7f8ca0; }
+.demo-lab .op-paper strong { display: block; font-size: 17px; color: #3f526d; margin-top: 7px; }
+.demo-lab .op-fields { margin: 0; }
+.demo-lab .op-fields>div { padding: 10px 9px; border-bottom: 1px solid #e4eaf3; }
+.demo-lab .op-fields dt { font-size: 8px; color: #8a99ad; }
+.demo-lab .op-fields dd { margin: 5px 0 0; font-size: 11px; color: #4f637e; font-weight: 600; }
+.demo-lab .op-fields dd span { display: block; color: #b77c44; font-size: 7px; margin-top: 5px; }
+.demo-lab .op-fields .needs-review { background: #fff6e6; border: 1px solid #f0d8ad; border-radius: 7px; }
+.demo-lab .op-review { margin-top: 22px; padding: 14px; border: 1px solid #edd1b7; border-radius: 10px; background: #fff7ed; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.demo-lab .op-review strong { font-size: 11px; color: #956637; }
+.demo-lab .op-review p { font-size: 9px; color: #a68665; margin: 4px 0; }
+.demo-lab .op-app-icon { display: grid; place-items: center; border-radius: 9px; width: 31px; height: 31px; background: #ffeded; color: #dc6969; font-weight: 800; }
+.demo-lab .op-app-toolbar { display: flex; align-items: end; justify-content: space-between; gap: 15px; padding: 13px; border-radius: 10px; background: #f2f0fa; border: 1px solid #e4dfef; margin-bottom: 17px; }
+.demo-lab .op-app-toolbar label { display: flex; flex-direction: column; gap: 5px; font-size: 8px; color: #817794; }
+.demo-lab .op-app-toolbar small { display: block; font-size: 8px; color: #8c7ba5; }
+.demo-lab .op-app-toolbar strong { display: block; font-size: 19px; letter-spacing: -.04em; color: #735c99; margin: 5px 0; }
+.demo-lab .op-order-state { display: inline-block; font-size: 8px; background: #eaf0fc; color: #6483b4; padding: 4px 6px; border-radius: 5px; }
+.demo-lab .op-layers { display: flex; flex-direction: column; gap: 10px; }
+.demo-lab .op-layer { display: flex; gap: 14px; align-items: center; border: 1px solid #d7e1ed; border-radius: 10px; padding: 15px; background: #f2f5fa; opacity: .5; }
+.demo-lab .op-layer.is-ready { opacity: 1; }
+.demo-lab .op-layer>span { display: grid; place-items: center; width: 31px; height: 31px; flex: none; border: 1px solid #c6a59160; background: #fff7; border-radius: 8px; font-size: 10px; color: #8a6952; }
+.demo-lab .op-layer strong { display: block; font-size: 13px; }
+.demo-lab .op-layer small { display: block; font-size: 8px; margin-top: 4px; opacity: .7; }
+.demo-lab .op-layer>b { margin-left: auto; font-size: 18px; letter-spacing: -.03em; }
+.demo-lab .op-layer.layer-0 { background: linear-gradient(115deg, #f7eee6, #fff9f4); color: #966f4b; border-color: #e8d5c4; }
+.demo-lab .op-layer.layer-1 { margin-left: 12px; background: linear-gradient(115deg, #edf0f4, #fbfcfe); color: #708399; }
+.demo-lab .op-layer.layer-2 { margin-left: 24px; background: linear-gradient(115deg, #faf3d9, #fdfaf0); color: #aa8b35; border-color: #ebdfb4; }
+.demo-lab .op-code { margin-top: 19px; padding: 14px; border: 1px solid #dce5f1; background: #edf3fa; border-radius: 9px; }
+.demo-lab .op-code>span { display: block; font-size: 7px; letter-spacing: .12em; color: #8aa0bb; margin-bottom: 10px; }
+.demo-lab .op-code code { font: 10px/1.8 ui-monospace, monospace; color: #4f7bb4; }
+.demo-lab .op-footnote { font-size: 9px; color: #8293a7; line-height: 1.8; margin: 16px 0 0; }
+.demo-lab .op-footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 18px 0 0; }
+.demo-lab .op-footer p { font-size: 9px; color: #768ba3; line-height: 1.8; max-width: 650px; margin: 0; }
+.demo-lab .op-footer>span { font-size: 8px; color: #95a5b8; text-align: right; }
+.demo-lab .op-footer button { flex: none; }
+.demo-lab .op-workspace.is-playing .op-connection b { animation: op-travel 2s linear infinite; opacity: .8; }
+.demo-lab .op-workspace.is-playing .op-step.is-current .op-step-icon { animation: op-pulse 1.7s ease-in-out infinite; }
+.demo-lab .op-workspace.is-playing .op-file-stack .op-file { animation: op-file-arrive 1.3s ease-in-out infinite; animation-delay: calc(var(--file-index) * .18s); }
+.demo-lab .op-workspace.is-playing .op-processing>span { animation: op-processing 2.4s linear infinite; }
+@keyframes op-travel { from { left: -10%; } to { left: 110%; } }
+@keyframes op-pulse { 50% { box-shadow: 0 0 0 8px #518cb80a, 0 6px 15px #4782bc0a; transform: translateY(-2px); } }
+@keyframes op-file-arrive { 50% { transform: translateX(3px); border-color: #8bafcb70; } }
+@keyframes op-processing { to { transform: rotate(360deg); } }
+
+/* CRM workspace. */
+.demo-lab .crm-heading { margin-top: 5px; }
+.demo-lab .crm-heading>.crm-button { flex: none; }
+.demo-lab .crm-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 11px; margin: 22px 0; }
+.demo-lab .crm-metrics>div { padding: 16px; border: 1px solid #fff; border-radius: 13px; background: #ffffffc9; box-shadow: 0 4px 10px #2f537308; }
+.demo-lab .crm-metrics small { display: block; font-size: 10px; color: #8292a8; }
+.demo-lab .crm-metrics strong { display: block; margin: 7px 0 5px; font-size: clamp(21px, 2.2vw, 28px); letter-spacing: -.045em; color: #315371; }
+.demo-lab .crm-metrics span { font-size: 8px; color: #92a2b5; }
+.demo-lab .crm-metrics>.crm-metric-accent { background: linear-gradient(135deg, #dff3ef, #edf7ff); border-color: #d1eae4; }
+.demo-lab .crm-metric-accent strong { color: #278b7e; }
+.demo-lab .crm-journey { display: grid; grid-template-columns: minmax(0, .75fr) minmax(0, 1.2fr); gap: 17px; padding: 19px; border-radius: 13px; border: 1px solid #cbddeb; background: radial-gradient(at 0% 0%, #e3f5f1, transparent 75%), #f1f7fc; }
+.demo-lab .crm-journey-title { display: flex; align-items: center; gap: 11px; }
+.demo-lab .crm-journey-title>span { display: grid; place-items: center; border-radius: 11px; width: 40px; height: 40px; flex: none; background: #d7f0e7; color: #3a9b82; border: 1px solid #c1e3d7; }
+.demo-lab .crm-journey-title strong { display: block; font-size: 13px; color: #3b6e6c; }
+.demo-lab .crm-journey-title small { display: block; font-size: 9px; color: #86a39f; margin-top: 4px; }
+.demo-lab .crm-journey-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center; }
+.demo-lab .crm-journey-steps>div { position: relative; text-align: center; font-size: 8px; color: #8da2b8; }
+.demo-lab .crm-journey-steps>div:not(:last-child):after { content: ''; position: absolute; height: 1px; top: 12px; left: calc(50% + 16px); right: calc(-50% + 16px); background: #d0deec; }
+.demo-lab .crm-journey-steps i { display: grid; place-items: center; width: 25px; height: 25px; background: #fff; border: 1px solid #d0ddea; border-radius: 50%; font-size: 8px; font-style: normal; margin: 0 auto 5px; }
+.demo-lab .crm-journey-steps .is-done { color: #3c9a7d; }
+.demo-lab .crm-journey-steps .is-done i { border-color: #a9d8c8; background: #ddf4ea; }
+.demo-lab .crm-journey-steps .is-current i { animation: op-pulse 1.5s infinite; }
+.demo-lab .crm-journey-actions { grid-column: 1 / -1; display: flex; gap: 8px; flex-wrap: wrap; padding-top: 13px; border-top: 1px solid #c8dfe570; }
+.demo-lab .crm-journey-actions .is-primary { background: #208d75; border-color: #208d75; }
+.demo-lab .crm-notification { min-height: 48px; display: flex; align-items: center; gap: 9px; padding: 9px 13px; margin: 12px 0 22px; background: #ffffff90; border: 1px solid #dce6ef; border-radius: 9px; color: #68859e; }
+.demo-lab .crm-notification>span { color: #4b99a4; flex: none; line-height: 0; }
+.demo-lab .crm-notification svg { width: 15px; height: 15px; }
+.demo-lab .crm-notification p { font-size: 10px; line-height: 1.7; margin: 0; }
+.demo-lab .crm-notification small { font-size: 6px; letter-spacing: .1em; color: #96acbd; white-space: nowrap; margin-left: auto; }
+.demo-lab .crm-board-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0 0 14px; }
+.demo-lab .crm-board-toolbar b { font-size: 12px; font-weight: 600; }
+.demo-lab .crm-board-toolbar>div>span { display: block; font-size: 8px; color: #8ca0b8; margin-top: 3px; }
+.demo-lab .crm-board-toolbar label { display: flex; align-items: center; gap: 9px; font-size: 9px; color: #899eb4; }
+.demo-lab .crm-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 17px; }
+.demo-lab .crm-board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; align-items: stretch; }
+.demo-lab .crm-column { padding: 12px 9px; border: 1px solid #dbe5ef; background: #e7eef7aa; border-radius: 11px; min-height: 260px; transition: border-color .2s, background .2s; }
+.demo-lab .crm-column.is-drop-target { outline: 2px dashed #489cb9; outline-offset: -3px; background: #e4f3fa; }
+.demo-lab .crm-column-heading { display: flex; align-items: center; justify-content: space-between; gap: 5px; }
+.demo-lab .crm-column-heading h4 { display: flex; align-items: center; gap: 6px; font-size: 10px; font-weight: 600; }
+.demo-lab .crm-column-heading i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: #8dabc7; }
+.demo-lab .crm-column:nth-child(2) .crm-column-heading i { background: #c1a16c; }
+.demo-lab .crm-column:nth-child(3) .crm-column-heading i { background: #7e91ca; }
+.demo-lab .crm-column:nth-child(4) .crm-column-heading i { background: #54b99c; }
+.demo-lab .crm-column-heading>span { font-size: 8px; color: #91a5bb; background: #d8e5f2; border-radius: 4px; padding: 2px 5px; }
+.demo-lab .crm-column-total { display: block; font-size: 8px; color: #97a9bc; margin: 6px 0 15px 11px; }
+.demo-lab .crm-card { border: 1px solid #d9e3ef; background: #ffffffdb; border-radius: 11px; box-shadow: 0 3px 5px #3f62840b; margin-bottom: 10px; overflow: hidden; cursor: grab; transition: box-shadow .2s, border-color .2s; }
+.demo-lab .crm-card.is-selected { border-color: #77a4d8; box-shadow: 0 0 0 2px #4381c812; }
+.demo-lab .crm-card.is-dragging { opacity: .5; }
+.demo-lab .crm-card-open { border: 0; border-radius: 0; background: transparent; color: inherit; text-align: left; padding: 12px 11px 8px; display: block; width: 100%; }
+.demo-lab .crm-card-open:hover { background: #edf5ff55; }
+.demo-lab .crm-card-line { display: flex; align-items: center; justify-content: space-between; gap: 5px; }
+.demo-lab .crm-avatar { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; background: #eaf1ff; color: #6484bd; font-size: 9px; font-weight: 700; flex: none; }
+.demo-lab .crm-origin { font-size: 6px; color: #9bb0c4; text-align: right; }
+.demo-lab .crm-card-open>b { display: block; font-size: 11px; font-weight: 600; margin: 13px 0 4px; color: #4a6684; }
+.demo-lab .crm-service { display: block; font-size: 8px; color: #93a4b8; line-height: 1.6; min-height: 25px; }
+.demo-lab .crm-card-open>strong { display: block; font-size: 21px; color: #416789; letter-spacing: -.04em; margin: 12px 0 10px; }
+.demo-lab .crm-card-owner { display: flex; align-items: center; gap: 5px; font-size: 7px; color: #90a3b8; }
+.demo-lab .crm-card-owner>i { display: grid; place-items: center; width: 17px; height: 17px; border-radius: 50%; background: #e9eef5; font-style: normal; font-size: 6px; }
+.demo-lab .crm-card-owner>span { margin-left: auto; font-size: 6px; }
+.demo-lab .crm-card-stage { display: flex; align-items: center; gap: 5px; margin: 3px 10px 7px; font-size: 7px; color: #99aabb; }
+.demo-lab .crm-card-stage select { width: 100%; font-size: 8px; min-height: 36px; padding: 7px 19px 7px 6px; border-color: #e3eaf2; border-radius: 6px; }
+.demo-lab .crm-advance { width: calc(100% - 20px); margin: 0 10px 10px; min-height: 34px; border: 1px solid #dce6f4; border-radius: 6px; background: #f0f6fd; color: #7093bf; font-size: 8px; }
+.demo-lab .crm-advance:hover { background: #e6f0fc; }
+.demo-lab .crm-closed { display: block; margin: 9px 10px 13px; color: #55aa8e; font-size: 8px; text-align: center; }
+.demo-lab .crm-empty { border: 1px dashed #c9d8e7; border-radius: 9px; color: #9fb1c5; font-size: 9px; text-align: center; padding: 29px 12px; line-height: 1.8; }
+.demo-lab .crm-detail { border-radius: 13px; padding: 20px; background: linear-gradient(125deg, #fff, #f5f9ff); border: 1px solid #d7e4f1; display: grid; grid-template-columns: 1fr 1.2fr; gap: 15px 28px; }
+.demo-lab .crm-detail-top { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
+.demo-lab .crm-stage-label { padding: 4px 8px; font-size: 8px; color: #6f92c2; background: #eaf2fd; border-radius: 5px; }
+.demo-lab .crm-identity { display: flex; align-items: center; gap: 12px; }
+.demo-lab .crm-identity>.crm-avatar { width: 45px; height: 45px; font-size: 13px; border-radius: 12px; }
+.demo-lab .crm-identity h4 { font-size: 18px; font-weight: 600; }
+.demo-lab .crm-identity p { font-size: 10px; color: #8ba0b7; margin: 5px 0 0; }
+.demo-lab .crm-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 0; grid-column: 1; }
+.demo-lab .crm-facts dt { font-size: 8px; color: #92a7bd; }
+.demo-lab .crm-facts dd { font-size: 10px; margin: 5px 0 0; color: #5a7898; }
+.demo-lab .crm-detail-controls { display: flex; flex-direction: column; gap: 10px; grid-column: 1; }
+.demo-lab .crm-detail-controls label { display: flex; flex-direction: column; gap: 7px; font-size: 9px; color: #829ab4; }
+.demo-lab .crm-detail-controls .crm-button { align-self: start; }
+.demo-lab .crm-timeline { grid-column: 2; grid-row: 2 / 5; border-left: 1px solid #e2eaf3; padding-left: 26px; }
+.demo-lab .crm-timeline h5 { font-size: 11px; font-weight: 600; margin: 0 0 17px; color: #617c98; }
+.demo-lab .crm-timeline ol { list-style: none; padding: 0; margin: 0; max-height: 260px; overflow-y: auto; }
+.demo-lab .crm-timeline li { display: flex; align-items: start; gap: 12px; position: relative; padding: 0 0 18px; }
+.demo-lab .crm-timeline li:not(:last-child):before { content: ''; position: absolute; left: 3px; top: 7px; bottom: 0; width: 1px; background: #dce7f2; }
+.demo-lab .crm-timeline li>i { width: 7px; height: 7px; border-radius: 50%; background: #a2b9d4; flex: none; margin-top: 4px; position: relative; }
+.demo-lab .crm-timeline li:first-child>i { background: #4eb59b; box-shadow: 0 0 0 4px #4eb59b14; }
+.demo-lab .crm-timeline small { font-size: 7px; color: #9db1c5; }
+.demo-lab .crm-timeline p { font-size: 10px; color: #748ea8; margin: 4px 0 0; line-height: 1.8; }
+.demo-lab .crm-footnote { font-size: 9px; color: #8ba0b7; line-height: 1.8; margin: 18px 0 0; }
+
+@media (min-width: 1250px) {
+  .demo-lab .crm-main { grid-template-columns: minmax(0, 1fr) 270px; }
+  .demo-lab .crm-board { gap: 7px; }
+  .demo-lab .crm-column { padding: 10px 6px; }
+  .demo-lab .crm-detail { display: block; padding: 17px; }
+  .demo-lab .crm-detail-top { gap: 8px; margin-bottom: 19px; }
+  .demo-lab .crm-detail .crm-eyebrow { font-size: 6px; }
+  .demo-lab .crm-identity { margin-bottom: 24px; }
+  .demo-lab .crm-identity h4 { font-size: 16px; }
+  .demo-lab .crm-identity>.crm-avatar { width: 34px; height: 34px; font-size: 10px; }
+  .demo-lab .crm-facts { gap: 15px 10px; margin-bottom: 22px; }
+  .demo-lab .crm-timeline { border-left: 0; border-top: 1px solid #e2eaf3; padding: 19px 0 0; margin-top: 22px; }
+  .demo-lab .crm-card-stage { flex-direction: column; align-items: start; }
+  .demo-lab .crm-card-owner>span { display: none; }
+}
+@media (max-width: 950px) {
+  .demo-lab .op-recipe-tabs button { gap: 5px; padding: 10px 7px; }
+  .demo-lab .op-recipe-tabs button>span { width: 23px; font-size: 20px; }
+  .demo-lab .op-recipe-tabs b { font-size: 9px; }
+  .demo-lab .op-recipe-tabs small { font-size: 6px; }
+  .demo-lab .op-tool-label { display: none; }
+  .demo-lab .op-scene-grid { grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); gap: 12px; }
+  .demo-lab .op-console, .demo-lab .op-result { padding: 16px; }
+  .demo-lab .op-app-toolbar { flex-wrap: wrap; }
+  .demo-lab .crm-board { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .demo-lab .crm-card-stage select { min-height: 42px; font-size: 10px; }
+  .demo-lab .crm-card-open { padding: 14px; }
+  .demo-lab .crm-card-open>b { font-size: 13px; }
+  .demo-lab .crm-card-owner>span { display: inline; }
+}
+@media (max-width: 700px) {
+  .demo-lab .op-recipe-tabs { grid-template-columns: 1fr 1fr; padding: 5px; gap: 5px; }
+  .demo-lab .op-recipe-tabs button { padding: 10px; min-height: 62px; }
+  .demo-lab .op-recipe-tabs b { font-size: 10px; }
+  .demo-lab .op-recipe-tabs small { font-size: 6px; }
+  .demo-lab :is(.op-heading, .crm-heading) { margin: 22px 0 18px; gap: 13px; align-items: start; }
+  .demo-lab :is(.op-heading, .crm-heading) h3 { font-size: 23px; }
+  .demo-lab :is(.op-heading, .crm-heading) p { font-size: 11px; }
+  .demo-lab .op-command-bar { flex-direction: column; align-items: stretch; padding: 13px; }
+  .demo-lab .op-run-status { font-size: 9px; }
+  .demo-lab .op-controls { gap: 5px; }
+  .demo-lab .op-controls .is-primary { flex: 1; }
+  .demo-lab :is(.op-button, .crm-button) { min-height: 44px; font-size: 10px; padding: 9px 10px; }
+  .demo-lab .op-controls .op-reset { min-width: 35px; font-size: 18px; padding: 7px; }
+  .demo-lab .op-flow { gap: 6px; padding: 24px 0; }
+  .demo-lab .op-step-icon { width: 42px; height: 45px; font-size: 20px; border-radius: 13px; }
+  .demo-lab .op-step strong { font-size: 9px; line-height: 1.5; }
+  .demo-lab .op-step em { font-size: 7px; }
+  .demo-lab .op-connection { top: 47px; }
+  .demo-lab .op-scene-grid { grid-template-columns: 1fr; gap: 14px; }
+  .demo-lab .op-console { padding: 18px; }
+  .demo-lab .op-console-title { margin-bottom: 16px; }
+  .demo-lab .op-file-stack { gap: 7px; }
+  .demo-lab .op-file { padding: 10px 12px; }
+  .demo-lab .op-file b { font-size: 11px; }
+  .demo-lab .op-file small { font-size: 8px; }
+  .demo-lab .op-processing { margin: 12px 0; }
+  .demo-lab .op-event-log { margin-top: 15px; padding-top: 13px; }
+  .demo-lab .op-event-log p { font-size: 11px; }
+  .demo-lab .op-result { padding: 16px 13px; }
+  .demo-lab .op-result-head h4 { font-size: 15px; }
+  .demo-lab .op-result-head { gap: 9px; }
+  .demo-lab .op-table-wrap table { font-size: 9px; }
+  .demo-lab .op-table-wrap :is(th, td) { padding: 10px 7px; }
+  .demo-lab .op-result-summary { flex-wrap: wrap; }
+  .demo-lab .op-result-summary strong { font-size: 16px; }
+  .demo-lab .op-pdf { gap: 14px; }
+  .demo-lab .op-paper { padding: 14px 9px; }
+  .demo-lab .op-paper>b { font-size: 9px; }
+  .demo-lab .op-paper strong { font-size: 14px; }
+  .demo-lab .op-fields dd { font-size: 10px; }
+  .demo-lab .op-review { margin-top: 18px; }
+  .demo-lab .op-review>.op-button { width: 100%; }
+  .demo-lab .op-app-toolbar { padding: 12px; gap: 12px; }
+  .demo-lab .op-app-toolbar>label { width: 100%; }
+  .demo-lab .op-app-toolbar select { min-height: 44px; }
+  .demo-lab .op-app-toolbar>div { flex: 1; }
+  .demo-lab .op-app-toolbar strong { font-size: 23px; }
+  .demo-lab .op-layer { gap: 10px; padding: 12px; }
+  .demo-lab .op-layer>b { font-size: 16px; }
+  .demo-lab .op-layer.layer-1 { margin-left: 7px; }
+  .demo-lab .op-layer.layer-2 { margin-left: 14px; }
+  .demo-lab .op-footer { flex-direction: column; align-items: start; gap: 10px; }
+  .demo-lab .op-footer>span { text-align: left; font-size: 8px; }
+  .demo-lab .op-footer>button { width: 100%; }
+  .demo-lab .crm-heading { flex-direction: column; }
+  .demo-lab .crm-heading>.crm-button { align-self: start; }
+  .demo-lab .crm-metrics { grid-template-columns: 1fr 1fr; gap: 8px; margin: 17px 0; }
+  .demo-lab .crm-metrics>div { padding: 14px 11px; }
+  .demo-lab .crm-metrics strong { font-size: 24px; }
+  .demo-lab .crm-metrics small { font-size: 9px; }
+  .demo-lab .crm-metrics span { font-size: 8px; }
+  .demo-lab .crm-journey { grid-template-columns: 1fr; gap: 20px; padding: 16px 13px; }
+  .demo-lab .crm-journey-title strong { font-size: 14px; }
+  .demo-lab .crm-journey-steps { padding: 0 2px; }
+  .demo-lab .crm-journey-steps>div { font-size: 9px; }
+  .demo-lab .crm-journey-steps i { width: 28px; height: 28px; font-size: 9px; }
+  .demo-lab .crm-journey-steps>div:not(:last-child):after { top: 14px; }
+  .demo-lab .crm-journey-actions { gap: 7px; }
+  .demo-lab .crm-journey-actions .is-primary { width: 100%; }
+  .demo-lab .crm-journey-actions .crm-button:not(.is-primary) { flex: 1; }
+  .demo-lab .crm-notification { align-items: start; padding: 12px; }
+  .demo-lab .crm-notification small { display: none; }
+  .demo-lab .crm-notification svg { margin-top: 3px; }
+  .demo-lab .crm-notification p { font-size: 10px; }
+  .demo-lab .crm-board-toolbar { flex-wrap: wrap; }
+  .demo-lab .crm-board-toolbar label { font-size: 8px; gap: 6px; }
+  .demo-lab .crm-board-toolbar select { min-height: 44px; font-size: 10px; }
+  .demo-lab .crm-board { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .demo-lab .crm-column { padding: 12px 7px; min-height: 120px; }
+  .demo-lab .crm-column-heading h4 { font-size: 10px; }
+  .demo-lab .crm-card-open { padding: 12px 9px 8px; }
+  .demo-lab .crm-card-open>b { font-size: 12px; overflow-wrap: anywhere; }
+  .demo-lab .crm-card-open>strong { font-size: 21px; }
+  .demo-lab .crm-origin { font-size: 6px; }
+  .demo-lab .crm-card-owner>span { display: none; }
+  .demo-lab .crm-card-stage { flex-direction: column; align-items: start; margin: 5px 8px 8px; font-size: 8px; }
+  .demo-lab .crm-card-stage select { min-height: 44px; font-size: 9px; padding-left: 7px; }
+  .demo-lab .crm-advance { min-height: 44px; font-size: 9px; }
+  .demo-lab .crm-detail { display: block; padding: 17px; }
+  .demo-lab .crm-detail-top { margin-bottom: 18px; }
+  .demo-lab .crm-detail-top .crm-eyebrow { font-size: 7px; }
+  .demo-lab .crm-identity { margin-bottom: 22px; }
+  .demo-lab .crm-facts { gap: 17px; margin-bottom: 23px; }
+  .demo-lab .crm-facts dd { font-size: 11px; }
+  .demo-lab .crm-detail-controls select { min-height: 44px; }
+  .demo-lab .crm-detail-controls .crm-button { width: 100%; }
+  .demo-lab .crm-timeline { padding: 21px 0 0; border-left: 0; border-top: 1px solid #dfe8f2; margin-top: 24px; }
+  .demo-lab .crm-timeline p { font-size: 11px; }
+}
+@media (max-width: 380px) {
+  .demo-lab .op-recipe-tabs button { padding: 8px 6px; gap: 5px; }
+  .demo-lab .op-recipe-tabs b { font-size: 9px; }
+  .demo-lab .op-recipe-tabs small { font-size: 5px; }
+  .demo-lab .op-recipe-tabs button>span { font-size: 19px; width: 20px; }
+  .demo-lab .op-controls .op-button.is-primary { width: 100%; flex: auto; }
+  .demo-lab .op-controls .op-button:not(.is-primary):not(.op-reset) { flex: 1; }
+  .demo-lab .op-pdf { grid-template-columns: 1fr; }
+  .demo-lab .op-paper { max-width: 185px; margin: 0 auto 10px; width: 100%; }
+  .demo-lab .op-step strong { font-size: 8px; }
+  .demo-lab .op-step em { font-size: 6px; }
+  .demo-lab .op-result-head { flex-wrap: wrap; }
+  .demo-lab .op-layer>span { width: 25px; height: 25px; }
+  .demo-lab .op-layer strong { font-size: 12px; }
+  .demo-lab .op-layer small { font-size: 7px; }
+  .demo-lab .op-layer>b { font-size: 14px; }
+  .demo-lab .crm-board { grid-template-columns: 1fr; }
+  .demo-lab .crm-card-stage { flex-direction: row; align-items: center; }
+  .demo-lab .crm-card-stage select { font-size: 10px; }
+  .demo-lab .crm-card-owner>span { display: inline; font-size: 8px; }
+  .demo-lab .crm-card-open>b { font-size: 14px; }
+  .demo-lab .crm-service { font-size: 10px; }
+  .demo-lab .crm-origin { font-size: 8px; }
+  .demo-lab .crm-card-line .crm-avatar { width: 35px; height: 35px; }
+  .demo-lab .crm-board-toolbar { gap: 12px; }
+  .demo-lab .crm-board-toolbar>label { width: 100%; }
+  .demo-lab .crm-board-toolbar select { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-lab :is(.op-workspace, .crm-workspace) * { animation: none !important; transition: none !important; }
+}
+.demo-lab.lab-motion-paused :is(.op-workspace, .crm-workspace) * { animation: none !important; transition: none !important; }
