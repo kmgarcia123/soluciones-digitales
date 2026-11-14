@@ -493,7 +493,7 @@
       </div>
       <div class="field">
         <label for="f-telefono">Teléfono (opcional)</label>
-        <input id="f-telefono" type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="300 123 4567" pattern="^\+?[0-9 ]{7,15}$" aria-describedby="h-telefono">
+        <input id="f-telefono" type="tel" name="telefono" autocomplete="tel" inputmode="tel" placeholder="300 123 4567" pattern="^(\+?57\s?)?3[0-9]{2}\s?[0-9]{3}\s?[0-9]{4}$" maxlength="16" aria-describedby="h-telefono">
         <small class="help" id="h-telefono" data-help="Celular de 10 dígitos, con o sin +57.">Celular de 10 dígitos, con o sin +57.</small>
       </div>
       <div class="field">
@@ -732,7 +732,7 @@ const ERRORES = {
   nombre: 'Escriba su nombre.',
   empresa: 'Escriba el nombre de su empresa.',
   correo: (el) => el.validity.valueMissing ? 'Escriba su correo.' : 'Revise el correo. Ejemplo: nombre@empresa.com',
-  telefono: 'Use solo números. Ejemplo: 300 123 4567',
+  telefono: 'Escriba un celular de 10 dígitos que empiece por 3. Ejemplo: 300 123 4567',
   mensaje: 'Cuéntenos en una frase qué quiere mejorar.',
   autorizacion: 'Marque la autorización para poder contactarlo.'
 };
