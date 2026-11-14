@@ -55,8 +55,8 @@ Al final de `index.html`, en el bloque `CONFIG`: número de WhatsApp, correo y `
 
 ## Formulario y CRM
 
-- **Mientras `crm` esté vacío:** al enviar el formulario se abre WhatsApp (número de `CONFIG.whatsapp`) con los datos ya escritos. No se pierde ningún contacto.
-- **Cuando el CRM exista:** pegue en `crm` la URL que recibe las solicitudes (ej. `https://crm.teggnar.com/api/leads`). El formulario envía un `POST` con `Content-Type: application/json`:
+- **Si `crm` queda vacío:** al enviar el formulario se abre WhatsApp (número de `CONFIG.whatsapp`) con los datos ya escritos. No se pierde ningún contacto.
+- **Conectado a la plataforma TEGGNAR:** `crm` apunta a `https://app.teggnar.com/api/v1/leads` (contrato en `teggnar-plataforma/docs/plan/04-integraciones.md`, sección 1). La plataforma recibe solo desde los dominios verificados en Configuración → Formularios (teggnar.com). El formulario envía un `POST` con `Content-Type: application/json`:
 
 ```json
 {
